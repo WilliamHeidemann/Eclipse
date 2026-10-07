@@ -13,63 +13,51 @@ MonoBehaviour:
   m_Name: Audio Container
   m_EditorClassIdentifier: Eclipse.Presentation::Game.Presentation.AudioContainer
   _drawCard:
-    _clips:
-    - {fileID: 8300000, guid: ea956aa88cd50bc4cb9692faf6b27230, type: 3}
-    - {fileID: 8300000, guid: 156bf1f4ec713734b865c634f4aa488a, type: 3}
-    - {fileID: 8300000, guid: 561986ede35f3c44586d20cf0d60cfcb, type: 3}
-    - {fileID: 8300000, guid: 22a37681a0bb9844b889c206bfeae82c, type: 3}
-    - {fileID: 8300000, guid: 2b8befb905f3aae47b40fb8e032c7ebc, type: 3}
-    - {fileID: 8300000, guid: 75d7f59876ac144468fed8d2440330a2, type: 3}
-    - {fileID: 8300000, guid: 699b8cf95c5223540b64a8315f84ba89, type: 3}
-    - {fileID: 8300000, guid: 77ae20c31d860de498394c71861e2538, type: 3}
-    - {fileID: 8300000, guid: 28269e3c1e691b74d94013b9bad59aca, type: 3}
-    - {fileID: 8300000, guid: eff67410809d47b4889e086876c37fba, type: 3}
-    _randomizePitch: 1
-    _pitchRange: {x: 0.9, y: 1.1}
+    Guid:
+      Data1: 1296822423
+      Data2: 1135464146
+      Data3: -1927293774
+      Data4: 346006366
+    Path: event:/Card_Interactions/SequenceSFX DrawCard
   _onClick:
-    _clips:
-    - {fileID: 8300000, guid: ccf6ef057ef0b0f499242e2bd7680b0d, type: 3}
-    - {fileID: 8300000, guid: a8956d97ab30e204f8beffd9775e30a7, type: 3}
-    - {fileID: 8300000, guid: 4f5e2211aaee628499ba92571dafda4a, type: 3}
-    - {fileID: 8300000, guid: 653245a8886912c4b81bffa784b2ca2e, type: 3}
-    - {fileID: 8300000, guid: 304d3ad63ef974e4ca87a3bd7fd377e7, type: 3}
-    - {fileID: 8300000, guid: 7f6f0eea23340e9408bae32f3a25344b, type: 3}
-    _randomizePitch: 1
-    _pitchRange: {x: 0.9, y: 1.1}
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _pop:
-    _clips: []
-    _randomizePitch: 1
-    _pitchRange: {x: 0.9, y: 1.1}
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _putDown:
-    _clips:
-    - {fileID: 8300000, guid: fbed1b2fe5bf056448137a9fb7669af5, type: 3}
-    - {fileID: 8300000, guid: 06f59154e16acc143ae14b1f0cb57c5c, type: 3}
-    - {fileID: 8300000, guid: afa077b80a2efe44ea5b33019447abb5, type: 3}
-    - {fileID: 8300000, guid: 6b0742a843dc898488f67eb3efb2ef4b, type: 3}
-    - {fileID: 8300000, guid: 79653d7da4d2da446b13c2d768cc3842, type: 3}
-    - {fileID: 8300000, guid: 4159cb9797cbdb2419f8b0995915cdf3, type: 3}
-    - {fileID: 8300000, guid: 83e1ff2bb662b334f8998234da40bdd0, type: 3}
-    - {fileID: 8300000, guid: 4a86cd64d1a575a41bfa54cfbfb48330, type: 3}
-    - {fileID: 8300000, guid: bf4e0b0fae1f26a48b057cb1354a7e60, type: 3}
-    _randomizePitch: 1
-    _pitchRange: {x: 0.9, y: 1.1}
+    Guid:
+      Data1: 915834304
+      Data2: 1189493587
+      Data3: 625885616
+      Data4: 2074174715
+    Path: event:/Card_Interactions/SequenceSFX PutDownCard1
   _toHand:
-    _clips:
-    - {fileID: 8300000, guid: 135ef0fa53aa9414eb029e8d989b67c4, type: 3}
-    - {fileID: 8300000, guid: 18d313c5fca174f49879b98485c1383e, type: 3}
-    - {fileID: 8300000, guid: b280eab4dacfc834f8ad2b42704725d4, type: 3}
-    - {fileID: 8300000, guid: babc7e3c0de0fde46b87821569e2a6c6, type: 3}
-    - {fileID: 8300000, guid: 0032210eb38fc694d8121615669e2a87, type: 3}
-    - {fileID: 8300000, guid: f4a5db384e85b344e9faf8f586e72721, type: 3}
-    _randomizePitch: 1
-    _pitchRange: {x: 0.9, y: 1.1}
+    Guid:
+      Data1: 1491655296
+      Data2: 1230732872
+      Data3: -200856192
+      Data4: 641091382
+    Path: event:/Card_Interactions/SequenceSFX ToHand1
   _yes:
-    _clips:
-    - {fileID: 8300000, guid: 3a68aa8cfb2fe2b4cbb811b5c4ff72e0, type: 3}
-    _randomizePitch: 0
-    _pitchRange: {x: 1, y: 1}
+    Guid:
+      Data1: -417762487
+      Data2: 1338703585
+      Data3: -1961638738
+      Data4: 827020433
+    Path: event:/Game_MechanicSFX/Yes1sfx
   _no:
-    _clips:
-    - {fileID: 8300000, guid: 1a91fe3b051c5454a93fb25e20951a98, type: 3}
-    _randomizePitch: 1
-    _pitchRange: {x: 1, y: 1.2}
+    Guid:
+      Data1: 60458784
+      Data2: 1287078726
+      Data3: -546226288
+      Data4: -2028668407
+    Path: event:/Game_MechanicSFX/NoSFX

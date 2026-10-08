@@ -21,6 +21,7 @@ namespace Game.Presentation
 
         private PlayCoordinator _playCoordinator;
         private Option<string> _matchId;
+        private HeartBeat _heartBeat;
 
         private void BindToPresentation(PlayCoordinator playCoordinator)
         {
@@ -75,6 +76,8 @@ namespace Game.Presentation
             _playCoordinator.OnValidMoveRequest += async move => await NotifyOpponent(opponentId);
             _matchId = Option<string>.Some(match.Id);
             BindToPresentation(_playCoordinator);
+            _heartBeat = new HeartBeat(match.Id, _playCoordinator);
+            _heartBeat.RunAsync().Forget();
         }
 
         private async Task NotifyOpponent(string opponentId)

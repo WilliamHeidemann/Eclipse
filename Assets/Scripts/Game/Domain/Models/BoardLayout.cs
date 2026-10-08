@@ -56,6 +56,66 @@ namespace Game.Domain.Models
 
         public static Row[] AllRows() => (Row[])Enum.GetValues(typeof(Row));
         public static Column[] AllColumns() => (Column[])Enum.GetValues(typeof(Column));
+
+        public static Position[] AllPositions()
+        {
+            return new Position[]
+            {
+                new(Row.One, Column.One),
+                new(Row.One, Column.Two),
+                new(Row.One, Column.Three),
+                new(Row.One, Column.Four),
+                new(Row.One, Column.Five),
+                new(Row.One, Column.Six),
+                new(Row.One, Column.Seven),
+                new(Row.One, Column.Eight),
+
+                new(Row.Two, Column.One),
+                new(Row.Two, Column.Two),
+                new(Row.Two, Column.Three),
+                new(Row.Two, Column.Four),
+                new(Row.Two, Column.Five),
+                new(Row.Two, Column.Six),
+                new(Row.Two, Column.Seven),
+                new(Row.Two, Column.Eight),
+
+                new(Row.Three, Column.One),
+                new(Row.Three, Column.Two),
+                new(Row.Three, Column.Three),
+                new(Row.Three, Column.Four),
+                new(Row.Three, Column.Five),
+                new(Row.Three, Column.Six),
+                new(Row.Three, Column.Seven),
+                new(Row.Three, Column.Eight),
+                
+                new(Row.Four, Column.One),
+                new(Row.Four, Column.Two),
+                new(Row.Four, Column.Three),
+                new(Row.Four, Column.Four),
+                new(Row.Four, Column.Five),
+                new(Row.Four, Column.Six),
+                new(Row.Four, Column.Seven),
+                new(Row.Four, Column.Eight),
+
+                new(Row.Five, Column.One),
+                new(Row.Five, Column.Two),
+                new(Row.Five, Column.Three),
+                new(Row.Five, Column.Four),
+                new(Row.Five, Column.Five),
+                new(Row.Five, Column.Six),
+                new(Row.Five, Column.Seven),
+                new(Row.Five, Column.Eight),
+
+                new(Row.Six, Column.One),
+                new(Row.Six, Column.Two),
+                new(Row.Six, Column.Three),
+                new(Row.Six, Column.Four),
+                new(Row.Six, Column.Five),
+                new(Row.Six, Column.Six),
+                new(Row.Six, Column.Seven),
+                new(Row.Six, Column.Eight)
+            };
+        }
     }
 
     public enum Row

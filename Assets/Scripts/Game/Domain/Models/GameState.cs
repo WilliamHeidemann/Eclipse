@@ -6,12 +6,14 @@ namespace Game.Domain.Models
     [Serializable]
     public class GameState
     {
-        public GameState(Card[] redHand, Card[] yellowHand, Card[] deck, Move[] moves, Score score, Team toPlay)
+        public GameState(Card[] redHand, Card[] yellowHand, Card[] deck, Move[] moves, Position[] locked, Score score,
+            Team toPlay)
         {
             RedHand = redHand;
             YellowHand = yellowHand;
             Deck = deck;
             Moves = moves;
+            Locked = locked;
             Score = score;
             ToPlay = toPlay;
         }
@@ -20,9 +22,10 @@ namespace Game.Domain.Models
         public Card[] YellowHand { get; }
         public Card[] Deck { get; }
         public Move[] Moves { get; }
+        public Position[] Locked { get; }
         public Score Score { get; }
         public Team ToPlay { get; }
-        
+
         public ClientGameState ToClientGameState(Team team)
         {
             Card[] hand = team == Team.Red ? RedHand : YellowHand;
@@ -33,7 +36,9 @@ namespace Game.Domain.Models
                 Moves = Moves,
                 Hand = hand,
                 Team = team,
-                IsMyTurn = isMyTurn
+                IsMyTurn = isMyTurn,
+                Locked = Locked,
+                Score = Score,
             };
         }
 
@@ -46,13 +51,15 @@ namespace Game.Domain.Models
             Card[] yellowCards = Enumerable.Range(0, 7).Select(_ => deck.Draw()).ToArray();
 
             Move[] moves = Array.Empty<Move>();
-            
+
+            Position[] locked = Array.Empty<Position>();
+
             Score score = new();
 
             Random random = new();
             Team toPlay = random.NextDouble() < 0.5 ? Team.Red : Team.Yellow;
 
-            return new GameState(redCards, yellowCards, deck.GetCards(), moves, score, toPlay);
+            return new GameState(redCards, yellowCards, deck.GetCards(), moves, locked, score, toPlay);
         }
     }
 }

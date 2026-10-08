@@ -203,7 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33775e2c95a184e428e2d2931dff100d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Eclipse.Presentation::CloudHandler
-  _mainMenu: {fileID: 473984943}
 --- !u!1 &495012472
 GameObject:
   m_ObjectHideFlags: 0

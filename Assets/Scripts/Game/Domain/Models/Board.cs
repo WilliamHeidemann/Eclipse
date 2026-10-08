@@ -12,11 +12,11 @@ namespace Game.Domain.Models
 
         public bool Fits(Position position) => !_takenSpaces.ContainsKey(position);
 
-        public bool HasSequence(Team team) =>
-            SequencePatterns.All().Any(pattern => IsSequence(pattern, team));
-
-        public int SequenceCount(Team team) =>
-            SequencePatterns.All().Count(pattern => IsSequence(pattern, team));
+        // public bool HasSequence(Team team) =>
+        //     SequencePatterns.All().Any(pattern => IsSequence(pattern, team));
+        //
+        // public int SequenceCount(Team team) =>
+        //     SequencePatterns.All().Count(pattern => IsSequence(pattern, team));
 
         private bool IsSequence(Position[] positions, Team team) =>
             positions.All(position =>
@@ -48,6 +48,9 @@ namespace Game.Domain.Models
                 ? Option<Team>.Some(team) 
                 : Option<Team>.None;
         }
+
+        public bool OwnerIs(Position position, Team team) => 
+            _takenSpaces.TryGetValue(position, out Team owner) && owner == team;
     }
 
     public enum Team

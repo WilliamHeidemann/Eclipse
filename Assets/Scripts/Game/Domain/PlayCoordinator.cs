@@ -22,7 +22,7 @@ namespace Game.Domain
         {
             _gameServer = gameServer;
             _clientGameState = startingState;
-            
+
             gameServer.OnCardReceived += card => OnDrawCard?.Invoke(card);
             gameServer.OnOpponentPlayed += Receive;
         }
@@ -34,7 +34,11 @@ namespace Game.Domain
             if (attempt.IsSome(out Move move))
             {
                 OnValidMoveRequest?.Invoke(move);
-                await _gameServer.Request(move);
+                Option<ClientGameState> result = await _gameServer.Request(move);
+                if (result.IsSome(out ClientGameState clientGameState))
+                {
+                    _clientGameState = clientGameState;
+                }
             }
             else
             {
@@ -52,17 +56,18 @@ namespace Game.Domain
 
         public async Task CheckIfOpponentPlayed(string matchId)
         {
-            await _gameServer.CheckIfOpponentPlayed(matchId);
+            ClientGameState clientGameState = await _gameServer.GetClientGameState(matchId);
+            if (_clientGameState.Moves.Length < clientGameState.Moves.Length)
+            {
+                _gameServer.Receive(clientGameState);
+            }
         }
-        
+
         private void Receive(ClientGameState clientGameState)
         {
             _clientGameState = clientGameState;
-            
-            clientGameState.Moves.LastOption().Try(lastMove =>
-            {
-                OnOpponentPlayed?.Invoke(lastMove);
-            });
+
+            clientGameState.Moves.LastOption().Try(lastMove => { OnOpponentPlayed?.Invoke(lastMove); });
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models
     {
         public List<Move> Moves;
         public List<Card> Hand;
+        public List<Position> Locked;
         public Team Team;
         public Score Score;
         public bool IsMyTurn;

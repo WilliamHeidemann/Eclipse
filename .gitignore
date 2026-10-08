@@ -110,3 +110,6 @@ InitTestScene*.unity*
 /Cloud_Code_Module_Reference/**/[Oo]bj/
 /Cloud_Code_Module_Reference/.idea/
 
+# Preserve specific solution and project files in EclipseModule
+!/EclipseModule/*.sln
+!/EclipseModule/**/*.csproj

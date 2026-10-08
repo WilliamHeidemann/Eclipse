@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Game.Domain.Models;
 using Game.Domain.Server;
 using Unity.Services.CloudCode.GeneratedBindings;
+using UtilityToolkit.Monads;
 
 namespace Game.Cloud
 {
@@ -20,25 +21,24 @@ namespace Game.Cloud
             _matchId = matchId;
         }
 
-        public async Task Request(Move move)
+        public async Task<Option<ClientGameState>> Request(Move move)
         {
-            var cardResult = await _gameLogicService.Request(move.ToDto(), _matchId);
+            var moveResult = await _gameLogicService.Request(move.ToDto(), _matchId);
 
-            if (cardResult.HasCard)
+            if (moveResult.WasValid)
             {
-                OnCardReceived?.Invoke(cardResult.Card.ToModel());
-                OnScored?.Invoke(cardResult.DeltaScore, move.Team);
+                OnCardReceived?.Invoke(moveResult.UpdatedGameState.ToModel().Hand[^1]);
+                OnScored?.Invoke(moveResult.DeltaScore, move.Team);
+                return Option<ClientGameState>.Some(moveResult.UpdatedGameState.ToModel());
             }
+
+            return Option<ClientGameState>.None;
         }
 
-        public async Task CheckIfOpponentPlayed(string matchId)
+        public async Task<ClientGameState> GetClientGameState(string matchId)
         {
             var dto = await _gameLogicService.GetClientGameState(matchId);
-            var clientGameState = dto.ToModel();
-            if (clientGameState.IsMyTurn)
-            {
-                Receive(clientGameState);
-            }
+            return dto.ToModel();
         }
 
         public void Receive(ClientGameState gameState)

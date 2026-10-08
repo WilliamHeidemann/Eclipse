@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Game.Domain.Models;
+using UtilityToolkit.Monads;
 
 namespace Game.Domain.Server
 {
@@ -28,27 +29,27 @@ namespace Game.Domain.Server
             _gameState = gameState;
         }
 
-        public Task Request(Move move)
+        public Task<Option<ClientGameState>> Request(Move move)
         {
             MoveValidator.MoveResult result = MoveValidator.PlayMove(_gameState.Value, move);
 
             _gameState.Value = result switch
             {
-                MoveValidator.MoveResult.Success(var updatedState, var drawnCard, var deltaScore) => updatedState,
+                MoveValidator.MoveResult.Success(var updatedState, _) => updatedState,
                 MoveValidator.MoveResult.Invalid => _gameState.Value,
                 _ => throw new ArgumentOutOfRangeException()
             };
 
             HandleEvents(result, move);
 
-            return Task.CompletedTask;
+            return Task.FromResult(Option<ClientGameState>.Some(_gameState.Value.ToClientGameState(move.Team)));
         }
 
         private void HandleEvents(MoveValidator.MoveResult result, Move move)
         {
-            if (result is MoveValidator.MoveResult.Success(var updatedState, var drawnCard, var deltaScore))
+            if (result is MoveValidator.MoveResult.Success(var updatedState, var deltaScore))
             {
-                OnCardReceived?.Invoke(drawnCard);
+                OnCardReceived?.Invoke(updatedState.ToClientGameState(move.Team).Hand[^1]);
                 
                 OnScored?.Invoke(deltaScore, move.Team);
 
@@ -56,7 +57,7 @@ namespace Game.Domain.Server
             }
         }
 
-        public Task CheckIfOpponentPlayed(string matchId)
+        public Task<ClientGameState> GetClientGameState(string matchId)
         {
             throw new NotImplementedException();
         }

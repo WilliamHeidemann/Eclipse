@@ -11,7 +11,7 @@
 }
 
 .custom-input-field > .unity-base-field__input {
-    background-color: rgb(34, 34, 34);
+    background-color: rgba (255, 255, 255, 0.11);
     color: rgb(255, 255, 255);
     border-radius: 6px;
     border-width: 1px;
@@ -25,10 +25,10 @@
 }
 
 .custom-input-field > .unity-base-field__input:hover {
-    border-color: rgb(59, 130, 246);
+    border-color: rgb(255, 255, 255, 0.3);
 }
 
 .custom-input-field > .unity-base-field__input:focus {
-    border-color: rgb(96, 165, 250);
-    background-color: rgb(26, 26, 26);
+    border-color: rgba(96, 165, 250, 0);
+    background-color: rgba (255, 255, 255, 0.3);
 }

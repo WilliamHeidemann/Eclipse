@@ -1233,6 +1233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Eclipse.Presentation::Game.Presentation.AudioPlayer
   _audioContainer: {fileID: 11400000, guid: ad6817c5b8b908f4fbc2e5c0fc93e1c0, type: 2}
+  _audioSourceTemplate: {fileID: 0}
 --- !u!1 &927048356
 GameObject:
   m_ObjectHideFlags: 0

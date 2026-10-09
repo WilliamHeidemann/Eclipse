@@ -28,11 +28,11 @@ MonoBehaviour:
     Path: 
   _pop:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 895195994
+      Data2: 1114501356
+      Data3: -792591993
+      Data4: 330381151
+    Path: event:/SFX_Spare_Assets/Weird
   _putDown:
     Guid:
       Data1: 915834304

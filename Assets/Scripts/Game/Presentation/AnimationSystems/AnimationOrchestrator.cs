@@ -71,7 +71,7 @@ namespace Game.Presentation.AnimationSystems
             async Awaitable Play()
             {
                 _boardPresenter.Pop(move.Position);
-                // _audioPlayer.Play(Sound.Pop);
+                _audioPlayer.Play(Sound.Pop);
 
                 if (_cardAligner.RemoveCard(move.Card, out Transform cardTransform))
                 {

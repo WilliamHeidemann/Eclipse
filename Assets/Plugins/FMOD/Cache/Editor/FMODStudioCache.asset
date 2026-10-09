@@ -278,9 +278,36 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639271489620258013
+  lastModified: 639271516613009671
   FileSizes: []
   Exists: 1
+--- !u!114 &-270165123107974786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX_Spare_Assets/Weird
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SFX_Spare_Assets/Weird
+  Guid:
+    Data1: 895195994
+    Data2: 1114501356
+    Data3: -792591993
+    Data4: 330381151
+  Banks:
+  - {fileID: -290881010876077276}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5250
 --- !u!114 &-134713252364062148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,13 +360,14 @@ MonoBehaviour:
   - {fileID: -7433658011460069896}
   - {fileID: 5365247971523005164}
   - {fileID: -5224621881789799407}
+  - {fileID: -270165123107974786}
   EditorParameters: []
   MasterBanks:
   - {fileID: -290881010876077276}
   StringsBanks:
   - {fileID: 4720145984006127432}
   cacheVersion: 131861
-  cacheTime: 639271489620282376
+  cacheTime: 639271516613039785
   SerializableEventsDict:
   - key: event:/SFX_Spare_Assets/SequenceSFX PopSound1
     index: 0
@@ -359,6 +387,8 @@ MonoBehaviour:
     index: 7
   - key: event:/Card_Interactions/SequenceSFX PutDownCard1
     index: 8
+  - key: event:/SFX_Spare_Assets/Weird
+    index: 9
 --- !u!114 &584127877941880455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,10 +485,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639271489620282376
+  lastModified: 639271516613039785
   FileSizes:
   - Name: 
-    Value: 1358
+    Value: 1394
   Exists: 1
 --- !u!114 &5151405625735782579
 MonoBehaviour:

@@ -113,3 +113,10 @@ InitTestScene*.unity*
 # Preserve specific solution and project files in EclipseModule
 !/EclipseModule/*.sln
 !/EclipseModule/**/*.csproj
+
+# Allow your FMOD banks to be pushed to the team
+!Assets/FMOD/StreamingAssets/*.bank
+!Assets/FMOD/StreamingAssets/*.strings
+
+# Ignore FMOD's local designer cache so it doesn't clutter Git
+/[Aa]ssets/Plugins/FMOD/Cache/

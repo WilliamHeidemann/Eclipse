@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: ../../../../ProjectCreatureAssembly/FMOD_Projects/Sequence_Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639270633243553971
+  lastModified: 639271485931404165
   FileSizes:
   - Name: Desktop
-    Value: 2358976
+    Value: 2374944
   Exists: 1
 --- !u!114 &-6631920417335273110
 MonoBehaviour:
@@ -240,7 +240,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 6977284761771543973}
   cacheVersion: 131861
-  cacheTime: 639270633243565841
+  cacheTime: 639271485931424973
   SerializableEventsDict:
   - key: event:/SFX_Spare_Assets/SequenceSFX PopSound1
     index: 0
@@ -329,8 +329,8 @@ MonoBehaviour:
   Path: ../../../../ProjectCreatureAssembly/FMOD_Projects/Sequence_Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639270633243565841
+  lastModified: 639271485931424973
   FileSizes:
   - Name: Desktop
-    Value: 1324
+    Value: 1358
   Exists: 1

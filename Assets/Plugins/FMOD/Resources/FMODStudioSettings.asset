@@ -378,10 +378,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: FMODUnity::FMODUnity.Settings
   switchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: ../../../../ProjectCreatureAssembly/FMOD_Projects/Sequence_Project/Sequence_Project.fspro
-  sourceBankPath: ../../../../ProjectCreatureAssembly/FMOD_Projects/Sequence_Project/Build
+  sourceBankPath: Assets/Plugins/FMOD/StreamingAssets/Desktop
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -421,18 +421,18 @@ MonoBehaviour:
   HideSetupWizard: 0
   LastEventReferenceScanVersion: 131861
   Platforms:
-  - {fileID: 4908454865340152206}
-  - {fileID: 1885920061908515149}
-  - {fileID: 791867986601270964}
-  - {fileID: -2490602459238671721}
+  - {fileID: -7722069856318196010}
+  - {fileID: -7315993975106932215}
+  - {fileID: -6896744776598616382}
   - {fileID: -6213081307371130412}
+  - {fileID: -2490602459238671721}
+  - {fileID: 334922695478161436}
+  - {fileID: 791867986601270964}
+  - {fileID: 1142135263803317069}
+  - {fileID: 1885920061908515149}
+  - {fileID: 4908454865340152206}
   - {fileID: 5377654489591772966}
   - {fileID: 7755123890569269066}
-  - {fileID: -6896744776598616382}
-  - {fileID: -7722069856318196010}
-  - {fileID: 334922695478161436}
-  - {fileID: 1142135263803317069}
-  - {fileID: -7315993975106932215}
   MigratedPlatforms: 0a00000000000000150000000b00000009000000050000001200000008000000060000000c0000000200000001000000i
 --- !u!114 &334922695478161436
 MonoBehaviour:
@@ -869,16 +869,16 @@ MonoBehaviour:
     HasValue: 0
   displaySortOrder: 0
   childIdentifiers:
-  - b7716510a1f36934c87976f3a81dbf3d
-  - de700ef3f37a49b58a57ae3addf01ad9
-  - 46fbfdf3fc43db0458918377fd40293e
-  - 0f8eb3f400726694eb47beb1a9f94ce8
-  - 52eb9df5db46521439908db3a29a1bbb
-  - c88d16e5272a4e241b0ef0ac2e53b73d
   - 2fea114e74ecf3c4f920e1d5cc1c4c40
-  - fd7c55dab0fce234b8c25f6ffca523c1
-  - e7a046c753c3c3d4aacc91f6597f310d
   - 2c5177b11d81d824dbb064f9ac8527da
+  - c88d16e5272a4e241b0ef0ac2e53b73d
+  - 52eb9df5db46521439908db3a29a1bbb
+  - 0f8eb3f400726694eb47beb1a9f94ce8
+  - fd7c55dab0fce234b8c25f6ffca523c1
+  - 46fbfdf3fc43db0458918377fd40293e
+  - e7a046c753c3c3d4aacc91f6597f310d
+  - de700ef3f37a49b58a57ae3addf01ad9
+  - b7716510a1f36934c87976f3a81dbf3d
   codecChannels:
     Value: []
     HasValue: 0

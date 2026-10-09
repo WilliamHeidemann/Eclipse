@@ -44,6 +44,11 @@ namespace Game.Presentation
             mainMenu.OnSentGameRequest +=
                 async n => await SendGameRequest(AuthenticationService.Instance.PlayerName, n);
             mainMenu.OnChallengeAccepted += async challengerId => await StartMatch(challengerId, gameStarter, mainMenu);
+            
+            mainMenu.OnSetPlayerName += Debug.Log;
+            mainMenu.OnSentFriendRequest += Debug.Log;
+            mainMenu.OnSentGameRequest += Debug.Log;
+            mainMenu.OnChallengeAccepted += Debug.Log;
         }
 
         private static SubscriptionEventCallbacks CreateSubscriptionEventCallbacks(MainMenu mainMenu,
@@ -80,6 +85,8 @@ namespace Game.Presentation
         {
             if (Enum.TryParse(messageReceivedEvent.MessageType, true, out PushMessageType messageType))
             {
+                Debug.Log($"[{messageReceivedEvent.MessageType}] {messageReceivedEvent.Message}");
+                
                 switch (messageType)
                 {
                     case PushMessageType.ChallengeRequest:

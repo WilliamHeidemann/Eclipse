@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Game.Presentation.AnimationSystems
@@ -9,12 +10,12 @@ namespace Game.Presentation.AnimationSystems
         private readonly Queue<Func<Awaitable>> _queue = new();
         private bool _isPlaying = false;
 
-        public void Enqueue(Func<Awaitable> animation)
+        public async Task Enqueue(Func<Awaitable> animation)
         {
             _queue.Enqueue(animation);
             if (!_isPlaying)
             {
-                Play().Forget();
+                await Play();
             }
         }
 

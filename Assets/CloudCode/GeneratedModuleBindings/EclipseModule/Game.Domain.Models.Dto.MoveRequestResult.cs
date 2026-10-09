@@ -6,9 +6,8 @@ namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Dto
 {
     public partial class MoveRequestResult
     {
-        public bool HasCard;
-        public bool IsOutOfSync;
-        public Card Card;
+        public bool WasValid;
+        public ClientGameState UpdatedGameState;
         public int DeltaScore;
 
         [Preserve]

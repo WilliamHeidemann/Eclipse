@@ -29,7 +29,8 @@ public class GameLogicService(IGameApiClient gameApiClient)
         GameState gameState = GameState.CreateInitial();
         ApiResponse<SetItemResponse> setMatchResponse = await SetGameState(context, matchId, gameState);
 
-        ClientGameState clientGameState = gameState.ToClientGameState(gameState.ToPlay);
+        Team myTeam = GetTeam(context.PlayerId, teams);
+        ClientGameState clientGameState = gameState.ToClientGameState(myTeam);
 
         return new Match
         {
@@ -77,10 +78,10 @@ public class GameLogicService(IGameApiClient gameApiClient)
 
         MoveRequestResult moveRequestResult = MoveValidator.PlayMove(currentGameState, move) switch
         {
-            MoveValidator.MoveResult.Success(var nextGameState, var drawnCard, var deltaScore) => await
-                SuccessMoveRequestResult(context, matchId, nextGameState, drawnCard, deltaScore),
-            MoveValidator.MoveResult.Invalid => new MoveRequestResult { HasCard = false, },
-            MoveValidator.MoveResult.OutOfSync => new MoveRequestResult { HasCard = false, IsOutOfSync = true },
+            MoveValidator.MoveResult.Success(var nextGameState, var deltaScore) => await
+                SuccessMoveRequestResult(context, matchId, nextGameState, move.Team, deltaScore),
+            MoveValidator.MoveResult.Invalid => new MoveRequestResult { WasValid = false, },
+            MoveValidator.MoveResult.OutOfSync => new MoveRequestResult { WasValid = false, },
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -88,17 +89,17 @@ public class GameLogicService(IGameApiClient gameApiClient)
     }
 
     private async Task<MoveRequestResult> SuccessMoveRequestResult(IExecutionContext context, string matchId,
-        GameState next, Card drawnCard, int deltaScore)
+        GameState next, Team team, int deltaScore)
     {
         ApiResponse<SetItemResponse> response = await SetGameState(context, matchId, next);
 
         if (response.StatusCode != HttpStatusCode.OK)
         {
             // maybe start returning an enum instead? Or an algebraic data type so the card can be return?
-            return new MoveRequestResult { HasCard = false, IsOutOfSync = true };
+            return new MoveRequestResult { WasValid = false };
         }
 
-        return new MoveRequestResult { Card = drawnCard, HasCard = true, DeltaScore = deltaScore };
+        return new MoveRequestResult { WasValid = true, UpdatedGameState = next.ToClientGameState(team), DeltaScore = deltaScore };
     }
 
 
@@ -112,6 +113,8 @@ public class GameLogicService(IGameApiClient gameApiClient)
 
     private async Task<Team> GetMyTeam(IExecutionContext context, string matchId)
     {
+        if (context.PlayerId == null) throw new NullReferenceException("context.PlayerId is null");
+        
         ApiResponse<GetItemsResponse> response = await gameApiClient.CloudSaveData.GetPrivateCustomItemsAsync(
             context,
             context.ServiceToken,
@@ -124,9 +127,17 @@ public class GameLogicService(IGameApiClient gameApiClient)
         Teams teams = JsonConvert.DeserializeObject<Teams>(rawJson)
                       ?? throw new JsonException("Could not deserialize teams.");
 
-        if (context.PlayerId == teams.Red) return Team.Red;
-        if (context.PlayerId == teams.Yellow) return Team.Yellow;
-        throw new InvalidOperationException("Player is not on any team.");
+        return GetTeam(context.PlayerId, teams);
+    }
+
+    private static Team GetTeam(string playerId, Teams teams)
+    {
+        return playerId switch
+        {
+            _ when playerId == teams.Red => Team.Red,
+            _ when playerId == teams.Yellow => Team.Yellow,
+            _ => throw new InvalidOperationException("Player is not on any team.")
+        };
     }
 
     private async Task<GameState> GetGameState(IExecutionContext context, string matchId)

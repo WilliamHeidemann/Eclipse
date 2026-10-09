@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Eclipse%20Main%20Menu.uss?fileID=7433441132597879392&amp;guid=bf0bc098faf924cacbc3d118f52cf544&amp;type=3#Eclipse Main Menu"/>
-    <ui:VisualElement class="friend-row">
+    <ui:VisualElement class="friend-row" style="color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0.043); border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;">
         <ui:Label text="Friend#1001" name="FriendName" class="row-name"/>
-        <ui:Button name="Play" text="Play" class="secondary-button"/>
+        <ui:Button name="Play" text="Play" class="secondary-button" style="background-color: rgba(0, 0, 0, 0); background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Menu%20Elements/Asset%202@4x.png?fileID=2800000&amp;guid=9d1ab8ab5c04e964caee9add67ec48f6&amp;type=3#Asset 2@4x&quot;); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);"/>
     </ui:VisualElement>
 </ui:UXML>

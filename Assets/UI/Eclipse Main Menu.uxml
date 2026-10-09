@@ -2,27 +2,28 @@
     <ui:Template name="Friend" src="project://database/Assets/UI/Friend.uxml?fileID=9197481963319205126&amp;guid=181663193c07e42688492d478d962cf2&amp;type=3#Friend"/>
     <ui:Template name="FriendRequest" src="project://database/Assets/UI/FriendRequest.uxml?fileID=9197481963319205126&amp;guid=c6ce7796970d443d2aa8424f95bed7d9&amp;type=3#FriendRequest"/>
     <Style src="project://database/Assets/UI/Eclipse%20Main%20Menu.uss?fileID=7433441132597879392&amp;guid=bf0bc098faf924cacbc3d118f52cf544&amp;type=3#Eclipse Main Menu"/>
-    <ui:VisualElement name="MainMenuRoot" class="main-menu-root">
+    <ui:VisualElement name="MainMenuRoot" class="main-menu-root" style="background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Backgrounds/Game%20Background%20V3.jpg?fileID=2800000&amp;guid=857ce6898e6bca345966fedbc284e9cc&amp;type=3#Game Background V3&quot;);">
         <ui:VisualElement name="Header" class="header">
-            <ui:Label name="LogoLabel" text="ECLIPSE" class="logo-text"/>
-            <ui:Label text="Asynchronous turn-based card duels" class="subtitle-text" style="display: none;"/>
+            <ui:Image scale-mode="ScaleToFit" style="background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Logo/Eclipse%20LOGO.png?fileID=2800000&amp;guid=730e854957f9b174a9bf36c275ab7fec&amp;type=3#Eclipse LOGO&quot;); background-color: rgba(255, 255, 255, 0); border-top-width: 68px; border-right-width: 150px; border-bottom-width: 68px; border-left-width: 150px; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0;"/>
         </ui:VisualElement>
-        <ui:VisualElement name="PlayerPanel" class="panel player-panel">
-            <ui:Label text="Player#1234" name="CurrentPlayerName" class="panel-title"/>
+        <ui:VisualElement name="PlayerPanel" class="panel player-panel" style="background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Menu%20Elements/Asset%208.png?fileID=2800000&amp;guid=597b771ac589761419ef23ec7dbd623f&amp;type=3#Asset 8&quot;); border-left-color: rgba(49, 60, 87, 0); border-right-color: rgba(49, 60, 87, 0); border-top-color: rgba(49, 60, 87, 0); border-bottom-color: rgba(49, 60, 87, 0); -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgba(21, 28, 44, 0);">
+            <ui:Label text="Player#1234" name="CurrentPlayerName" class="panel-title" style="-unity-text-align: upper-center; -unity-font-style: bold-and-italic;"/>
             <ui:VisualElement class="name-row">
                 <ui:Label text="Your Name" class="player-name-label" style="display: none;"/>
-                <ui:TextField name="PlayerNameInput" placeholder-text="Change name..." class="text-input"/>
-                <ui:Button name="SavePlayerNameButton" text="Save" class="primary-button"/>
+                <ui:TextField name="PlayerNameInput" placeholder-text="Change name..." select-word-by-double-click="true" class="text-input" style="-unity-background-image-tint-color: rgba(255, 255, 255, 0); background-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); color: rgb(237, 242, 247);"/>
+                <ui:Button name="SavePlayerNameButton" text="Save" class="primary-button" style="background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Menu%20Elements/Asset%202@4x.png?fileID=2800000&amp;guid=9d1ab8ab5c04e964caee9add67ec48f6&amp;type=3#Asset 2@4x&quot;); -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Body" class="body">
-            <ui:VisualElement name="FriendsPanel" class="panel friends-panel">
+            <ui:VisualElement name="FriendsPanel" class="panel friends-panel" style="background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Menu%20Elements/Asset%2010.png?fileID=2800000&amp;guid=e38e00c5e4d04a34fad3578d7d2ca982&amp;type=3#Asset 10&quot;); background-color: rgba(255, 255, 255, 0); border-left-color: rgba(49, 60, 87, 0); border-right-color: rgba(49, 60, 87, 0); border-top-color: rgba(49, 60, 87, 0); border-bottom-color: rgba(49, 60, 87, 0);">
                 <ui:Label text="Friends" class="panel-title"/>
                 <ui:ScrollView name="FriendsList" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" class="friends-list">
-                    <ui:Instance template="Friend" name="Friend"/>
+                    <ui:Instance template="Friend" name="Friend">
+                        <AttributeOverrides element-name="Play" icon-image="" selectable="true" focusable="true"/>
+                    </ui:Instance>
                 </ui:ScrollView>
             </ui:VisualElement>
-            <ui:VisualElement name="RequestsPanel" class="panel requests-panel">
+            <ui:VisualElement name="RequestsPanel" class="panel requests-panel" style="background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Menu%20Elements/Asset%208.png?fileID=2800000&amp;guid=597b771ac589761419ef23ec7dbd623f&amp;type=3#Asset 8&quot;); background-color: rgba(255, 255, 255, 0); border-left-color: rgba(49, 60, 87, 0); border-right-color: rgba(49, 60, 87, 0); border-top-color: rgba(49, 60, 87, 0); border-bottom-color: rgba(49, 60, 87, 0);">
                 <ui:Label text="Friend Requests" class="panel-title"/>
                 <ui:Label text="Incoming" class="section-label"/>
                 <ui:ScrollView name="IncomingRequestsList" vertical-scroller-visibility="Hidden" horizontal-scroller-visibility="Hidden" class="request-list">
@@ -31,7 +32,7 @@
                 <ui:Label text="Send Request" class="section-label"/>
                 <ui:VisualElement class="send-request-row">
                     <ui:TextField name="FriendRequestInput" placeholder-text="Friend name or tag..." class="text-input"/>
-                    <ui:Button name="SendFriendRequestButton" text="Send" class="primary-button"/>
+                    <ui:Button name="SendFriendRequestButton" text="Send" class="primary-button" style="background-color: rgba(0, 0, 0, 0); background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Menu%20Elements/Asset%202@4x.png?fileID=2800000&amp;guid=9d1ab8ab5c04e964caee9add67ec48f6&amp;type=3#Asset 2@4x&quot;);"/>
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

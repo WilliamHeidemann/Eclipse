@@ -32,7 +32,7 @@ namespace Tests
         {
             // Arrange
             Position movePos = new(Row.One, Column.One);
-            Move move = new(movePos, CreateDummyCard(), _activeTeam);
+            Move move = new(movePos, _activeTeam);
 
             // Board contains only the move just played, not a full sequence
             Move[] boardMoves = { move };
@@ -51,7 +51,7 @@ namespace Tests
         {
             // Arrange
             Position movePos = new(Row.One, Column.One);
-            Move move = new(movePos, CreateDummyCard(), _activeTeam);
+            Move move = new(movePos, _activeTeam);
 
             // Assuming (One,One), (One,Two), (One,Three), (One,Four) forms a valid pattern returned by SequencePatterns.Around
             Position[] patternPositions =
@@ -77,7 +77,7 @@ namespace Tests
         {
             // Arrange
             Position movePos = new(Row.One, Column.One);
-            Move move = new(movePos, CreateDummyCard(), _activeTeam);
+            Move move = new(movePos, _activeTeam);
 
             // Assuming (One,One), (One,Two), (One,Three), (One,Four) forms a valid pattern returned by SequencePatterns.Around
             Position[] patternPositions =
@@ -101,7 +101,7 @@ namespace Tests
         {
             // Arrange
             Position movePos = new(Row.One, Column.One);
-            Move move = new(movePos, CreateDummyCard(), _activeTeam);
+            Move move = new(movePos, _activeTeam);
 
             Position[] patternPositions =
             {
@@ -114,10 +114,10 @@ namespace Tests
             // Active team owns 3, Opponent owns 1
             Move[] moves =
             {
-                new(patternPositions[0], CreateDummyCard(), _activeTeam),
-                new(patternPositions[1], CreateDummyCard(), _activeTeam),
-                new(patternPositions[2], CreateDummyCard(), _activeTeam),
-                new(patternPositions[3], CreateDummyCard(), _opposingTeam)
+                new(patternPositions[0], _activeTeam),
+                new(patternPositions[1], _activeTeam),
+                new(patternPositions[2], _activeTeam),
+                new(patternPositions[3], _opposingTeam)
             };
 
             Board board = new(moves);
@@ -134,7 +134,7 @@ namespace Tests
         {
             // Arrange
             Position movePos = new(Row.One, Column.One);
-            Move move = new(movePos, CreateDummyCard(), _activeTeam);
+            Move move = new(movePos, _activeTeam);
 
             Position[] patternPositions =
             {
@@ -159,7 +159,7 @@ namespace Tests
         {
             // Arrange
             Position movePos = new(Row.One, Column.One);
-            Move move = new(movePos, CreateDummyCard(), _activeTeam);
+            Move move = new(movePos, _activeTeam);
 
             Position[] patternPositions =
             {
@@ -185,7 +185,7 @@ namespace Tests
         {
             // Arrange
             Position movePos = new(Row.Two, Column.Two);
-            Move move = new(movePos, CreateDummyCard(), _activeTeam);
+            Move move = new(movePos, _activeTeam);
 
             // Assume these form two distinct intersecting lines (e.g., horizontal and vertical) 
             // intersecting ONLY at the movePos (overlap of Two).
@@ -220,7 +220,7 @@ namespace Tests
         {
             // Arrange
             Position movePos = new(Row.One, Column.Three);
-            Move move = new(movePos, CreateDummyCard(), _activeTeam);
+            Move move = new(movePos, _activeTeam);
 
             Position[] existing =
             {
@@ -248,7 +248,7 @@ namespace Tests
         {
             // Arrange
             Position movePos = new(Row.One, Column.Six);
-            Move move = new(movePos, CreateDummyCard(), _activeTeam);
+            Move move = new(movePos, _activeTeam);
 
             Position[] existing =
             {
@@ -277,15 +277,8 @@ namespace Tests
 
         private Board CreateBoardWithTeamOwnership(IEnumerable<Position> positions, Team team)
         {
-            Move[] moves = positions.Select(p => new Move(p, CreateDummyCard(), team)).ToArray();
+            Move[] moves = positions.Select(p => new Move(p, team)).ToArray();
             return new Board(moves);
-        }
-
-        private Card CreateDummyCard()
-        {
-            // Assuming standard instantiation or a mock. 
-            // Adjust parameters as required by your domain's Card constructor.
-            return default!;
         }
 
         #endregion

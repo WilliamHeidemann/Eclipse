@@ -105,7 +105,6 @@ namespace Game.Cloud
         {
             return new Organism.Move
             {
-                Card = move.Card.ToDto(),
                 Position = move.Position.ToDto(),
                 Team = move.Team.ToDto()
             };

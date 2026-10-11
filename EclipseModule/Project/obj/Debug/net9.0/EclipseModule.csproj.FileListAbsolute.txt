@@ -19,7 +19,6 @@ C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Debug\net9.0\EclipseModule.Ge
 C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Debug\net9.0\EclipseModule.AssemblyInfoInputs.cache
 C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Debug\net9.0\EclipseModule.AssemblyInfo.cs
 C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Debug\net9.0\EclipseModule.csproj.CoreCompileInputs.cache
-C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Debug\net9.0\EclipseModule.sourcelink.json
 C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Debug\net9.0\EclipseModule.dll
 C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Debug\net9.0\refint\EclipseModule.dll
 C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Debug\net9.0\EclipseModule.pdb

@@ -66,14 +66,15 @@ namespace Game.Presentation.AnimationSystems
 
             async Awaitable Play()
             {
+                Card card = BoardLayout.Get(move.Position);
 
-                if (_cardAligner.RemoveCard(move.Card, out Transform cardTransform))
+                if (_cardAligner.RemoveCard(card, out Transform cardTransform))
                 {
                     _audioPlayer.Play(Sound.PutDown);
                     await _discardPile.Discard(cardTransform);
                 }
 
-                if (move.Card.IsRemover())
+                if (card.IsRemover())
                 {
                     await _boardPresenter.RemovePin(move.Position);
                 }
@@ -94,8 +95,11 @@ namespace Game.Presentation.AnimationSystems
             {
                 await Awaitable.WaitForSecondsAsync(1f); // simulate thinking time.
                 _audioPlayer.Play(Sound.PutDown);
-                await _opponentHandAnimator.AnimatePlay(move.Card);
-                if (move.Card.IsRemover())
+                
+                Card card = BoardLayout.Get(move.Position);
+                
+                await _opponentHandAnimator.AnimatePlay(card);
+                if (card.IsRemover())
                 {
                     await _boardPresenter.RemovePin(move.Position);
                 }

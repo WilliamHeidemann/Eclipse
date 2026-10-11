@@ -25,11 +25,7 @@ namespace Game.Domain.Models.Organisms
         {
             foreach (Move move in moves)
             {
-                if (move.Card.IsRemover())
-                {
-                    _takenSpaces.Remove(move.Position);
-                }
-                else if (!_takenSpaces.TryAdd(move.Position, move.Team))
+                if (!_takenSpaces.TryAdd(move.Position, move.Team))
                 {
                     throw new DomainException($"Duplicate move at {BoardLayout.Get(move.Position)}");
                 }

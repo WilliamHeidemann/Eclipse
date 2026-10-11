@@ -41,7 +41,7 @@ namespace Game.Domain.Models
                 }
             }
 
-            Move move = new(position, cardInHand, clientGameState.Team);
+            Move move = new(position, clientGameState.Team);
 
             Team toPlay = clientGameState.IsMyTurn ? clientGameState.Team : clientGameState.Team.Opposing();
 
@@ -59,25 +59,27 @@ namespace Game.Domain.Models
 
             bool isOpen = board.Fits(move.Position);
 
-            var requiredCard = hand.FindCard(move.Card, isOpen);
+            Card requiredCard = isOpen ? BoardLayout.Get(move.Position) : Card.JackOfMoon;
 
-            if (!requiredCard.IsSome(out Card cardInHand))
+            bool hasCardInHand = hand.FindCard(requiredCard, isOpen).IsSome(out _);
+            
+            if (!hasCardInHand)
             {
                 return false;
             }
 
-            if (cardInHand.Rank == Rank.Jack)
+            if (requiredCard == Card.JackOfSun)
             {
                 board.TryAdd(move.Position, move.Team);
                 var sequences = SequencePatterns.FindSequences(board, move.Team, locked).ToArray();
+                board.Remove(move.Position);
                 int deltaScore = sequences.Length;
                 if (deltaScore > 0)
                 {
                     return false;
                 }
             }
-
-            if (cardInHand.IsRemover())
+            else if (requiredCard == Card.JackOfMoon)
             {
                 bool playerOwnsPosition = board.OwnerIs(move.Position, move.Team);
 
@@ -104,10 +106,12 @@ namespace Game.Domain.Models
                 return new MoveResult.Invalid();
             }
 
-            if (move.Card.IsRemover()) board.Remove(move.Position);
-            else board.TryAdd(move.Position, move.Team);
+            if (board.Fits(move.Position)) board.TryAdd(move.Position, move.Team);
+            else board.Remove(move.Position);
+            
+            Card requiredCard = board.Fits(move.Position) ? Card.JackOfMoon : BoardLayout.Get(move.Position);
 
-            hand.TryRemove(move.Card);
+            hand.TryRemove(requiredCard);
 
             Deck deck = new(gameState.Deck);
             Card draw = deck.Draw();
@@ -121,7 +125,7 @@ namespace Game.Domain.Models
             var sequences = SequencePatterns.FindSequences(board, move.Team, locked).ToArray();
             int deltaScore = sequences.Length;
 
-            if (move.Card.Rank == Rank.Jack && deltaScore > 0)
+            if (requiredCard == Card.JackOfSun && deltaScore > 0)
             {
                 return new MoveResult.Invalid();
             }

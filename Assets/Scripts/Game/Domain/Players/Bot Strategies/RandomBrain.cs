@@ -16,13 +16,14 @@ namespace Game.Domain.Players.Bot_Strategies
             Board board = new(clientGameState.Moves);
 
             Card card = clientGameState.Hand.Where(card => card.Rank != Rank.Jack).RandomElement();
+            
             (Position first, Position second) = BoardLayout.Get(card);
 
             if (_random.NextDouble() < 0.5f) (first, second) = (second, first);
 
             Position position = board.Fits(first) ? first : second;
 
-            Move move = new(position, card, clientGameState.Team);
+            Move move = new(position, clientGameState.Team);
 
             return move;
         }

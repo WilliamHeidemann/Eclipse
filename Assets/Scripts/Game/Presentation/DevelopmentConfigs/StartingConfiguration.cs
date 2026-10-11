@@ -71,7 +71,7 @@ namespace Game.Presentation
             [SerializeField] private SerializedPosition _serializedPosition;
             [SerializeField] private SerializedCard _serializedCard;
             [SerializeField] private Team _team;
-            public Move ToModel() => new(_serializedPosition.ToModel(), _serializedCard.ToModel(), _team);
+            public Move ToModel() => new(_serializedPosition.ToModel(), _team);
         }
     }
 }

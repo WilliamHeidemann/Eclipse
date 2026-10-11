@@ -102,6 +102,11 @@ namespace Game.Cloud
             return new Move(position, team);
         }
 
+        private static Sequence ToModel(this Organism.Sequence sequence)
+        {
+            return new Sequence(sequence.Positions.ToModel(), sequence.Team.ToModel());
+        }
+
         private static Card[] ToModel(this List<Organism.Card> cards)
         {
             return cards.Select(ToModel).ToArray();
@@ -117,9 +122,9 @@ namespace Game.Cloud
             return moves.Select(ToModel).ToArray();
         }
 
-        public static Score ToModel(this Organism.Score score)
+        private static Sequence[] ToModel(this List<Organism.Sequence> sequences)
         {
-            return new Score(score.Red, score.Yellow);
+            return sequences.Select(ToModel).ToArray();
         }
 
         public static ClientGameState ToModel(this State.ClientGameState clientGameState)
@@ -127,9 +132,8 @@ namespace Game.Cloud
             return new ClientGameState(
                 clientGameState.Moves.ToModel(),
                 clientGameState.Hand.ToModel(),
-                clientGameState.Locked.ToModel(),
+                clientGameState.Sequences.ToModel(),
                 clientGameState.Team.ToModel(),
-                clientGameState.Score.ToModel(),
                 clientGameState.IsMyTurn);
         }
 

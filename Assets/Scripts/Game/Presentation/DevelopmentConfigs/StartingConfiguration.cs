@@ -42,11 +42,9 @@ namespace Game.Presentation
 
             Move[] moves = _playedMoves.Select(m => m.ToModel()).ToArray();
 
-            Position[] locked = Array.Empty<Position>();
+            Sequence[] sequences = Array.Empty<Sequence>();
 
-            Score score = new(0, 0);
-            
-            return new GameState(redCards, yellowCards, deck.GetCards(), moves, locked, score, Team.Red);
+            return new GameState(redCards, yellowCards, deck.GetCards(), moves, sequences, Team.Red);
         }
 
         [Serializable]

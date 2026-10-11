@@ -9,9 +9,8 @@ namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.State
     {
         public List<Organisms.Move> Moves;
         public List<Organisms.Card> Hand;
-        public List<Organisms.Position> Locked;
+        public List<Organisms.Sequence> Sequences;
         public Organisms.Team Team;
-        public Organisms.Score Score;
         public bool IsMyTurn;
 
         [Preserve]

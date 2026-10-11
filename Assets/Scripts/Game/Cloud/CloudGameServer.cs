@@ -15,7 +15,6 @@ namespace Game.Cloud
         private readonly string _matchId;
         public event Action<Card> OnCardReceived;
         public event Action<ClientGameState> OnOpponentPlayed;
-        public event Action<int, Team> OnScored;
 
         public CloudGameServer(GameLogicServiceBindings gameLogicService, string matchId)
         {
@@ -30,7 +29,6 @@ namespace Game.Cloud
             if (moveResult.WasValid)
             {
                 OnCardReceived?.Invoke(moveResult.UpdatedGameState.ToModel().Hand[^1]);
-                OnScored?.Invoke(moveResult.DeltaScore, move.Team);
                 return Option<ClientGameState>.Some(moveResult.UpdatedGameState.ToModel());
             }
 

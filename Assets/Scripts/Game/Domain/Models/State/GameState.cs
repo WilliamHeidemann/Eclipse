@@ -5,34 +5,20 @@ using Game.Domain.Models.Organisms;
 namespace Game.Domain.Models.State
 {
     [Serializable]
-    public class GameState
+    public record GameState(
+        Card[] RedHand,
+        Card[] YellowHand,
+        Card[] Deck,
+        Move[] Moves,
+        Sequence[] Sequences,
+        Team ToPlay)
     {
-        public GameState(Card[] redHand, Card[] yellowHand, Card[] deck, Move[] moves, Position[] locked, Score score,
-            Team toPlay)
-        {
-            RedHand = redHand;
-            YellowHand = yellowHand;
-            Deck = deck;
-            Moves = moves;
-            Locked = locked;
-            Score = score;
-            ToPlay = toPlay;
-        }
-
-        public Card[] RedHand { get; }
-        public Card[] YellowHand { get; }
-        public Card[] Deck { get; }
-        public Move[] Moves { get; }
-        public Position[] Locked { get; }
-        public Score Score { get; }
-        public Team ToPlay { get; }
-
         public ClientGameState ToClientGameState(Team team)
         {
             Card[] hand = team == Team.Red ? RedHand : YellowHand;
             bool isMyTurn = team == ToPlay;
 
-            return new ClientGameState(Moves, hand, Locked, team, Score, isMyTurn);
+            return new ClientGameState(Moves, hand, Sequences, team, isMyTurn);
         }
 
         public static GameState CreateInitial()
@@ -45,14 +31,12 @@ namespace Game.Domain.Models.State
 
             Move[] moves = Array.Empty<Move>();
 
-            Position[] locked = Array.Empty<Position>();
-
-            Score score = new(0, 0);
+            Sequence[] sequences = Array.Empty<Sequence>();
 
             Random random = new();
             Team toPlay = random.NextDouble() < 0.5 ? Team.Red : Team.Yellow;
 
-            return new GameState(redCards, yellowCards, deck.GetCards(), moves, locked, score, toPlay);
+            return new GameState(redCards, yellowCards, deck.GetCards(), moves, sequences, toPlay);
         }
     }
 }

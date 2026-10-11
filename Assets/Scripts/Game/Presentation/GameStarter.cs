@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Game.Cloud;
 using Game.Domain;
@@ -42,9 +43,9 @@ namespace Game.Presentation
 
             if (_startingConfiguration.UseDevelopmentStartingState)
             {
-                foreach (Move preMove in gameState.Moves)
+                foreach (Play prePlay in gameState.Moves.Select(m => new Play(m, BoardLayout.Get(m.Position))))
                 {
-                    _animationOrchestrator.PlayDiscardAndPinAnimation(preMove);
+                    _animationOrchestrator.PlayDiscardAndPinAnimation(prePlay);
                 }
             }
 
@@ -56,8 +57,6 @@ namespace Game.Presentation
                 ClientGameState clientGameState = gameState.ToClientGameState(gameState.ToPlay);
 
                 LocalGameServer playerGameServer = CreateLocalGameServer(gameState);
-
-                playerGameServer.OnScored += (score, team) => Debug.Log($"Scored {score} for team {team}");
 
                 return new PlayCoordinator(playerGameServer, clientGameState);
 
@@ -86,7 +85,7 @@ namespace Game.Presentation
         public void StartGame(Match match, string opponentId)
         {
             _playCoordinator = CreatePlayCoordinator(match);
-            _playCoordinator.OnValidMoveRequest += async move => await NotifyOpponent(opponentId);
+            _playCoordinator.OnValidMoveRequest += async _ => await NotifyOpponent(opponentId);
             _matchId = Option<string>.Some(match.Id);
             BindToPresentation(_playCoordinator);
             _heartBeat = new HeartBeat(match.Id, _playCoordinator);
@@ -124,8 +123,6 @@ namespace Game.Presentation
         private PlayCoordinator CreatePlayCoordinator(Match match)
         {
             CloudGameServer playerGameServer = CreateCloudGameServer(match.Id);
-
-            playerGameServer.OnScored += (score, team) => Debug.Log($"Scored {score} for team {team}");
 
             return new PlayCoordinator(playerGameServer, match.ClientGameState);
 

@@ -80,8 +80,8 @@ public class GameLogicService(IGameApiClient gameApiClient)
 
         MoveRequestResult moveRequestResult = MoveValidator.PlayMove(currentGameState, move) switch
         {
-            MoveResult.Success(var nextGameState, var deltaScore) => await
-                SuccessMoveRequestResult(context, matchId, nextGameState, move.Team, deltaScore),
+            MoveResult.Success success => await
+                SuccessMoveRequestResult(context, matchId, success.UpdatedState, move.Team),
             MoveResult.Invalid => new MoveRequestResult { WasValid = false, },
             _ => throw new ArgumentOutOfRangeException()
         };
@@ -90,7 +90,7 @@ public class GameLogicService(IGameApiClient gameApiClient)
     }
 
     private async Task<MoveRequestResult> SuccessMoveRequestResult(IExecutionContext context, string matchId,
-        GameState next, Team team, int deltaScore)
+        GameState next, Team team)
     {
         ApiResponse<SetItemResponse> response = await SetGameState(context, matchId, next);
 
@@ -100,7 +100,7 @@ public class GameLogicService(IGameApiClient gameApiClient)
             return new MoveRequestResult { WasValid = false };
         }
 
-        return new MoveRequestResult { WasValid = true, UpdatedGameState = next.ToClientGameState(team), DeltaScore = deltaScore };
+        return new MoveRequestResult { WasValid = true, UpdatedGameState = next.ToClientGameState(team) };
     }
 
 

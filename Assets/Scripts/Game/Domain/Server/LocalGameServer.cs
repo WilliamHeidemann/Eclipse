@@ -24,7 +24,6 @@ namespace Game.Domain.Server
         public IGameServer OtherPlayerServer { get; set; }
         public event Action<Card> OnCardReceived;
         public event Action<ClientGameState> OnOpponentPlayed;
-        public event Action<int, Team> OnScored;
 
         public LocalGameServer(LocalGameState gameState)
         {
@@ -37,7 +36,7 @@ namespace Game.Domain.Server
 
             _gameState.Value = result switch
             {
-                MoveResult.Success(var updatedState, _) => updatedState,
+                MoveResult.Success success => success.UpdatedState,
                 MoveResult.Invalid => _gameState.Value,
                 _ => throw new ArgumentOutOfRangeException()
             };
@@ -49,13 +48,11 @@ namespace Game.Domain.Server
 
         private void HandleEvents(MoveResult result, Move move)
         {
-            if (result is MoveResult.Success(var updatedState, var deltaScore))
+            if (result is MoveResult.Success success)
             {
-                OnCardReceived?.Invoke(updatedState.ToClientGameState(move.Team).Hand[^1]);
-                
-                OnScored?.Invoke(deltaScore, move.Team);
+                OnCardReceived?.Invoke(success.UpdatedState.ToClientGameState(move.Team).Hand[^1]);
 
-                OtherPlayerServer.Receive(updatedState.ToClientGameState(move.Team.Opposing()));
+                OtherPlayerServer.Receive(success.UpdatedState.ToClientGameState(move.Team.Opposing()));
             }
         }
 

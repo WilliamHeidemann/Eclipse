@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Domain;
@@ -17,14 +18,14 @@ namespace Tests
 
         private Team _activeTeam;
         private Team _opposingTeam;
-        private HashSet<Position> _lockedPositions;
+        private Sequence[] _sequences;
 
         [SetUp]
         public void Setup()
         {
             _activeTeam = Team.Red;
             _opposingTeam = Team.Yellow;
-            _lockedPositions = new HashSet<Position>();
+            _sequences = Array.Empty<Sequence>();
         }
 
         [Test]
@@ -39,7 +40,7 @@ namespace Tests
             Board board = new(boardMoves);
 
             // Act
-            Position[][] result = SequencePatterns.FindSequences(board, move.Team, _lockedPositions).ToArray();
+            Sequence[] result = SequencePatterns.FindSequences(board, move.Team, _sequences).ToArray();
 
             // Assert
             Assert.That(result, Is.Empty,
@@ -65,13 +66,13 @@ namespace Tests
             Board board = CreateBoardWithTeamOwnership(patternPositions, _activeTeam);
 
             // Act
-            Position[][] result = SequencePatterns.FindSequences(board, move.Team, _lockedPositions).ToArray();
+            Sequence[] result = SequencePatterns.FindSequences(board, move.Team, _sequences).ToArray();
 
             // Assert
             Assert.That(result, Is.Not.Empty);
             Assert.That(result.First(), Is.EquivalentTo(patternPositions));
         }
-        
+
         [Test]
         public void Sequences_ThreeInARow_ReturnsNoSequence()
         {
@@ -90,7 +91,7 @@ namespace Tests
             Board board = CreateBoardWithTeamOwnership(patternPositions, _activeTeam);
 
             // Act
-            Position[][] result = SequencePatterns.FindSequences(board, move.Team, _lockedPositions).ToArray();
+            Sequence[] result = SequencePatterns.FindSequences(board, move.Team, _sequences).ToArray();
 
             // Assert
             Assert.That(result, Is.Empty);
@@ -123,7 +124,7 @@ namespace Tests
             Board board = new(moves);
 
             // Act
-            Position[][] result = SequencePatterns.FindSequences(board, move.Team, _lockedPositions).ToArray();
+            Sequence[] result = SequencePatterns.FindSequences(board, move.Team, _sequences).ToArray();
 
             // Assert
             Assert.That(result, Is.Empty);
@@ -145,10 +146,12 @@ namespace Tests
             };
 
             Board board = CreateBoardWithTeamOwnership(patternPositions, _activeTeam);
-            _lockedPositions.Add(patternPositions[1]); // Exactly 1 locked position
+            _sequences =
+                _sequences.Append(new Sequence(new[] { patternPositions[1] }, move.Team))
+                    .ToArray(); // Exactly 1 locked position
 
             // Act
-            Position[][] result = SequencePatterns.FindSequences(board, move.Team, _lockedPositions).ToArray();
+            Sequence[] result = SequencePatterns.FindSequences(board, move.Team, _sequences).ToArray();
 
             // Assert
             Assert.That(result, Is.Not.Empty, "Sequence should be kept if less than 2 positions are locked.");
@@ -170,11 +173,16 @@ namespace Tests
             };
 
             Board board = CreateBoardWithTeamOwnership(patternPositions, _activeTeam);
-            _lockedPositions.Add(patternPositions[1]);
-            _lockedPositions.Add(patternPositions[2]); // 2 locked positions
+            _sequences =
+                _sequences.Append(new Sequence(new[]
+                    {
+                        patternPositions[1],
+                        patternPositions[2]
+                    }, move.Team))
+                    .ToArray(); // 2 locked positions
 
             // Act
-            Position[][] result = SequencePatterns.FindSequences(board, move.Team, _lockedPositions).ToArray();
+            Sequence[] result = SequencePatterns.FindSequences(board, move.Team, _sequences).ToArray();
 
             // Assert
             Assert.That(result, Is.Empty, "Sequence should be filtered out if 2 or more positions are locked.");
@@ -198,20 +206,21 @@ namespace Tests
             Board board = CreateBoardWithTeamOwnership(allPositions, _activeTeam);
 
             // Act
-            Position[][] result = SequencePatterns.FindSequences(board, move.Team, _lockedPositions).ToArray();
+            Sequence[] result = SequencePatterns.FindSequences(board, move.Team, _sequences).ToArray();
 
             // Assert
             // Due to the Cartesian product in CombineAll, an overlap < 2 returns seq1 uncombined.
             // We expect the result to contain both patterns separately (and potentially duplicates 
             // based on how CombineAll yields A+A, A+B, B+A, B+B).
-            Position[][] distinctSequences = result.Select(seq => seq.OrderBy(p => p.GetHashCode()).ToArray())
+            Sequence[] distinctSequences = result.Select(seq => seq.Positions.OrderBy(p => p.GetHashCode()).ToArray())
                 .DistinctBy(seq => string.Join(",", seq))
+                .Select(ps => new Sequence(ps, _activeTeam))
                 .ToArray();
 
             Assert.That(distinctSequences.Length, Is.EqualTo(2));
-            Assert.That(distinctSequences.Any(s => s.Length == 4 && s.Contains(pattern1[0])), Is.True);
-            Assert.That(distinctSequences.Any(s => s.Length == 4 && s.Contains(pattern2[0])), Is.True);
-            Assert.That(distinctSequences.Any(s => s.Length >= 7), Is.False,
+            Assert.That(distinctSequences.Any(s => s.Positions.Length == 4 && s.Positions.Contains(pattern1[0])), Is.True);
+            Assert.That(distinctSequences.Any(s => s.Positions.Length == 4 && s.Positions.Contains(pattern2[0])), Is.True);
+            Assert.That(distinctSequences.Any(s => s.Positions.Length >= 7), Is.False,
                 "Sequences should not be combined if overlap < 2.");
         }
 
@@ -235,12 +244,12 @@ namespace Tests
             Board board = CreateBoardWithTeamOwnership(existing, _activeTeam);
 
             // Act
-            Position[][] result = SequencePatterns.FindSequences(board, move.Team, _lockedPositions).ToArray();
+            Sequence[] result = SequencePatterns.FindSequences(board, move.Team, _sequences).ToArray();
 
             // Assert
             // The CombineAll logic concatenates and uses Distinct() when overlap >= 2.
             Assert.That(result.Length, Is.EqualTo(1));
-            Assert.That(result[0].Length, Is.EqualTo(6));
+            Assert.That(result[0].Positions.Length, Is.EqualTo(6));
         }
 
         [Test]
@@ -258,16 +267,13 @@ namespace Tests
                 new(Row.One, Column.Four),
                 new(Row.One, Column.Five),
             };
-
-            foreach (Position position in existing)
-            {
-                _lockedPositions.Add(position);
-            }
+            
+            _sequences = _sequences.Append(new Sequence(existing, move.Team)).ToArray();
 
             Board board = CreateBoardWithTeamOwnership(existing, _activeTeam);
 
             // Act
-            Position[][] result = SequencePatterns.FindSequences(board, move.Team, _lockedPositions).ToArray();
+            Sequence[] result = SequencePatterns.FindSequences(board, move.Team, _sequences).ToArray();
 
             // Assert
             Assert.That(result.Length, Is.EqualTo(0));

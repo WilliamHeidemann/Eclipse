@@ -8,7 +8,6 @@ namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Dto
     {
         public bool WasValid;
         public State.ClientGameState UpdatedGameState;
-        public int DeltaScore;
 
         [Preserve]
         public MoveRequestResult ()

@@ -20,13 +20,13 @@ namespace Game.Domain
         /// <summary>
         /// Finds all contiguous lines of a specific team that meet or exceed the target length.
         /// </summary>
-        public static IEnumerable<Position[]> FindSequences(Board board, Team team, HashSet<Position> locked)
+        public static IEnumerable<Sequence> FindSequences(Board board, Team team, Sequence[] sequences)
         {
             for (int i = 7; i >= 4; i--)
             {
                 foreach (Position position in BoardLayout.AllPositions())
                 {
-                    foreach (Position[] sequence in FindSequencesOfLength(position, i))
+                    foreach (Sequence sequence in FindSequencesOfLength(position, i))
                     {
                         yield return sequence;
                     }
@@ -35,7 +35,7 @@ namespace Game.Domain
 
             yield break;
 
-            IEnumerable<Position[]> FindSequencesOfLength(Position currentPos, int targetLength)
+            IEnumerable<Sequence> FindSequencesOfLength(Position currentPos, int targetLength)
             {
                 // Skip if the current position doesn't belong to the target team
                 if (!board.OwnerIs(currentPos, team))
@@ -58,17 +58,16 @@ namespace Game.Domain
 
                     while (nextPos.IsSome(out Position nextPosition) &&
                            board.OwnerIs(nextPosition, team) &&
-                           currentLine.Count(locked.Contains) <= 1)
+                           currentLine.Count(p => sequences.Any(s => s.Positions.Contains(p))) <= 1)
                     {
                         currentLine.Add(nextPosition);
                         nextPos = GetNeighbor(nextPosition, dRow, dCol);
                     }
 
                     // 3. If the total continuous line meets our requirement, yield it.
-                    if (currentLine.Count >= targetLength && currentLine.Count(locked.Contains) <= 1)
+                    if (currentLine.Count >= targetLength && currentLine.Count(p => sequences.Any(s => s.Positions.Contains(p))) <= 1)
                     {
-                        currentLine.ForEach(p => locked.Add(p));
-                        yield return currentLine.ToArray();
+                        yield return new Sequence(currentLine.ToArray(), team);
                     }
                 }
             }

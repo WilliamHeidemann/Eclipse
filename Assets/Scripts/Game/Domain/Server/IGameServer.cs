@@ -13,7 +13,6 @@ namespace Game.Domain.Server
         public void Receive(ClientGameState clientGameState);
         event Action<Card> OnCardReceived;
         event Action<ClientGameState> OnOpponentPlayed;
-        event Action<int, Team> OnScored;
         public Task<ClientGameState> GetClientGameState(string matchId);
     }
 }

@@ -5,9 +5,8 @@ namespace Game.Domain.Models.State
     public record ClientGameState(
         Move[] Moves,
         Card[] Hand,
-        Position[] Locked,
+        Sequence[] Sequences,
         Team Team,
-        Score Score,
         bool IsMyTurn
     );
 }

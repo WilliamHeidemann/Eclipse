@@ -9,11 +9,11 @@ namespace Game.Domain.Models
 {
     public static class MoveValidator
     {
-        public static Option<Move> GetValidMove(ClientGameState clientGameState, Position position)
+        public static Option<Play> GetValidPlay(ClientGameState clientGameState, Position position)
         {
             if (!clientGameState.IsMyTurn)
             {
-                return Option<Move>.None;
+                return Option<Play>.None;
             }
 
             Board board = new(clientGameState.Moves);
@@ -28,7 +28,7 @@ namespace Game.Domain.Models
 
             if (!requiredCard.IsSome(out Card cardInHand))
             {
-                return Option<Move>.None;
+                return Option<Play>.None;
             }
 
             if (cardInHand.IsRemover())
@@ -37,7 +37,7 @@ namespace Game.Domain.Models
 
                 if (ownerIsPlayer)
                 {
-                    return Option<Move>.None;
+                    return Option<Play>.None;
                 }
             }
 
@@ -45,12 +45,12 @@ namespace Game.Domain.Models
 
             Team toPlay = clientGameState.IsMyTurn ? clientGameState.Team : clientGameState.Team.Opposing();
 
-            return IsMoveValid(move, board, hand, clientGameState.Locked.ToHashSet(), toPlay)
-                ? Option<Move>.Some(move)
-                : Option<Move>.None;
+            return IsMoveValid(move, board, hand, clientGameState.Sequences, toPlay)
+                ? Option<Play>.Some(new Play(move, cardInHand))
+                : Option<Play>.None;
         }
 
-        public static bool IsMoveValid(Move move, Board board, Hand hand, HashSet<Position> locked, Team toPlay)
+        public static bool IsMoveValid(Move move, Board board, Hand hand, Sequence[] sequences, Team toPlay)
         {
             if (move.Team != toPlay)
             {
@@ -62,7 +62,7 @@ namespace Game.Domain.Models
             Card requiredCard = isOpen ? BoardLayout.Get(move.Position) : Card.JackOfMoon;
 
             bool hasCardInHand = hand.FindCard(requiredCard, isOpen).IsSome(out _);
-            
+
             if (!hasCardInHand)
             {
                 return false;
@@ -71,9 +71,8 @@ namespace Game.Domain.Models
             if (requiredCard == Card.JackOfSun)
             {
                 board.TryAdd(move.Position, move.Team);
-                var sequences = SequencePatterns.FindSequences(board, move.Team, locked).ToArray();
+                var deltaScore = SequencePatterns.FindSequences(board, move.Team, sequences).ToArray().Length;
                 board.Remove(move.Position);
-                int deltaScore = sequences.Length;
                 if (deltaScore > 0)
                 {
                     return false;
@@ -83,7 +82,7 @@ namespace Game.Domain.Models
             {
                 bool playerOwnsPosition = board.OwnerIs(move.Position, move.Team);
 
-                return !playerOwnsPosition && !locked.Contains(move.Position);
+                return !playerOwnsPosition && !sequences.Any(s => s.Positions.Contains(move.Position));
             }
 
             return true;
@@ -101,14 +100,14 @@ namespace Game.Domain.Models
             Hand hand = new(cardsInHand);
             Board board = new(gameState.Moves);
 
-            if (!IsMoveValid(move, board, hand, gameState.Locked.ToHashSet(), gameState.ToPlay))
+            if (!IsMoveValid(move, board, hand, gameState.Sequences, gameState.ToPlay))
             {
                 return new MoveResult.Invalid();
             }
 
             if (board.Fits(move.Position)) board.TryAdd(move.Position, move.Team);
             else board.Remove(move.Position);
-            
+
             Card requiredCard = board.Fits(move.Position) ? Card.JackOfMoon : BoardLayout.Get(move.Position);
 
             hand.TryRemove(requiredCard);
@@ -121,14 +120,15 @@ namespace Game.Domain.Models
             MoveHistory moveHistory = new(gameState.Moves);
             moveHistory.Add(move);
 
-            HashSet<Position> locked = new(gameState.Locked);
-            var sequences = SequencePatterns.FindSequences(board, move.Team, locked).ToArray();
+            var sequences = SequencePatterns.FindSequences(board, move.Team, gameState.Sequences).ToArray();
             int deltaScore = sequences.Length;
 
             if (requiredCard == Card.JackOfSun && deltaScore > 0)
             {
                 return new MoveResult.Invalid();
             }
+
+            var updatedSequences = gameState.Sequences.Concat(sequences).ToArray();
 
             (Card[] redHand, Card[] yellowHand) = move.Team switch
             {
@@ -139,10 +139,10 @@ namespace Game.Domain.Models
 
             GameState updatedGameState = new(
                 redHand, yellowHand,
-                deck.GetCards(), moveHistory.GetMoves(), locked.ToArray(),
-                gameState.Score, move.Team.Opposing());
+                deck.GetCards(), moveHistory.GetMoves(),
+                updatedSequences, move.Team.Opposing());
 
-            return new MoveResult.Success(updatedGameState, deltaScore);
+            return new MoveResult.Success(updatedGameState);
         }
     }
 }

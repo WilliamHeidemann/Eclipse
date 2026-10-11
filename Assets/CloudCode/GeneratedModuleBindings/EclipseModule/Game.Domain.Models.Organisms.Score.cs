@@ -2,15 +2,15 @@
 using UnityEngine.Scripting;
 using System;
 
-namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models
+namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms
 {
-    public partial class Card
+    public partial class Score
     {
-        public Rank Rank;
-        public Symbol Symbol;
+        public int Red;
+        public int Yellow;
 
         [Preserve]
-        public Card ()
+        public Score ()
         {
         }
     }

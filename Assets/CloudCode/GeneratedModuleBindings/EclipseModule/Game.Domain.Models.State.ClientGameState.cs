@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine.Scripting;
 using System;
 
-namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models
+namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.State
 {
     public partial class ClientGameState
     {
-        public List<Move> Moves;
-        public List<Card> Hand;
-        public List<Position> Locked;
-        public Team Team;
-        public Score Score;
+        public List<Organisms.Atoms.Move> Moves;
+        public List<Organisms.Atoms.Card> Hand;
+        public List<Organisms.Atoms.Position> Locked;
+        public Organisms.Atoms.Molecules.Team Team;
+        public Organisms.Score Score;
         public bool IsMyTurn;
 
         [Preserve]

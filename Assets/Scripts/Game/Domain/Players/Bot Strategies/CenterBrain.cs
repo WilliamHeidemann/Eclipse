@@ -4,6 +4,7 @@ using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
 using Game.Domain.Models.Organisms.Atoms;
 using Game.Domain.Models.Organisms.Atoms.Molecules;
+using Game.Domain.Models.State;
 using UtilityToolkit.CollectionExtensions;
 
 namespace Game.Domain.Players.Bot_Strategies

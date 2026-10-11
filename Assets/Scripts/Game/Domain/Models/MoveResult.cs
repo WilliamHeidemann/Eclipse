@@ -1,4 +1,6 @@
-﻿namespace Game.Domain.Models
+﻿using Game.Domain.Models.State;
+
+namespace Game.Domain.Models
 {
     public abstract record MoveResult
     {

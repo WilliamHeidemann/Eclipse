@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Domain.Models.State;
 
 namespace Game.Domain.Models.Dto
 {

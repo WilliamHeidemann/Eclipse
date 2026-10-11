@@ -2,13 +2,13 @@
 using UnityEngine.Scripting;
 using System;
 
-namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models
+namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms.Atoms
 {
     public partial class Move
     {
         public Position Position;
         public Card Card;
-        public Team Team;
+        public Molecules.Team Team;
 
         [Preserve]
         public Move ()

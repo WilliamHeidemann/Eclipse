@@ -105,6 +105,9 @@ namespace Game.Domain.Models
                 return new MoveResult.Invalid();
             }
 
+            MoveHistory moveHistory = new(gameState.Moves);
+            moveHistory.Add(move);
+            
             if (board.Fits(move.Position)) board.TryAdd(move.Position, move.Team);
             else board.Remove(move.Position);
 
@@ -116,9 +119,6 @@ namespace Game.Domain.Models
             Card draw = deck.Draw();
 
             hand.TryAdd(draw);
-
-            MoveHistory moveHistory = new(gameState.Moves);
-            moveHistory.Add(move);
 
             var sequences = SequencePatterns.FindSequences(board, move.Team, gameState.Sequences).ToArray();
             int deltaScore = sequences.Length;

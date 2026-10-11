@@ -7,10 +7,10 @@ namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.State
 {
     public partial class ClientGameState
     {
-        public List<Organisms.Atoms.Move> Moves;
-        public List<Organisms.Atoms.Card> Hand;
-        public List<Organisms.Atoms.Position> Locked;
-        public Organisms.Atoms.Molecules.Team Team;
+        public List<Organisms.Move> Moves;
+        public List<Organisms.Card> Hand;
+        public List<Organisms.Position> Locked;
+        public Organisms.Team Team;
         public Organisms.Score Score;
         public bool IsMyTurn;
 

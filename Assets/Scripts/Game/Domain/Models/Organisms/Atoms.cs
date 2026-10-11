@@ -1,6 +1,4 @@
-﻿using Game.Domain.Models.Organisms.Atoms.Molecules;
-
-namespace Game.Domain.Models.Organisms.Atoms;
+﻿namespace Game.Domain.Models.Organisms;
 
 public record Sequence(Position[] Positions, Team Team);
 

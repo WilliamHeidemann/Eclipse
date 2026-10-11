@@ -2,12 +2,12 @@
 using UnityEngine.Scripting;
 using System;
 
-namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms.Atoms
+namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms
 {
     public partial class Card
     {
-        public Molecules.Symbol Symbol;
-        public Molecules.Rank Rank;
+        public Symbol Symbol;
+        public Rank Rank;
 
         [Preserve]
         public Card ()

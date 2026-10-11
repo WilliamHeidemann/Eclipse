@@ -4,7 +4,7 @@ using Game.Cloud;
 using Game.Domain;
 using Game.Domain.Models;
 using Game.Domain.Models.Dto;
-using Game.Domain.Models.Organisms.Atoms;
+using Game.Domain.Models.Organisms;
 using Game.Domain.Models.State;
 using Game.Domain.Players;
 using Game.Domain.Players.Bot_Strategies;

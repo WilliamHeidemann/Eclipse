@@ -1,5 +1,4 @@
 using System;
-using Game.Domain.Models.Organisms.Atoms.Molecules;
 
 namespace Game.Domain.Models.Organisms
 {

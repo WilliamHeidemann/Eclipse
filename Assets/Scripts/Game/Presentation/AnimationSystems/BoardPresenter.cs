@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
-using Game.Domain.Models.Organisms.Atoms;
-using Game.Domain.Models.Organisms.Atoms.Molecules;
 using LitMotion;
 using LitMotion.Extensions;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Column = Game.Domain.Models.Organisms.Atoms.Molecules.Column;
-using Position = Game.Domain.Models.Organisms.Atoms.Position;
+using Column = Game.Domain.Models.Organisms.Column;
+using Position = Game.Domain.Models.Organisms.Position;
 
 namespace Game.Presentation.AnimationSystems
 {

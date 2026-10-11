@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game.Domain.Models.Organisms.Atoms.Molecules;
+namespace Game.Domain.Models.Organisms;
 
 public enum Column
 {

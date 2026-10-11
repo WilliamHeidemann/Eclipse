@@ -3,8 +3,6 @@ using System.Linq;
 using Game.Domain;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
-using Game.Domain.Models.Organisms.Atoms;
-using Game.Domain.Models.Organisms.Atoms.Molecules;
 using NUnit.Framework;
 using UnityEngine;
 

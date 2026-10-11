@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Game.Domain.Models.Organisms.Atoms;
 
 namespace Game.Domain.Models.Organisms
 {

@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Domain.Models;
-using Game.Domain.Models.Organisms.Atoms;
-using Game.Domain.Models.Organisms.Atoms.Molecules;
+using Game.Domain.Models.Organisms;
 using Game.Domain.Models.State;
-using Molecule = Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms.Atoms.Molecules;
-using Atom = Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms.Atoms;
 using Organism = Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms;
 using Dto = Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Dto;
 using State = Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.State;
@@ -15,98 +12,98 @@ namespace Game.Cloud
 {
     public static class ModelToDtoExtensions
     {
-        public static Molecule.Rank ToDto(this Rank rank)
+        public static Organism.Rank ToDto(this Rank rank)
         {
             return rank switch
             {
-                Rank.Ace => Molecule.Rank.Ace,
-                Rank.Two => Molecule.Rank.Two,
-                Rank.Three => Molecule.Rank.Three,
-                Rank.Four => Molecule.Rank.Four,
-                Rank.Five => Molecule.Rank.Five,
-                Rank.Six => Molecule.Rank.Six,
-                Rank.Seven => Molecule.Rank.Seven,
-                Rank.Eight => Molecule.Rank.Eight,
-                Rank.Nine => Molecule.Rank.Nine,
-                Rank.Ten => Molecule.Rank.Ten,
-                Rank.Jack => Molecule.Rank.Jack,
-                Rank.Queen => Molecule.Rank.Queen,
-                Rank.King => Molecule.Rank.King,
+                Rank.Ace => Organism.Rank.Ace,
+                Rank.Two => Organism.Rank.Two,
+                Rank.Three => Organism.Rank.Three,
+                Rank.Four => Organism.Rank.Four,
+                Rank.Five => Organism.Rank.Five,
+                Rank.Six => Organism.Rank.Six,
+                Rank.Seven => Organism.Rank.Seven,
+                Rank.Eight => Organism.Rank.Eight,
+                Rank.Nine => Organism.Rank.Nine,
+                Rank.Ten => Organism.Rank.Ten,
+                Rank.Jack => Organism.Rank.Jack,
+                Rank.Queen => Organism.Rank.Queen,
+                Rank.King => Organism.Rank.King,
                 _ => throw new ArgumentOutOfRangeException(nameof(rank), rank, null)
             };
         }
 
-        public static Molecule.Symbol ToDto(this Symbol symbol)
+        public static Organism.Symbol ToDto(this Symbol symbol)
         {
             return symbol switch
             {
-                Symbol.Moon => Molecule.Symbol.Moon,
-                Symbol.Sun => Molecule.Symbol.Sun,
+                Symbol.Moon => Organism.Symbol.Moon,
+                Symbol.Sun => Organism.Symbol.Sun,
                 _ => throw new ArgumentOutOfRangeException(nameof(symbol), symbol, null)
             };
         }
 
-        public static Atom.Card ToDto(this Card card)
+        public static Organism.Card ToDto(this Card card)
         {
-            return new Atom.Card
+            return new Organism.Card
             {
                 Rank = card.Rank.ToDto(),
                 Symbol = card.Symbol.ToDto()
             };
         }
 
-        public static Molecule.Row ToDto(this Row row)
+        public static Organism.Row ToDto(this Row row)
         {
             return row switch
             {
-                Row.One => Molecule.Row.One,
-                Row.Two => Molecule.Row.Two,
-                Row.Three => Molecule.Row.Three,
-                Row.Four => Molecule.Row.Four,
-                Row.Five => Molecule.Row.Five,
-                Row.Six => Molecule.Row.Six,
+                Row.One => Organism.Row.One,
+                Row.Two => Organism.Row.Two,
+                Row.Three => Organism.Row.Three,
+                Row.Four => Organism.Row.Four,
+                Row.Five => Organism.Row.Five,
+                Row.Six => Organism.Row.Six,
                 _ => throw new ArgumentOutOfRangeException(nameof(row), row, null)
             };
         }
 
-        public static Molecule.Column ToDto(this Column column)
+        public static Organism.Column ToDto(this Column column)
         {
             return column switch
             {
-                Column.One => Molecule.Column.One,
-                Column.Two => Molecule.Column.Two,
-                Column.Three => Molecule.Column.Three,
-                Column.Four => Molecule.Column.Four,
-                Column.Five => Molecule.Column.Five,
-                Column.Six => Molecule.Column.Six,
-                Column.Seven => Molecule.Column.Seven,
-                Column.Eight => Molecule.Column.Eight,
+                Column.One => Organism.Column.One,
+                Column.Two => Organism.Column.Two,
+                Column.Three => Organism.Column.Three,
+                Column.Four => Organism.Column.Four,
+                Column.Five => Organism.Column.Five,
+                Column.Six => Organism.Column.Six,
+                Column.Seven => Organism.Column.Seven,
+                Column.Eight => Organism.Column.Eight,
                 _ => throw new ArgumentOutOfRangeException(nameof(column), column, null)
             };
         }
 
-        public static Atom.Position ToDto(this Position position)
+        public static Organism.Position ToDto(this Position position)
         {
-            return new Atom.Position
+            return new Organism.Position
             {
                 Row = position.Row.ToDto(),
                 Column = position.Column.ToDto()
             };
         }
 
-        public static Molecule.Team ToDto(this Team team)
+        public static Organism.Team ToDto(this Team team)
         {
             return team switch
             {
-                Team.Red => Molecule.Team.Red,
-                Team.Yellow => Molecule.Team.Yellow,
+                Team.Red => Organism.Team.Red,
+                Team.Yellow => Organism.Team.Yellow,
                 _ => throw new ArgumentOutOfRangeException(nameof(team), team, null)
             };
         }
 
-        public static Atom.Move ToDto(this Move move)
+        public static Organism.Move ToDto(this Move move)
         {
-            return new Atom.Move
+            return new Organism.Move
             {
                 Card = move.Card.ToDto(),
                 Position = move.Position.ToDto(),
@@ -114,12 +111,12 @@ namespace Game.Cloud
             };
         }
 
-        private static List<Atom.Card> ToDto(this Card[] cards)
+        private static List<Organism.Card> ToDto(this Card[] cards)
         {
             return cards.Select(card => card.ToDto()).ToList();
         }
         
-        private static List<Atom.Move> ToDto(this Move[] moves)
+        private static List<Organism.Move> ToDto(this Move[] moves)
         {
             return moves.Select(move => move.ToDto()).ToList();
         }

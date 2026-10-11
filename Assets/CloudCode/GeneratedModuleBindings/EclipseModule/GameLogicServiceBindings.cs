@@ -27,7 +27,7 @@ namespace Unity.Services.CloudCode.GeneratedBindings
                 });
         }
 
-        public async Task<Game.Domain.Models.Dto.MoveRequestResult> Request(Game.Domain.Models.Organisms.Atoms.Move move, string matchId)
+        public async Task<Game.Domain.Models.Dto.MoveRequestResult> Request(Game.Domain.Models.Organisms.Move move, string matchId)
         {
             return await k_Service.CallModuleEndpointAsync<Game.Domain.Models.Dto.MoveRequestResult>(
                 "EclipseModule",

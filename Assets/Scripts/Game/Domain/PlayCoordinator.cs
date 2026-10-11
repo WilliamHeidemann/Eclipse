@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Game.Domain.Models;
-using Game.Domain.Models.Organisms.Atoms;
+using Game.Domain.Models.Organisms;
 using Game.Domain.Models.State;
 using Game.Domain.Server;
 using UtilityToolkit.CollectionExtensions;

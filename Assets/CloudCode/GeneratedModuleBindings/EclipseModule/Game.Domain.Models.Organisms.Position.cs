@@ -2,12 +2,12 @@
 using UnityEngine.Scripting;
 using System;
 
-namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms.Atoms
+namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms
 {
     public partial class Position
     {
-        public Molecules.Row Row;
-        public Molecules.Column Column;
+        public Row Row;
+        public Column Column;
 
         [Preserve]
         public Position ()

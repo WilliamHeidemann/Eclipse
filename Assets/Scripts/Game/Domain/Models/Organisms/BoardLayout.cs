@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Game.Domain.Models.Organisms.Atoms;
-using Game.Domain.Models.Organisms.Atoms.Molecules;
 
 namespace Game.Domain.Models.Organisms
 {

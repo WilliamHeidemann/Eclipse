@@ -9,11 +9,10 @@ namespace Game.Presentation
 {
     public class EntryPoint : MonoBehaviour
     {
-        [SerializeField] private StartIn _startIn;
-        [SerializeField] private Mode _mode;
         [SerializeField] private MainMenu _mainMenu;
         [SerializeField] private GameStarter _gameStarter;
-
+        [SerializeField] private StartingConfiguration _startingConfiguration;
+        
         private async Task Awake()
         {
             try
@@ -21,9 +20,9 @@ namespace Game.Presentation
                 QualitySettings.vSyncCount = 0;
                 Application.targetFrameRate = 60;
                 
-                _mainMenu.gameObject.SetActive(_startIn == StartIn.MainMenu);
+                _mainMenu.gameObject.SetActive(_startingConfiguration.StartIn == StartIn.MainMenu);
                 
-                switch (_mode)
+                switch (_startingConfiguration.Mode)
                 {
                     case Mode.Online:
                         await CloudHandler.Initialize(_mainMenu, _gameStarter);
@@ -33,7 +32,7 @@ namespace Game.Presentation
                         // Debug.Log($"{t.ToModel()}");
                         break;
                     
-                    case Mode.Local when _startIn == StartIn.Game:
+                    case Mode.Local when _startingConfiguration.StartIn == StartIn.Game:
                         _gameStarter.StartLocalGame();
                         break;
                 }

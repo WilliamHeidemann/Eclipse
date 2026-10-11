@@ -2,6 +2,7 @@ using System;
 
 namespace Game.Domain.Models
 {
+    [Serializable]
     public readonly struct Card : IEquatable<Card>
     {
         public static Card TwoOfMoon => new(Symbol.Moon, Rank.Two);

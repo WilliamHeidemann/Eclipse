@@ -1,5 +1,8 @@
+using System;
+
 namespace Game.Domain.Models
 {
+    [Serializable]
     public readonly struct Move
     {
         public Position Position { get; }

@@ -55,23 +55,16 @@ namespace Game.Presentation.AnimationSystems
             }
         }
 
-        public void PlayDrawAnimation(IEnumerable<Card> cards)
-        {
-            foreach (Card card in cards)
-            {
-                PlayDrawAnimation(card);
-            }
-        }
-
         public void PlayDiscardAndPinAnimation(Move move)
         {
-            Play().Forget();
+            _boardPresenter.Pop(move.Position);
+            _audioPlayer.Play(Sound.Pop);
+
+            _animationQueue.Enqueue(Play);
             return;
 
             async Awaitable Play()
             {
-                _boardPresenter.Pop(move.Position);
-                _audioPlayer.Play(Sound.Pop);
 
                 if (_cardAligner.RemoveCard(move.Card, out Transform cardTransform))
                 {

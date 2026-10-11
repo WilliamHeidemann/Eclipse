@@ -831,6 +831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Eclipse.Presentation::Game.Presentation.LocalGame
   _boardPresenter: {fileID: 105310681}
   _animationOrchestrator: {fileID: 1626219986}
+  _startingConfiguration: {fileID: 11400000, guid: e24733084ed93cc46849c8ed97ccd71d, type: 2}
 --- !u!4 &733830842
 Transform:
   m_ObjectHideFlags: 0
@@ -1496,10 +1497,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0558cd8a1323c43bb918cf57478656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _startIn: 1
-  _mode: 0
   _mainMenu: {fileID: 1362680818}
   _gameStarter: {fileID: 733830841}
+  _startingConfiguration: {fileID: 11400000, guid: e24733084ed93cc46849c8ed97ccd71d, type: 2}
 --- !u!1 &1564673131
 GameObject:
   m_ObjectHideFlags: 0

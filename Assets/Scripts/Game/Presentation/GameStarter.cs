@@ -18,6 +18,7 @@ namespace Game.Presentation
     {
         [SerializeField] private BoardPresenter _boardPresenter;
         [SerializeField] private AnimationOrchestrator _animationOrchestrator;
+        [SerializeField] private StartingConfiguration _startingConfiguration;
 
         private PlayCoordinator _playCoordinator;
         private Option<string> _matchId;
@@ -29,25 +30,35 @@ namespace Game.Presentation
             playCoordinator.RaiseDrawHandEvent();
             _boardPresenter.OnPositionClicked += HandlePositionClicked;
         }
-        
+
         public void StartLocalGame()
         {
-            _playCoordinator = CreateLocalPlayCoordinator();
+            GameState gameState = _startingConfiguration.UseDevelopmentStartingState
+                ? _startingConfiguration.DevelopmentGameState()
+                : GameState.CreateInitial();
+            _playCoordinator = CreateLocalPlayCoordinator(gameState);
+
+            if (_startingConfiguration.UseDevelopmentStartingState)
+            {
+                foreach (Move preMove in gameState.Moves)
+                {
+                    _animationOrchestrator.PlayDiscardAndPinAnimation(preMove);
+                }
+            }
+
             BindToPresentation(_playCoordinator);
             return;
-            
-            static PlayCoordinator CreateLocalPlayCoordinator()
-            {
-                GameState gameState = GameState.CreateInitial();
 
+            static PlayCoordinator CreateLocalPlayCoordinator(GameState gameState)
+            {
                 ClientGameState clientGameState = gameState.ToClientGameState(gameState.ToPlay);
 
                 LocalGameServer playerGameServer = CreateLocalGameServer(gameState);
-                
+
                 playerGameServer.OnScored += (score, team) => Debug.Log($"Scored {score} for team {team}");
 
                 return new PlayCoordinator(playerGameServer, clientGameState);
-            
+
                 static LocalGameServer CreateLocalGameServer(GameState gameState)
                 {
                     LocalGameState localGameState = new(gameState);
@@ -61,7 +72,7 @@ namespace Game.Presentation
                 }
             }
         }
-        
+
         public async Task<Match> CreateMatch(string opponentId)
         {
             GameLogicServiceBindings gameLogicServiceBindings = new();
@@ -87,7 +98,7 @@ namespace Game.Presentation
                 Debug.LogError("MatchId does not exist. Opponent was not notified.");
                 return;
             }
-            
+
             PushMessagesServiceBindings pushMessagesServiceBindings = new();
             bool success = await pushMessagesServiceBindings.NotifyOpponentOfMove(matchId, opponentId);
             if (success)
@@ -111,11 +122,11 @@ namespace Game.Presentation
         private PlayCoordinator CreatePlayCoordinator(Match match)
         {
             CloudGameServer playerGameServer = CreateCloudGameServer(match.Id);
-            
+
             playerGameServer.OnScored += (score, team) => Debug.Log($"Scored {score} for team {team}");
-            
+
             return new PlayCoordinator(playerGameServer, match.ClientGameState);
-            
+
             CloudGameServer CreateCloudGameServer(string matchId)
             {
                 GameLogicServiceBindings gameLogicService = new();

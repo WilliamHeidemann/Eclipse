@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e3488e45744dfda68d3767c53626dd, type: 3}
+  m_Name: Starting Configuration
+  m_EditorClassIdentifier: Eclipse.Presentation::Game.Presentation.StartingConfiguration
+  Mode: 0
+  StartIn: 1
+  UseDevelopmentStartingState: 0
+  _myCards:
+  - _rank: 1
+    _symbol: 1
+  _opponentCards:
+  - _rank: 1
+    _symbol: 0
+  - _rank: 2
+    _symbol: 0
+  - _rank: 3
+    _symbol: 0
+  - _rank: 4
+    _symbol: 0
+  - _rank: 5
+    _symbol: 0
+  - _rank: 6
+    _symbol: 0
+  - _rank: 7
+    _symbol: 0
+  - _rank: 8
+    _symbol: 0
+  _playedMoves:
+  - _serializedPosition:
+      _row: 3
+      _column: 3
+    _serializedCard:
+      _rank: 0
+      _symbol: 0
+    _team: 1
+  - _serializedPosition:
+      _row: 3
+      _column: 4
+    _serializedCard:
+      _rank: 0
+      _symbol: 0
+    _team: 1
+  - _serializedPosition:
+      _row: 3
+      _column: 5
+    _serializedCard:
+      _rank: 0
+      _symbol: 0
+    _team: 1
+  - _serializedPosition:
+      _row: 2
+      _column: 3
+    _serializedCard:
+      _rank: 0
+      _symbol: 0
+    _team: 1
+  - _serializedPosition:
+      _row: 2
+      _column: 4
+    _serializedCard:
+      _rank: 0
+      _symbol: 0
+    _team: 1
+  - _serializedPosition:
+      _row: 2
+      _column: 5
+    _serializedCard:
+      _rank: 0
+      _symbol: 0
+    _team: 1

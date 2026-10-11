@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Game.Domain.Models;
+using Game.Domain.Models.Organisms.Atoms;
 using NUnit.Framework;
 using UnityEngine;
 

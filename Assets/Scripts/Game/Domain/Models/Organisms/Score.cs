@@ -1,6 +1,7 @@
 using System;
+using Game.Domain.Models.Organisms.Atoms.Molecules;
 
-namespace Game.Domain.Models
+namespace Game.Domain.Models.Organisms
 {
     public record Score(int Red, int Yellow)
     {

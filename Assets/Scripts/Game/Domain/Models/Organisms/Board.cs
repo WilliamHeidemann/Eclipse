@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using UtilityToolkit.Monads;
+using Game.Domain.Models.Organisms.Atoms;
+using Game.Domain.Models.Organisms.Atoms.Molecules;
 
-namespace Game.Domain.Models
+namespace Game.Domain.Models.Organisms
 {
     public class Board
     {
@@ -42,26 +43,7 @@ namespace Game.Domain.Models
             return _takenSpaces.Remove(position);
         }
 
-        public Option<Team> Owner(Position position)
-        {
-            return _takenSpaces.TryGetValue(position, out Team team) 
-                ? Option<Team>.Some(team) 
-                : Option<Team>.None;
-        }
-
         public bool OwnerIs(Position position, Team team) => 
             _takenSpaces.TryGetValue(position, out Team owner) && owner == team;
-    }
-
-    public enum Team
-    {
-        Red,
-        Yellow
-    }
-
-    public static class TeamExtensions
-    {
-        public static Team Opposing(this Team team) => 
-            team == Team.Red ? Team.Yellow : Team.Red;
     }
 }

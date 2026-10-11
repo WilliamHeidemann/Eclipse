@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using Game.Domain;
 using Game.Domain.Models;
+using Game.Domain.Models.Organisms.Atoms;
 using Game.Presentation.Audio;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Position = Game.Domain.Models.Position;
+using Position = Game.Domain.Models.Organisms.Atoms.Position;
 
 namespace Game.Presentation.AnimationSystems
 {

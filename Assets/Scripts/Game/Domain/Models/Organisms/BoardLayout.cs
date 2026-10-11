@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Game.Domain.Models.Organisms.Atoms;
+using Game.Domain.Models.Organisms.Atoms.Molecules;
 
-namespace Game.Domain.Models
+namespace Game.Domain.Models.Organisms
 {
     public static class BoardLayout
     {
@@ -115,60 +117,6 @@ namespace Game.Domain.Models
                 new(Row.Six, Column.Seven),
                 new(Row.Six, Column.Eight)
             };
-        }
-    }
-
-    public enum Row
-    {
-        One,
-        Two,
-        Three,
-        Four,
-        Five,
-        Six,
-    }
-
-    public enum Column
-    {
-        One,
-        Two,
-        Three,
-        Four,
-        Five,
-        Six,
-        Seven,
-        Eight
-    }
-
-    public readonly struct Position : IEquatable<Position>
-    {
-        public Position(Row row, Column column)
-        {
-            Row = row;
-            Column = column;
-        }
-
-        public Row Row { get; }
-        public Column Column { get; }
-
-        public bool Equals(Position other)
-        {
-            return Row == other.Row && Column == other.Column;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj is Position other && Equals(other);
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine((int)Row, (int)Column);
-        }
-
-        public override string ToString()
-        {
-            return $"({Row}, {Column})";
         }
     }
 }

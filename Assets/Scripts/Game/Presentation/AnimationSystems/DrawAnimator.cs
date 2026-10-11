@@ -1,4 +1,6 @@
 using Game.Domain.Models;
+using Game.Domain.Models.Organisms.Atoms;
+using Game.Domain.Models.Organisms.Atoms.Molecules;
 using LitMotion;
 using LitMotion.Extensions;
 using UnityEngine;

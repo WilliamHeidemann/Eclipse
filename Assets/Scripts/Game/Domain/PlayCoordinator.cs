@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Game.Domain.Models;
+using Game.Domain.Models.Organisms.Atoms;
 using Game.Domain.Server;
 using UtilityToolkit.CollectionExtensions;
 using UtilityToolkit.Monads;
@@ -17,6 +18,7 @@ namespace Game.Domain
         public event Action<Move> OnValidMoveRequest;
         public event Action<Card> OnDrawCard;
         public event Action<Move> OnOpponentPlayed;
+        public event Action<Sequence> OnSequenceScored;
 
         public PlayCoordinator(IGameServer gameServer, ClientGameState startingState)
         {
@@ -67,7 +69,7 @@ namespace Game.Domain
         {
             _clientGameState = clientGameState;
 
-            clientGameState.Moves.LastOption().Try(lastMove => { OnOpponentPlayed?.Invoke(lastMove); });
+            clientGameState.Moves.LastOption().Try(lastMove => OnOpponentPlayed?.Invoke(lastMove));
         }
     }
 }

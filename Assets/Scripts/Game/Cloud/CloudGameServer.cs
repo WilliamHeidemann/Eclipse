@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Game.Domain.Models;
+using Game.Domain.Models.Organisms.Atoms;
+using Game.Domain.Models.Organisms.Atoms.Molecules;
 using Game.Domain.Server;
 using Unity.Services.CloudCode.GeneratedBindings;
 using UtilityToolkit.Monads;

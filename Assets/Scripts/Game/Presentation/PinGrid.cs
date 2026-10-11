@@ -1,4 +1,5 @@
 using Game.Domain.Models;
+using Game.Domain.Models.Organisms.Atoms;
 using UnityEngine;
 
 namespace Game.Presentation

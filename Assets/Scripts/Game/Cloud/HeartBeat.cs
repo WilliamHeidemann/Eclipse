@@ -25,7 +25,6 @@ namespace Game.Cloud
                 {
                     await Awaitable.WaitForSecondsAsync((float)_interval.TotalSeconds);
                     await _playCoordinator.CheckIfOpponentPlayed(_matchId);
-                    Debug.Log("Heartbeat check completed");
                 }
                 catch (OperationCanceledException)
                 {

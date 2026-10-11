@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Domain.Models;
+using Game.Domain.Models.Organisms.Atoms;
+using Game.Domain.Models.Organisms.Atoms.Molecules;
 using Dto = Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models;
 
 namespace Game.Cloud

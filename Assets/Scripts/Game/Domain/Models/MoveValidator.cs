@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Domain.Models.Organisms;
+using Game.Domain.Models.Organisms.Atoms;
+using Game.Domain.Models.Organisms.Atoms.Molecules;
 using UtilityToolkit.Monads;
 
 namespace Game.Domain.Models
@@ -43,12 +46,12 @@ namespace Game.Domain.Models
 
             Team toPlay = clientGameState.IsMyTurn ? clientGameState.Team : clientGameState.Team.Opposing();
 
-            return IsValid(move, board, hand, clientGameState.Locked.ToHashSet(), toPlay)
+            return IsMoveValid(move, board, hand, clientGameState.Locked.ToHashSet(), toPlay)
                 ? Option<Move>.Some(move)
                 : Option<Move>.None;
         }
 
-        public static bool IsValid(Move move, Board board, Hand hand, HashSet<Position> locked, Team toPlay)
+        public static bool IsMoveValid(Move move, Board board, Hand hand, HashSet<Position> locked, Team toPlay)
         {
             if (move.Team != toPlay)
             {
@@ -97,7 +100,7 @@ namespace Game.Domain.Models
             Hand hand = new(cardsInHand);
             Board board = new(gameState.Moves);
 
-            if (!IsValid(move, board, hand, gameState.Locked.ToHashSet(), gameState.ToPlay))
+            if (!IsMoveValid(move, board, hand, gameState.Locked.ToHashSet(), gameState.ToPlay))
             {
                 return new MoveResult.Invalid();
             }

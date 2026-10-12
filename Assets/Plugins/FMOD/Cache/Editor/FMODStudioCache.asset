@@ -278,7 +278,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639271516613009671
+  lastModified: 639274220208802134
   FileSizes: []
   Exists: 1
 --- !u!114 &-270165123107974786
@@ -307,7 +307,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 5250
+  Length: 1500
 --- !u!114 &-134713252364062148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,7 +367,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 4720145984006127432}
   cacheVersion: 131861
-  cacheTime: 639271516613039785
+  cacheTime: 639274220208827176
   SerializableEventsDict:
   - key: event:/SFX_Spare_Assets/SequenceSFX PopSound1
     index: 0
@@ -485,7 +485,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639271516613039785
+  lastModified: 639274220208827176
   FileSizes:
   - Name: 
     Value: 1394
@@ -516,7 +516,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 230400
+  Length: 98400
 --- !u!114 &5365247971523005164
 MonoBehaviour:
   m_ObjectHideFlags: 0

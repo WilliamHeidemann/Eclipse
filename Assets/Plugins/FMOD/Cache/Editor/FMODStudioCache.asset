@@ -81,6 +81,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2400
+--- !u!114 &-8021933230643154255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.assets.bank
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorBankRef
+  Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.assets.bank
+  Name: Master.assets
+  StudioPath: bank:/Master.assets
+  lastModified: 639274235579126219
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-7625720528538125207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +199,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 230400
+  Length: 98400
 --- !u!114 &-6631920417335273110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +377,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639272300754642160
+  lastModified: 639274235578477412
   FileSizes: []
   Exists: 1
 --- !u!114 &-3324857194313043193
@@ -496,7 +514,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 5250
+  Length: 1500
 --- !u!114 &-1512425790861856284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,10 +557,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639272300754642160
+  lastModified: 639274235579141365
   FileSizes:
   - Name: 
-    Value: 1394
+    Value: 1444
   Exists: 1
 --- !u!114 &-927733094618069933
 MonoBehaviour:
@@ -658,6 +676,7 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: -1501010237459166615}
   - {fileID: -4093005912187627915}
+  - {fileID: -8021933230643154255}
   EditorEvents:
   - {fileID: 2311441690719758746}
   - {fileID: -3324857194313043193}
@@ -675,7 +694,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -1501010237459166615}
   cacheVersion: 131861
-  cacheTime: 639272300754642160
+  cacheTime: 639274235579141365
   SerializableEventsDict:
   - key: event:/SFX_Spare_Assets/SequenceSFX PopSound1
     index: 0

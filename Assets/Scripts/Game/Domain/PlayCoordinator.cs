@@ -10,15 +10,13 @@ using UtilityToolkit.Monads;
 
 namespace Game.Domain
 {
-    public readonly record struct Play(Move Move, Card Card);
-
     public class PlayCoordinator
     {
         private readonly IGameServer _gameServer;
         private ClientGameState _clientGameState;
 
         public event Action<Position> OnInvalidMoveRequest;
-        public event Action<Play> OnValidMoveRequest;
+        public event Action<Move> OnValidMoveRequest;
         public event Action<Card> OnDrawCard;
         public event Action<Move> OnOpponentPlayed;
         public event Action<Sequence> OnSequenceScored;
@@ -34,12 +32,12 @@ namespace Game.Domain
 
         public async Task PositionClicked(Position position)
         {
-            Option<Play> attempt = MoveValidator.GetValidPlay(_clientGameState, position);
+            Option<Move> attempt = MoveValidator.GetValidMove(_clientGameState, position);
 
-            if (attempt.IsSome(out Play play))
+            if (attempt.IsSome(out Move move))
             {
-                OnValidMoveRequest?.Invoke(play);
-                Option<ClientGameState> result = await _gameServer.Request(play.Move);
+                OnValidMoveRequest?.Invoke(move);
+                Option<ClientGameState> result = await _gameServer.Request(move);
                 if (result.IsSome(out ClientGameState clientGameState))
                 {
                     _clientGameState = clientGameState;

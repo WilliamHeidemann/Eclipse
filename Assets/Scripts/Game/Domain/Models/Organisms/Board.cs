@@ -11,21 +11,18 @@ namespace Game.Domain.Models.Organisms
 
         public bool Fits(Position position) => !_takenSpaces.ContainsKey(position);
 
-        // public bool HasSequence(Team team) =>
-        //     SequencePatterns.All().Any(pattern => IsSequence(pattern, team));
-        //
-        // public int SequenceCount(Team team) =>
-        //     SequencePatterns.All().Count(pattern => IsSequence(pattern, team));
-
-        private bool IsSequence(Position[] positions, Team team) =>
-            positions.All(position =>
-                _takenSpaces.TryGetValue(position, out Team occupyingTeam) && occupyingTeam == team);
-        
         public Board(Move[] moves)
         {
             foreach (Move move in moves)
             {
-                if (!_takenSpaces.TryAdd(move.Position, move.Team))
+                if (move.Card.IsRemover())
+                {
+                    if (!_takenSpaces.Remove(move.Position))
+                    {
+                        throw new DomainException($"Nothing to remove at {move.Position}");
+                    }
+                }
+                else if (!_takenSpaces.TryAdd(move.Position, move.Team))
                 {
                     throw new DomainException($"Duplicate move at {BoardLayout.Get(move.Position)}");
                 }

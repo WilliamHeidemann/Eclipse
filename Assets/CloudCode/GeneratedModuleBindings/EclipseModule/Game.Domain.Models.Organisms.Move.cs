@@ -7,6 +7,7 @@ namespace Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organism
     public partial class Move
     {
         public Position Position;
+        public Card Card;
         public Team Team;
 
         [Preserve]

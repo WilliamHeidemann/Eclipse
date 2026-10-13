@@ -56,9 +56,9 @@ namespace Game.Presentation.AnimationSystems
             }
         }
 
-        public void PlayDiscardAndPinAnimation(Play play)
+        public void PlayDiscardAndPinAnimation(Move move)
         {
-            _boardPresenter.Pop(play.Move.Position);
+            _boardPresenter.Pop(move.Position);
             _audioPlayer.Play(Sound.Pop);
 
             _animationQueue.Enqueue(Play);
@@ -66,19 +66,19 @@ namespace Game.Presentation.AnimationSystems
 
             async Awaitable Play()
             {
-                if (_cardAligner.RemoveCard(play.Card, out Transform cardTransform))
+                if (_cardAligner.RemoveCard(move.Card, out Transform cardTransform))
                 {
                     _audioPlayer.Play(Sound.PutDown);
                     await _discardPile.Discard(cardTransform);
                 }
 
-                if (play.Card.IsRemover())
+                if (move.Card.IsRemover())
                 {
-                    await _boardPresenter.RemovePin(play.Move.Position);
+                    await _boardPresenter.RemovePin(move.Position);
                 }
                 else
                 {
-                    await _boardPresenter.Pin(play.Move.Position, play.Move.Team);
+                    await _boardPresenter.Pin(move.Position, move.Team);
                     _audioPlayer.Play(Sound.Yes); // Yes is for successful placement
                 }
             }

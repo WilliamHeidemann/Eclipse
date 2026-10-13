@@ -23,7 +23,7 @@ namespace Game.Domain.Players.Bot_Strategies
 
             Position position = board.Fits(first) ? first : second;
 
-            Move move = new(position, clientGameState.Team);
+            Move move = new(position, BoardLayout.Get(position), clientGameState.Team);
 
             return move;
         }

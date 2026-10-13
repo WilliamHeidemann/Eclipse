@@ -98,8 +98,9 @@ namespace Game.Cloud
         public static Move ToModel(this Organism.Move move)
         {
             Position position = move.Position.ToModel();
+            Card card = move.Card.ToModel();
             Team team = move.Team.ToModel();
-            return new Move(position, team);
+            return new Move(position, card, team);
         }
 
         private static Sequence ToModel(this Organism.Sequence sequence)

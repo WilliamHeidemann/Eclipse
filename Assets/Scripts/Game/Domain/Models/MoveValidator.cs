@@ -9,11 +9,11 @@ namespace Game.Domain.Models
 {
     public static class MoveValidator
     {
-        public static Option<Play> GetValidPlay(ClientGameState clientGameState, Position position)
+        public static Option<Move> GetValidMove(ClientGameState clientGameState, Position position)
         {
             if (!clientGameState.IsMyTurn)
             {
-                return Option<Play>.None;
+                return Option<Move>.None;
             }
 
             Board board = new(clientGameState.Moves);
@@ -28,7 +28,7 @@ namespace Game.Domain.Models
 
             if (!requiredCard.IsSome(out Card cardInHand))
             {
-                return Option<Play>.None;
+                return Option<Move>.None;
             }
 
             if (cardInHand.IsRemover())
@@ -37,17 +37,17 @@ namespace Game.Domain.Models
 
                 if (ownerIsPlayer)
                 {
-                    return Option<Play>.None;
+                    return Option<Move>.None;
                 }
             }
 
-            Move move = new(position, clientGameState.Team);
+            Move move = new(position, cardInHand, clientGameState.Team);
 
             Team toPlay = clientGameState.IsMyTurn ? clientGameState.Team : clientGameState.Team.Opposing();
 
             return IsMoveValid(move, board, hand, clientGameState.Sequences, toPlay)
-                ? Option<Play>.Some(new Play(move, cardInHand))
-                : Option<Play>.None;
+                ? Option<Move>.Some(new Move(position, cardInHand, clientGameState.Team))
+                : Option<Move>.None;
         }
 
         public static bool IsMoveValid(Move move, Board board, Hand hand, Sequence[] sequences, Team toPlay)

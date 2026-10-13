@@ -43,9 +43,9 @@ namespace Game.Presentation
 
             if (_startingConfiguration.UseDevelopmentStartingState)
             {
-                foreach (Play prePlay in gameState.Moves.Select(m => new Play(m, BoardLayout.Get(m.Position))))
+                foreach (Move preMove in gameState.Moves)
                 {
-                    _animationOrchestrator.PlayDiscardAndPinAnimation(prePlay);
+                    _animationOrchestrator.PlayDiscardAndPinAnimation(preMove);
                 }
             }
 

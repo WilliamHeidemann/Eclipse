@@ -7,7 +7,7 @@ public readonly record struct Position(Row Row, Column Column)
     public override string ToString() => $"({Row}, {Column})";
 }
 
-public readonly record struct Move(Position Position, Team Team);
+public readonly record struct Move(Position Position, Card Card, Team Team);
 
 public readonly record struct Card(Symbol Symbol, Rank Rank)
 {

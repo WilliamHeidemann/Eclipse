@@ -1,0 +1,61 @@
+.main-menu {
+    flex-grow: 1;
+}
+
+.sounds-toggle {
+    flex-grow: 0.2;
+    flex-direction: row;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+.sound-toggle {
+    flex-grow: 1;
+    max-width: 8%;
+    background-color: rgba(0, 0, 0, 0);
+    margin-left: 5px;
+    height: 32%;
+    min-width: 8%;
+    -unity-background-scale-mode: scale-to-fit;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.menu-logo {
+    flex-grow: 1;
+    min-height: 30%;
+    max-height: 30%;
+    background-image: url("project://database/Assets/Sprites/UI%20Assets/Logo/Eclipse%20LOGO.png?fileID=2800000&guid=730e854957f9b174a9bf36c275ab7fec&type=3#Eclipse LOGO");
+}
+
+.menu-icons {
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: flex-end;
+    padding-top: 22px;
+    padding-right: 22px;
+    padding-bottom: 22px;
+    padding-left: 22px;
+    justify-content: center;
+}
+
+.menu-icon-button {
+    flex-grow: 1;
+    height: 30%;
+    min-width: 20%;
+    max-width: 20%;
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-scale-mode: scale-to-fit;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}

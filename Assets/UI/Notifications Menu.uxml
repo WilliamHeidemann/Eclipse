@@ -1,0 +1,22 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="FriendRequest" src="project://database/Assets/UI/FriendRequest.uxml?fileID=9197481963319205126&amp;guid=876119e7e71c9b24eb579bc764e0604b&amp;type=3#FriendRequest"/>
+    <ui:Template name="GameRequest" src="project://database/Assets/UI/GameRequest.uxml?fileID=9197481963319205126&amp;guid=81306f91731dcc441ae6fb1a86b5bc77&amp;type=3#GameRequest"/>
+    <Style src="project://database/Assets/UI/Notifications%20Menu.uss?fileID=7433441132597879392&amp;guid=ef52b3797d8f4478b49284b883ae792e&amp;type=3#Notifications Menu"/>
+    <ui:VisualElement name="NotificationsMenu" class="notifications-menu">
+        <ui:Button name="Back" class="back-button"/>
+        <ui:VisualElement name="GameRequests" class="request-section" style="flex-grow: 0;">
+            <ui:Label text="Game Requests" name="GameRequestsLabel" class="section-heading"/>
+            <ui:ScrollView name="GameRequestsScrollView">
+                <ui:Instance template="GameRequest"/>
+                <ui:Instance template="GameRequest"/>
+            </ui:ScrollView>
+        </ui:VisualElement>
+        <ui:VisualElement name="FriendRequests" class="request-section" style="flex-grow: 0;">
+            <ui:Label text="Friend Requests" name="FriendRequestsLabel" class="section-heading"/>
+            <ui:ScrollView name="FriendRequestsScrollView">
+                <ui:Instance template="FriendRequest"/>
+                <ui:Instance template="FriendRequest"/>
+            </ui:ScrollView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

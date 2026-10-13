@@ -22,6 +22,8 @@ namespace Game.Domain
         /// </summary>
         public static IEnumerable<Sequence> FindSequences(Board board, Team team, Sequence[] sequences)
         {
+            HashSet<Position> locked = new(sequences.SelectMany(s => s.Positions));
+            
             for (int i = 7; i >= 4; i--)
             {
                 foreach (Position position in BoardLayout.AllPositions())
@@ -58,15 +60,16 @@ namespace Game.Domain
 
                     while (nextPos.IsSome(out Position nextPosition) &&
                            board.OwnerIs(nextPosition, team) &&
-                           currentLine.Count(p => sequences.Any(s => s.Positions.Contains(p))) <= 1)
+                           currentLine.Count(locked.Contains) <= 1)
                     {
                         currentLine.Add(nextPosition);
                         nextPos = GetNeighbor(nextPosition, dRow, dCol);
                     }
 
                     // 3. If the total continuous line meets our requirement, yield it.
-                    if (currentLine.Count >= targetLength && currentLine.Count(p => sequences.Any(s => s.Positions.Contains(p))) <= 1)
+                    if (currentLine.Count >= targetLength && currentLine.Count(locked.Contains) <= 1)
                     {
+                        currentLine.ForEach(p => locked.Add(p));
                         yield return new Sequence(currentLine.ToArray(), team);
                     }
                 }

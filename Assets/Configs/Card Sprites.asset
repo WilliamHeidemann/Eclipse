@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Models.CardSprites
   _moon: {fileID: -3303150674910046169, guid: 4f105793f3d25454dbdf927723bc32fb, type: 3}
   _sun: {fileID: -4887987006404809063, guid: 5f6af31f6a43bb24bb3767575b167b61, type: 3}
-  _wild: {fileID: 1999783776571448115, guid: ec65e9592c269434ab92978f20a6968c, type: 3}
-  _remove: {fileID: -5728689884597094573, guid: bdce1274cd887c54fb97da5dbab3fe09, type: 3}
+  _wild: {fileID: 1303983477555845423, guid: d0123d36d12193a4ca015f29fd93e991, type: 3}
+  _remove: {fileID: -3382897330147348680, guid: 73bea5e037f44b645a15634a86551791, type: 3}
   _moonBoard: {fileID: -4402421732462105134, guid: e81c2b6e947726640bfaac904503020b, type: 3}
   _sunBoard: {fileID: 5376046311585156021, guid: 27a3bff42c8f7db41b467f7be3c86844, type: 3}
   _cardBack: {fileID: 7967033294725035957, guid: e8c651aa89855e1419d27c6d0d27d475, type: 3}

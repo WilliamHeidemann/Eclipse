@@ -39,8 +39,7 @@ namespace Game.Presentation
             GameState gameState = _startingConfiguration.UseDevelopmentStartingState
                 ? _startingConfiguration.DevelopmentGameState()
                 : GameState.CreateInitial();
-            _playCoordinator = CreateLocalPlayCoordinator(gameState);
-
+            
             if (_startingConfiguration.UseDevelopmentStartingState)
             {
                 foreach (Move preMove in gameState.Moves)
@@ -48,29 +47,30 @@ namespace Game.Presentation
                     _animationOrchestrator.PlayDiscardAndPinAnimation(preMove);
                 }
             }
+            
+            _playCoordinator = CreateLocalPlayCoordinator(gameState);
 
             BindToPresentation(_playCoordinator);
-            return;
+        }
+        
+        public static PlayCoordinator CreateLocalPlayCoordinator(GameState gameState)
+        {
+            ClientGameState clientGameState = gameState.ToClientGameState(gameState.ToPlay);
 
-            static PlayCoordinator CreateLocalPlayCoordinator(GameState gameState)
+            LocalGameServer playerGameServer = CreateLocalGameServer(gameState);
+
+            return new PlayCoordinator(playerGameServer, clientGameState);
+
+            static LocalGameServer CreateLocalGameServer(GameState gameState)
             {
-                ClientGameState clientGameState = gameState.ToClientGameState(gameState.ToPlay);
+                LocalGameState localGameState = new(gameState);
+                LocalGameServer playerGameServer = new(localGameState);
+                LocalGameServer botGameServer = new(localGameState);
+                playerGameServer.OtherPlayerServer = botGameServer;
+                botGameServer.OtherPlayerServer = playerGameServer;
+                new Bot(botGameServer, new CenterBrain());
 
-                LocalGameServer playerGameServer = CreateLocalGameServer(gameState);
-
-                return new PlayCoordinator(playerGameServer, clientGameState);
-
-                static LocalGameServer CreateLocalGameServer(GameState gameState)
-                {
-                    LocalGameState localGameState = new(gameState);
-                    LocalGameServer playerGameServer = new(localGameState);
-                    LocalGameServer botGameServer = new(localGameState);
-                    playerGameServer.OtherPlayerServer = botGameServer;
-                    botGameServer.OtherPlayerServer = playerGameServer;
-                    new Bot(botGameServer, new CenterBrain());
-
-                    return playerGameServer;
-                }
+                return playerGameServer;
             }
         }
 

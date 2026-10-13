@@ -26,6 +26,7 @@ namespace Game.Presentation.AnimationSystems
             playCoordinator.OnOpponentPlayed += AnimateOpponentPlay;
             playCoordinator.OnValidMoveRequest += PlayDiscardAndPinAnimation;
             playCoordinator.OnInvalidMoveRequest += PlayInvalidMove;
+            playCoordinator.OnSequenceScored += PlaySequenceCelebration;
         }
 
         public void PlayInvalidMove(Position position)
@@ -34,7 +35,7 @@ namespace Game.Presentation.AnimationSystems
                 _audioPlayer.Play(Sound.No); // No is for unsuccessful placement
         }
 
-        public async Awaitable PlaySequenceCelebration()
+        public void PlaySequenceCelebration(Sequence sequence)
         {
             Debug.Log("SEQUENCE!");
         }

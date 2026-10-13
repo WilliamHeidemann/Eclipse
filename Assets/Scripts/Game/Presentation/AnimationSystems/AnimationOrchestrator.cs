@@ -28,6 +28,12 @@ namespace Game.Presentation.AnimationSystems
             playCoordinator.OnInvalidMoveRequest += PlayInvalidMove;
             playCoordinator.OnSequenceScored += PlaySequenceCelebration;
             playCoordinator.OnTurnPassedTo += ShowWhoseTurnItIs;
+            playCoordinator.OnTeamWon += PlayWinAnimation;
+        }
+
+        private void PlayWinAnimation(Team team)
+        {
+            Debug.Log($"{team} has won!");
         }
 
         private void ShowWhoseTurnItIs(Team toPlay)

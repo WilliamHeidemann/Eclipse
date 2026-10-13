@@ -21,6 +21,7 @@ namespace Game.Domain
         public event Action<Move> OnOpponentPlayed;
         public event Action<Sequence> OnSequenceScored;
         public event Action<Team> OnTurnPassedTo;
+        public event Action<Team> OnTeamWon;
 
         public PlayCoordinator(IGameServer gameServer, ClientGameState startingState)
         {
@@ -85,6 +86,11 @@ namespace Game.Domain
             foreach (var sequence in clientGameState.SequencesFromLastMove(ofTeam))
             {
                 OnSequenceScored?.Invoke(sequence);
+            }
+            
+            if (clientGameState.Sequences.Count(s => s.Team == ofTeam) >= 2)
+            {
+                OnTeamWon?.Invoke(ofTeam);
             }
         }
     }

@@ -20,6 +20,7 @@ namespace Game.Domain
         public event Action<Card> OnDrawCard;
         public event Action<Move> OnOpponentPlayed;
         public event Action<Sequence> OnSequenceScored;
+        public event Action<Team> OnTurnPassedTo;
 
         public PlayCoordinator(IGameServer gameServer, ClientGameState startingState)
         {
@@ -37,6 +38,7 @@ namespace Game.Domain
             if (attempt.IsSome(out Move move))
             {
                 OnValidMoveRequest?.Invoke(move);
+                OnTurnPassedTo?.Invoke(move.Team.Opposing());
                 Option<ClientGameState> result = await _gameServer.Request(move);
                 if (result.IsSome(out ClientGameState clientGameState))
                 {
@@ -74,6 +76,8 @@ namespace Game.Domain
             clientGameState.Moves.LastOption().Try(lastMove => OnOpponentPlayed?.Invoke(lastMove));
             
             CheckForSequenceInLastMove(clientGameState, clientGameState.Team.Opposing());
+            
+            OnTurnPassedTo?.Invoke(clientGameState.Team);
         }
 
         private void CheckForSequenceInLastMove(ClientGameState clientGameState, Team ofTeam)

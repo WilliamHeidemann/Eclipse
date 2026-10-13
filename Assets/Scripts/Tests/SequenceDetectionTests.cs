@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using Game.Domain.Models.Organisms;
 using Game.Domain.Models.State;
 using NUnit.Framework;
-using UnityEditor;
-using UnityEngine.TestTools;
 
 namespace Tests
 {

@@ -27,6 +27,12 @@ namespace Game.Presentation.AnimationSystems
             playCoordinator.OnValidMoveRequest += PlayDiscardAndPinAnimation;
             playCoordinator.OnInvalidMoveRequest += PlayInvalidMove;
             playCoordinator.OnSequenceScored += PlaySequenceCelebration;
+            playCoordinator.OnTurnPassedTo += ShowWhoseTurnItIs;
+        }
+
+        private void ShowWhoseTurnItIs(Team toPlay)
+        {
+            Debug.Log($"To play: {toPlay}");
         }
 
         public void PlayInvalidMove(Position position)

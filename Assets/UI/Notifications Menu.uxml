@@ -6,14 +6,14 @@
         <ui:Button name="Back" class="back-button"/>
         <ui:VisualElement name="GameRequests" class="request-section" style="flex-grow: 0;">
             <ui:Label text="Game Requests" name="GameRequestsLabel" class="section-heading"/>
-            <ui:ScrollView name="GameRequestsScrollView">
+            <ui:ScrollView name="GameRequestsScrollView" horizontal-scroller-visibility="Hidden">
                 <ui:Instance template="GameRequest"/>
                 <ui:Instance template="GameRequest"/>
             </ui:ScrollView>
         </ui:VisualElement>
         <ui:VisualElement name="FriendRequests" class="request-section" style="flex-grow: 0;">
             <ui:Label text="Friend Requests" name="FriendRequestsLabel" class="section-heading"/>
-            <ui:ScrollView name="FriendRequestsScrollView">
+            <ui:ScrollView name="FriendRequestsScrollView" horizontal-scroller-visibility="AlwaysVisible">
                 <ui:Instance template="FriendRequest"/>
                 <ui:Instance template="FriendRequest"/>
             </ui:ScrollView>

@@ -1,0 +1,20 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Friend" src="project://database/Assets/UI/Friend.uxml?fileID=9197481963319205126&amp;guid=1a35536f453f45747a65de9c1db2e6b5&amp;type=3#Friend"/>
+    <Style src="project://database/Assets/UI/Friends%20Menu.uss?fileID=7433441132597879392&amp;guid=45225a7f09b64ef48a623f1dbbf3d3dd&amp;type=3#Friends Menu"/>
+    <ui:VisualElement name="NotificationsMenu" class="sub-menu" style="-unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;);">
+        <ui:Button name="Back" class="back-button"/>
+        <ui:VisualElement name="SendRequest" class="request-section" style="flex-grow: 0;">
+            <ui:Label text="Send Friend Request" name="SendRequestLabel" class="section-heading"/>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:TextField label="" placeholder-text="Friend#1234" style="-unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); -unity-text-align: middle-left; color: rgb(255, 255, 255); display: flex; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-grow: 1; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;"/>
+                <ui:Button text="Send" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 10px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-grow: 0.2; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0.498); border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="FriendsList" class="request-section" style="flex-grow: 0;">
+            <ui:Label text="Friends" name="FriendsLabel" class="section-heading"/>
+            <ui:ScrollView name="FriendsScrollView" horizontal-scroller-visibility="AlwaysVisible">
+                <ui:Instance template="Friend"/>
+            </ui:ScrollView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

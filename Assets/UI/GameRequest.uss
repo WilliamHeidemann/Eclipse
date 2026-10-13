@@ -2,8 +2,7 @@
     flex-grow: 1;
     flex-direction: row;
     -unity-font-definition: url("project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&type=3#opticenturyschoolbookbold");
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .invitation {

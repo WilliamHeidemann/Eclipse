@@ -38,6 +38,10 @@ namespace Game.Presentation.AnimationSystems
         public void PlaySequenceCelebration(Sequence sequence)
         {
             Debug.Log("SEQUENCE!");
+            foreach (var position in sequence.Positions)
+            {
+                _boardPresenter.Highlight(position);
+            }
         }
 
         public void PlayDrawAnimation(Card card)

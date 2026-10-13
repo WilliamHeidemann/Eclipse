@@ -164,5 +164,11 @@ namespace Game.Presentation.AnimationSystems
                 Destroy(pin.gameObject);
             }
         }
+
+        public void Highlight(Position position)
+        {
+            Button slot = _buttons[position];
+            
+        }
     }
 }

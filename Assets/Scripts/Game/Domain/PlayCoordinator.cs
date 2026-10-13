@@ -41,7 +41,7 @@ namespace Game.Domain
                 if (result.IsSome(out ClientGameState clientGameState))
                 {
                     _clientGameState = clientGameState;
-                    CheckForSequenceInLastMove(clientGameState);
+                    CheckForSequenceInLastMove(clientGameState, clientGameState.Team);
                 }
             }
             else
@@ -73,12 +73,12 @@ namespace Game.Domain
 
             clientGameState.Moves.LastOption().Try(lastMove => OnOpponentPlayed?.Invoke(lastMove));
             
-            CheckForSequenceInLastMove(clientGameState);
+            CheckForSequenceInLastMove(clientGameState, clientGameState.Team.Opposing());
         }
 
-        private void CheckForSequenceInLastMove(ClientGameState clientGameState)
+        private void CheckForSequenceInLastMove(ClientGameState clientGameState, Team ofTeam)
         {
-            foreach (var sequence in clientGameState.SequencesFromLastMove())
+            foreach (var sequence in clientGameState.SequencesFromLastMove(ofTeam))
             {
                 OnSequenceScored?.Invoke(sequence);
             }

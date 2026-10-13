@@ -31,7 +31,7 @@ namespace Tests
 
             ClientGameState clientGameState = new(moves, Array.Empty<Card>(), sequences, default, false);
 
-            int sequencesFromLastMove = clientGameState.SequencesFromLastMove().ToArray().Length;
+            int sequencesFromLastMove = clientGameState.SequencesFromLastMove(default).ToArray().Length;
 
             Assert.That(sequencesFromLastMove, Is.EqualTo(1));
         }

@@ -1,11 +1,13 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/styles.uss?fileID=7433441132597879392&amp;guid=cb1d2706049614e018463c0d001025a6&amp;type=3#styles"/>
+    <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=34018f246eda05847ac2c1594faa96b4&amp;type=3#MenuStyles"/>
     <Style src="project://database/Assets/UI/Difficulty%20Menu.uss?fileID=7433441132597879392&amp;guid=e88eb343a3a651543b1c109ab01f0694&amp;type=3#Difficulty Menu"/>
     <ui:VisualElement name="MenuContainer" class="difficulty-menu" style="flex-grow: 1;">
-        <ui:Button name="Back" class="back-button"/>
+        <ui:Button name="Back" class="menu-back-button"/>
         <ui:VisualElement name="DifficultyContainer" class="difficulty-container" style="flex-grow: 1;">
-            <ui:Button text="Easy" class="difficulty-button"/>
-            <ui:Button text="Hard" class="difficulty-button"/>
-            <ui:Button text="Extreme" class="difficulty-button"/>
+            <ui:Button text="Easy" class="difficulty-button menu-secondary-button"/>
+            <ui:Button text="Hard" class="difficulty-button menu-secondary-button"/>
+            <ui:Button text="Extreme" class="difficulty-button menu-secondary-button"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

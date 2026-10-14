@@ -2,7 +2,7 @@
 
 namespace Game.Domain.Models.Organisms;
 
-public enum Column
+public enum Column : byte
 {
     One,
     Two,
@@ -14,7 +14,7 @@ public enum Column
     Eight
 }
 
-public enum Row
+public enum Row : byte
 {
     One,
     Two,
@@ -24,7 +24,7 @@ public enum Row
     Six,
 }
 
-public enum Rank
+public enum Rank : byte
 {
     Ace,
     Two,
@@ -41,13 +41,13 @@ public enum Rank
     King
 }
 
-public enum Symbol
+public enum Symbol : byte
 {
     Sun,
     Moon
 }
 
-public enum Team
+public enum Team : byte
 {
     Red,
     Yellow

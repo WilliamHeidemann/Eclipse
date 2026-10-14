@@ -3,7 +3,7 @@
     <ui:VisualElement name="GameRequest" class="game-request">
         <ui:VisualElement name="Invitation" class="invitation" style="min-width: 66%;">
             <ui:Label text="Selma#1234" name="Name" class="name"/>
-            <ui:Label text="wants to play with you!" name="Description" class="description"/>
+            <ui:Label text="wants to play with you!" name="Description" class="description" style="font-size: 24px;"/>
         </ui:VisualElement>
         <ui:VisualElement name="Buttons" class="request-buttons">
             <ui:Button text="Accept" name="Accept" class="accept-button"/>

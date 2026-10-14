@@ -391,22 +391,12 @@
         "com.unity.modules.physics": "1.0.0"
       }
     },
-    "com.unity.visualscripting": {
-      "version": "1.9.12",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ugui": "2.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.williamheidemann.utilitytoolkit": {
       "version": "https://github.com/WilliamHeidemann/UtilityToolkit.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "bd9c1f94fe8dc4460718f49735ed34297015efbe"
+      "hash": "065494ea0c7a9f4f53ad666634c934ab08ac3a42"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

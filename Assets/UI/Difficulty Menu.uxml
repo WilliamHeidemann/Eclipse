@@ -5,9 +5,9 @@
     <ui:VisualElement name="MenuContainer" class="difficulty-menu" style="flex-grow: 1;">
         <ui:Button name="Back" class="menu-back-button"/>
         <ui:VisualElement name="DifficultyContainer" class="difficulty-container" style="flex-grow: 1;">
-            <ui:Button text="Easy" class="difficulty-button menu-secondary-button"/>
-            <ui:Button text="Hard" class="difficulty-button menu-secondary-button"/>
-            <ui:Button text="Extreme" class="difficulty-button menu-secondary-button"/>
+            <ui:Button text="Easy" name="Easy" class="difficulty-button menu-secondary-button"/>
+            <ui:Button text="Hard" name="Hard" class="difficulty-button menu-secondary-button"/>
+            <ui:Button text="Extreme" name="Extreme" class="difficulty-button menu-secondary-button"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Game.Cloud;
 using Game.Domain.Models;
+using Game.Presentation.UI;
 using Unity.Services.CloudCode.GeneratedBindings;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ namespace Game.Presentation
                 QualitySettings.vSyncCount = 0;
                 Application.targetFrameRate = 60;
                 
-                _mainMenu.gameObject.SetActive(_startingConfiguration.StartIn == StartIn.MainMenu);
+                // _mainMenu.gameObject.SetActive(_startingConfiguration.StartIn == StartIn.MainMenu);
                 
                 switch (_startingConfiguration.Mode)
                 {
@@ -33,7 +34,7 @@ namespace Game.Presentation
                         break;
                     
                     case Mode.Local when _startingConfiguration.StartIn == StartIn.Game:
-                        _gameStarter.StartLocalGame();
+                        _gameStarter.StartLocalGame(BotDifficulty.Hard);
                         break;
                 }
             }

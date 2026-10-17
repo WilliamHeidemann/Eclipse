@@ -11,6 +11,7 @@ using Game.Domain.Players;
 using Game.Domain.Players.Bot_Strategies;
 using Game.Domain.Server;
 using Game.Presentation.AnimationSystems;
+using Game.Presentation.UI;
 using Unity.Services.CloudCode.GeneratedBindings;
 using UnityEngine;
 using UtilityToolkit.Monads;
@@ -22,7 +23,8 @@ namespace Game.Presentation
         [SerializeField] private BoardPresenter _boardPresenter;
         [SerializeField] private AnimationOrchestrator _animationOrchestrator;
         [SerializeField] private StartingConfiguration _startingConfiguration;
-
+        [SerializeField] private GameObject _gameElements;
+        
         private PlayCoordinator _playCoordinator;
         private Option<string> _matchId;
         private HeartBeat _heartBeat;
@@ -34,8 +36,10 @@ namespace Game.Presentation
             _boardPresenter.OnPositionClicked += HandlePositionClicked;
         }
 
-        public void StartLocalGame()
+        public void StartLocalGame(BotDifficulty difficulty)
         {
+            _gameElements.SetActive(true);
+            
             GameState gameState = _startingConfiguration.UseDevelopmentStartingState
                 ? _startingConfiguration.DevelopmentGameState()
                 : GameState.CreateInitial();
@@ -48,28 +52,36 @@ namespace Game.Presentation
                 }
             }
             
-            _playCoordinator = CreateLocalPlayCoordinator(gameState);
+            _playCoordinator = CreateLocalPlayCoordinator(gameState, difficulty);
 
             BindToPresentation(_playCoordinator);
         }
         
-        public static PlayCoordinator CreateLocalPlayCoordinator(GameState gameState)
+        public static PlayCoordinator CreateLocalPlayCoordinator(GameState gameState, BotDifficulty difficulty)
         {
             ClientGameState clientGameState = gameState.ToClientGameState(gameState.ToPlay);
 
-            LocalGameServer playerGameServer = CreateLocalGameServer(gameState);
+            LocalGameServer playerGameServer = CreateLocalGameServer(gameState, difficulty);
 
             return new PlayCoordinator(playerGameServer, clientGameState);
 
-            static LocalGameServer CreateLocalGameServer(GameState gameState)
+            static LocalGameServer CreateLocalGameServer(GameState gameState, BotDifficulty difficulty)
             {
                 LocalGameState localGameState = new(gameState);
                 LocalGameServer playerGameServer = new(localGameState);
                 LocalGameServer botGameServer = new(localGameState);
                 playerGameServer.OtherPlayerServer = botGameServer;
                 botGameServer.OtherPlayerServer = playerGameServer;
-                new Bot(botGameServer, new CenterBrain());
+                IBrain botBrain = difficulty switch
+                {
+                    BotDifficulty.Easy => new RandomBrain(),
+                    BotDifficulty.Hard => new CenterBrain(),
+                    BotDifficulty.Extreme => new CenterBrain(),
+                    _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
+                };
+                new Bot(botGameServer, botBrain);
 
+                
                 return playerGameServer;
             }
         }
@@ -84,6 +96,7 @@ namespace Game.Presentation
 
         public void StartGame(Match match, string opponentId)
         {
+            _gameElements.SetActive(true);
             _playCoordinator = CreatePlayCoordinator(match);
             _playCoordinator.OnValidMoveRequest += async _ => await NotifyOpponent(opponentId);
             _matchId = Option<string>.Some(match.Id);

@@ -17,7 +17,7 @@ using UnityEngine;
 
 namespace Game.Presentation
 {
-    public class CloudHandler2(UIManager uiManager, GameStarter gameStarter)
+    public class CloudHandler(UIManager uiManager, GameStarter gameStarter)
     {
         public async Task Initialize()
         {

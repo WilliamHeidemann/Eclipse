@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e3488e45744dfda68d3767c53626dd, type: 3}
   m_Name: Starting Configuration
   m_EditorClassIdentifier: Eclipse.Presentation::Game.Presentation.StartingConfiguration
-  Mode: 0
+  Mode: 1
   StartIn: 0
   UseDevelopmentStartingState: 0
   _myCards:

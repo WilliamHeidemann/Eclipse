@@ -12,19 +12,19 @@ namespace Game.Presentation.UI
 {
     public class UIManager : MonoBehaviour
     {
-        [Header("Menus")] [SerializeField] private PanelRenderer _mainMenu;
+        [Header("Menus")] 
+        [SerializeField] private PanelRenderer _mainMenu;
         [SerializeField] private PanelRenderer _friendsMenu;
         [SerializeField] private PanelRenderer _notificationsMenu;
         [SerializeField] private PanelRenderer _difficultyMenu;
 
-        [Header("UI Templates")] [SerializeField]
-        private VisualTreeAsset _gameRequest;
-
+        [Header("UI Templates")] 
+        [SerializeField] private VisualTreeAsset _gameRequest;
         [SerializeField] private VisualTreeAsset _friendRequest;
         [SerializeField] private VisualTreeAsset _friend;
 
-        [Header("Game Logic")] [SerializeField]
-        private GameStarter _gameStarter;
+        [Header("Game Logic")] 
+        [SerializeField] private GameStarter _gameStarter;
 
         private readonly StateMachine _stateMachine = new();
         private RequestView _friends;
@@ -105,7 +105,11 @@ namespace Game.Presentation.UI
             VisualElement CreateFriend(User user)
             {
                 VisualElement friend = _friend.Instantiate();
-                friend.Q<Label>("Name").text = user.Name;
+                
+                if (friend == null) throw new NullReferenceException("Friend is null");
+                if (friend.Q<Label>("Name") == null) throw new NullReferenceException("Friend name is null");
+                
+                friend.Q<Label>("FriendName").text = user.Name;
                 friend.Q<Button>("Play").clicked += () => GameRequestSent?.Invoke(user.Id);
                 return friend;
             }

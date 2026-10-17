@@ -14,7 +14,7 @@ namespace Game.Presentation
         [SerializeField] private GameStarter _gameStarter;
         [SerializeField] private StartingConfiguration _startingConfiguration;
 
-        private CloudHandler2 _cloudHandler;
+        private CloudHandler _cloudHandler;
         
         private async Task Awake()
         {
@@ -26,7 +26,7 @@ namespace Game.Presentation
                 switch (_startingConfiguration.Mode)
                 {
                     case Mode.Online:
-                        _cloudHandler = new CloudHandler2(_uiManager, _gameStarter);
+                        _cloudHandler = new CloudHandler(_uiManager, _gameStarter);
                         await _cloudHandler.Initialize();
                         // var matchId = await _gameStarter.StartOnlineGame("123");
                         // GameLogicServiceBindings g = new();

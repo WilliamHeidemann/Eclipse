@@ -1,4 +1,5 @@
 using System;
+using Game.Domain.Models.Dto;
 using Game.Presentation.UI.Menus;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -28,10 +29,10 @@ namespace Game.Presentation.UI
         private RequestView _friendRequests;
         private RequestView _gameRequests;
         
-        public void ShowFriendRequest(string friendName) => _friendRequests.Add(friendName);
-        public void RemoveFriendRequest(string friendName) => _friendRequests.Remove(friendName);
-        public void ShowGameRequest(string friendName) => _gameRequests.Add(friendName);
-        public void RemoveGameRequest(string friendName) => _gameRequests.Remove(friendName);
+        public void ShowFriendRequest(User user) => _friendRequests.Add(user);
+        public void RemoveFriendRequest(User user) => _friendRequests.Remove(user.Id);
+        public void ShowGameRequest(User user) => _gameRequests.Add(user);
+        public void RemoveGameRequest(User user) => _gameRequests.Remove(user.Id);
 
 #if UNITY_EDITOR
         [Header("Debugging")] [SerializeField] private UIState _menuToGoTo;
@@ -83,10 +84,10 @@ namespace Game.Presentation.UI
             _friendRequests = new RequestView(scrollView, CreateFriendRequest);
             return;
 
-            VisualElement CreateFriendRequest(string friendName)
+            VisualElement CreateFriendRequest(User user)
             {
                 VisualElement request = _friendRequest.Instantiate();
-                request.Q<Label>("Name").text = friendName;
+                request.Q<Label>("Name").text = user.Name;
                 request.Q<Button>("Accept").clicked += AcceptFriend;
                 request.Q<Button>("Decline").clicked += DeclineFriend;
                 return request;
@@ -114,10 +115,10 @@ namespace Game.Presentation.UI
             _gameRequests = new RequestView(scrollView, CreateGameRequest);
             return;
 
-            VisualElement CreateGameRequest(string friendName)
+            VisualElement CreateGameRequest(User user)
             {
                 VisualElement request = _friendRequest.Instantiate();
-                request.Q<Label>("Name").text = friendName;
+                request.Q<Label>("Name").text = user.Name;
                 request.Q<Button>("Accept").clicked += AcceptMatch;
                 request.Q<Button>("Decline").clicked += DeclineMatch;
                 return request;

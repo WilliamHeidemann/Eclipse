@@ -21,18 +21,35 @@ namespace Game.Presentation.UI
         private VisualTreeAsset _gameRequest;
 
         [SerializeField] private VisualTreeAsset _friendRequest;
+        [SerializeField] private VisualTreeAsset _friend;
 
         [Header("Game Logic")] [SerializeField]
         private GameStarter _gameStarter;
 
         private readonly StateMachine _stateMachine = new();
+        private RequestView _friends;
         private RequestView _friendRequests;
         private RequestView _gameRequests;
-        
+
+        public event Action<string> FriendRequestSent;
+        public event Action<User> FriendRequestAccepted;
+        public event Action<string> GameRequestSent;
+        public event Action<User> GameRequestAccepted;
+
+        public void ShowFriend(User user) => _friends.Add(user);
+        public void RemoveFriend(User user) => _friends.Remove(user.Id);
         public void ShowFriendRequest(User user) => _friendRequests.Add(user);
         public void RemoveFriendRequest(User user) => _friendRequests.Remove(user.Id);
         public void ShowGameRequest(User user) => _gameRequests.Add(user);
         public void RemoveGameRequest(User user) => _gameRequests.Remove(user.Id);
+
+        public void HideMenus()
+        {
+            _mainMenu.gameObject.SetActive(false);
+            _friendsMenu.gameObject.SetActive(false);
+            _notificationsMenu.gameObject.SetActive(false);
+            _difficultyMenu.gameObject.SetActive(false);
+        }
 
 #if UNITY_EDITOR
         [Header("Debugging")] [SerializeField] private UIState _menuToGoTo;
@@ -80,27 +97,26 @@ namespace Game.Presentation.UI
             _stateMachine.Register(UIState.FriendsMenu, menu);
             root.Q<Button>("Back").clicked += () => _stateMachine.GoTo(UIState.MainMenu);
 
-            ScrollView scrollView = root.Q<ScrollView>();
-            _friendRequests = new RequestView(scrollView, CreateFriendRequest);
-            return;
+            ScrollView friendsScrollView = root.Q<ScrollView>("FriendsScrollView");
+            friendsScrollView.Clear();
+            _friends = new RequestView(friendsScrollView, CreateFriend);
+            root.Q<Button>("SendFriendRequestButton").clicked += SendFriendRequest;
 
-            VisualElement CreateFriendRequest(User user)
+            VisualElement CreateFriend(User user)
             {
-                VisualElement request = _friendRequest.Instantiate();
-                request.Q<Label>("Name").text = user.Name;
-                request.Q<Button>("Accept").clicked += AcceptFriend;
-                request.Q<Button>("Decline").clicked += DeclineFriend;
-                return request;
-                
-                void AcceptFriend()
-                {
-                    throw new NotImplementedException();
-                }
+                VisualElement friend = _friend.Instantiate();
+                friend.Q<Label>("Name").text = user.Name;
+                friend.Q<Button>("Play").clicked += () => GameRequestSent?.Invoke(user.Id);
+                return friend;
+            }
 
-                void DeclineFriend()
-                {
-                    throw new NotImplementedException();
-                }
+            void SendFriendRequest()
+            {
+                TextField input = root.Q<TextField>("FriendRequestInput");
+                string friendName = input.value.Trim();
+                if (string.IsNullOrEmpty(friendName)) return;
+                input.value = string.Empty;
+                FriendRequestSent?.Invoke(friendName);
             }
         }
 
@@ -111,27 +127,39 @@ namespace Game.Presentation.UI
             _stateMachine.Register(UIState.NotificationsMenu, menu);
             root.Q<Button>("Back").clicked += () => _stateMachine.GoTo(UIState.MainMenu);
             
-            ScrollView scrollView = root.Q<ScrollView>();
-            _gameRequests = new RequestView(scrollView, CreateGameRequest);
-            return;
+            ScrollView gameRequestsScrollView = root.Q<ScrollView>("GameRequestsScrollView");
+            ScrollView friendRequestsScrollView = root.Q<ScrollView>("FriendRequestsScrollView");
+            gameRequestsScrollView.Clear();
+            friendRequestsScrollView.Clear();
+            _gameRequests = new RequestView(gameRequestsScrollView, CreateGameRequest);
+            _friendRequests = new RequestView(friendRequestsScrollView, CreateFriendRequest);
 
-            VisualElement CreateGameRequest(User user)
+            VisualElement CreateFriendRequest(User user)
             {
                 VisualElement request = _friendRequest.Instantiate();
                 request.Q<Label>("Name").text = user.Name;
-                request.Q<Button>("Accept").clicked += AcceptMatch;
-                request.Q<Button>("Decline").clicked += DeclineMatch;
+                request.Q<Button>("Accept").clicked += () => FriendRequestAccepted?.Invoke(user);
+                request.Q<Button>("Decline").clicked += () =>
+                {
+                    RemoveFriendRequest(user);
+                };
                 return request;
-                
-                void AcceptMatch()
-                {
-                    throw new NotImplementedException();
-                }
+            }
 
-                void DeclineMatch()
+            VisualElement CreateGameRequest(User user)
+            {
+                VisualElement request = _gameRequest.Instantiate();
+                request.Q<Label>("Name").text = user.Name;
+                request.Q<Button>("Accept").clicked += () =>
                 {
-                    throw new NotImplementedException();
-                }
+                    RemoveGameRequest(user);
+                    GameRequestAccepted?.Invoke(user);
+                };
+                request.Q<Button>("Decline").clicked += () =>
+                {
+                    RemoveGameRequest(user);
+                };
+                return request;
             }
         }
 

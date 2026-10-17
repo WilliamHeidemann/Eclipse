@@ -1703,79 +1703,9 @@ MonoBehaviour:
   _difficultyMenu: {fileID: 339656106}
   _gameRequest: {fileID: 9197481963319205126, guid: 81306f91731dcc441ae6fb1a86b5bc77, type: 3}
   _friendRequest: {fileID: 9197481963319205126, guid: 876119e7e71c9b24eb579bc764e0604b, type: 3}
+  _friend: {fileID: 9197481963319205126, guid: 181663193c07e42688492d478d962cf2, type: 3}
   _gameStarter: {fileID: 733830841}
   _menuToGoTo: 0
---- !u!1 &1362680816
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1362680820}
-  - component: {fileID: 1362680819}
-  - component: {fileID: 1362680818}
-  m_Layer: 0
-  m_Name: Main Menu (Old)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1362680818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362680816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f98ec5577aff04b6390832678eb1f561, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _mainMenuDocument: {fileID: 1362680819}
-  _friendTemplate: {fileID: 9197481963319205126, guid: 181663193c07e42688492d478d962cf2, type: 3}
-  _requestTemplate: {fileID: 9197481963319205126, guid: c6ce7796970d443d2aa8424f95bed7d9, type: 3}
---- !u!114 &1362680819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362680816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: 6239defc7ef004cca9fda668f25a7cca, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: aa0f4943099c54f8f9fbfba8dcefb7ed, type: 3}
-  m_SortingOrder: 0
-  m_Position: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 448
-  m_WorldSpaceHeight: 969.4
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
-  m_WorldSpaceCollider: {fileID: 0}
---- !u!4 &1362680820
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362680816}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1385764832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,7 +1750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0558cd8a1323c43bb918cf57478656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _mainMenu: {fileID: 1362680818}
+  _uiManager: {fileID: 1258151632}
   _gameStarter: {fileID: 733830841}
   _startingConfiguration: {fileID: 11400000, guid: e24733084ed93cc46849c8ed97ccd71d, type: 2}
 --- !u!1 &1564673131
@@ -2442,7 +2372,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 1362680820}
   - {fileID: 1681708509}
   - {fileID: 1219153347}
   - {fileID: 1735991319}

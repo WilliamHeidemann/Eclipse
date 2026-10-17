@@ -3,13 +3,13 @@
     <Style src="project://database/Assets/UI/styles.uss?fileID=7433441132597879392&amp;guid=cb1d2706049614e018463c0d001025a6&amp;type=3#styles"/>
     <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=34018f246eda05847ac2c1594faa96b4&amp;type=3#MenuStyles"/>
     <Style src="project://database/Assets/UI/Friends%20Menu.uss?fileID=7433441132597879392&amp;guid=45225a7f09b64ef48a623f1dbbf3d3dd&amp;type=3#Friends Menu"/>
-    <ui:VisualElement name="NotificationsMenu" class="sub-menu" style="-unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;);">
+    <ui:VisualElement name="FriendsMenu" class="sub-menu" style="-unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;);">
         <ui:Button name="Back" class="menu-back-button"/>
         <ui:VisualElement name="SendRequest" class="request-section" style="flex-grow: 0;">
             <ui:Label text="Send Friend Request" name="SendRequestLabel" class="menu-section-heading"/>
             <ui:VisualElement style="flex-direction: row;">
-                <ui:TextField label="" placeholder-text="Friend#1234..." class="friend-request-input"/>
-                <ui:Button text="Send" class="menu-primary-button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 10px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-grow: 0.2; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0.498); font-size: 27px;"/>
+                <ui:TextField name="FriendRequestInput" label="" placeholder-text="Friend#1234..." class="friend-request-input"/>
+                <ui:Button name="SendFriendRequestButton" text="Send" class="menu-primary-button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 10px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; flex-grow: 0.2; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-color: rgba(188, 188, 188, 0.498); font-size: 27px;"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="FriendsList" class="request-section" style="flex-grow: 0;">

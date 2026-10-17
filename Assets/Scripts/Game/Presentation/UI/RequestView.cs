@@ -23,6 +23,7 @@ public class RequestView(ScrollView scrollView, Func<User, VisualElement> create
         if (_requests.TryGetValue(friendId, out VisualElement request))
         {
             scrollView.Remove(request);
+            _requests.Remove(friendId);
         }
     }
 }

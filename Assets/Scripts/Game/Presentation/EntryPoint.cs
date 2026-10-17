@@ -10,9 +10,11 @@ namespace Game.Presentation
 {
     public class EntryPoint : MonoBehaviour
     {
-        [SerializeField] private MainMenu _mainMenu;
+        [SerializeField] private UIManager _uiManager;
         [SerializeField] private GameStarter _gameStarter;
         [SerializeField] private StartingConfiguration _startingConfiguration;
+
+        private CloudHandler2 _cloudHandler;
         
         private async Task Awake()
         {
@@ -21,12 +23,11 @@ namespace Game.Presentation
                 QualitySettings.vSyncCount = 0;
                 Application.targetFrameRate = 60;
                 
-                // _mainMenu.gameObject.SetActive(_startingConfiguration.StartIn == StartIn.MainMenu);
-                
                 switch (_startingConfiguration.Mode)
                 {
                     case Mode.Online:
-                        await CloudHandler.Initialize(_mainMenu, _gameStarter);
+                        _cloudHandler = new CloudHandler2(_uiManager, _gameStarter);
+                        await _cloudHandler.Initialize();
                         // var matchId = await _gameStarter.StartOnlineGame("123");
                         // GameLogicServiceBindings g = new();
                         // var t = await g.GetClientGameState(matchId);

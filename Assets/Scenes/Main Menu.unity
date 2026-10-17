@@ -129,8 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 473984941}
   - component: {fileID: 473984942}
-  - component: {fileID: 473984943}
-  - component: {fileID: 473984944}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -176,33 +174,6 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
---- !u!114 &473984943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473984940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f98ec5577aff04b6390832678eb1f561, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _mainMenuDocument: {fileID: 473984942}
-  _friendTemplate: {fileID: 9197481963319205126, guid: 181663193c07e42688492d478d962cf2, type: 3}
-  _requestTemplate: {fileID: 9197481963319205126, guid: c6ce7796970d443d2aa8424f95bed7d9, type: 3}
---- !u!114 &473984944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 473984940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33775e2c95a184e428e2d2931dff100d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Eclipse.Presentation::CloudHandler
 --- !u!1 &495012472
 GameObject:
   m_ObjectHideFlags: 0

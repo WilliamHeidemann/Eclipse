@@ -1701,6 +1701,8 @@ MonoBehaviour:
   _friendsMenu: {fileID: 1230466893}
   _notificationsMenu: {fileID: 1574161253}
   _difficultyMenu: {fileID: 339656106}
+  _gameRequest: {fileID: 9197481963319205126, guid: 81306f91731dcc441ae6fb1a86b5bc77, type: 3}
+  _friendRequest: {fileID: 9197481963319205126, guid: 876119e7e71c9b24eb579bc764e0604b, type: 3}
   _gameStarter: {fileID: 733830841}
   _menuToGoTo: 0
 --- !u!1 &1362680816

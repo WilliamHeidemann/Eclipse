@@ -1005,7 +1005,7 @@ GameObject:
   m_Layer: 0
   m_Name: Card Aligner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1131,7 +1131,7 @@ GameObject:
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 9d5b9a892727d504b905b735d22f0bda, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1195,7 +1195,7 @@ GameObject:
   m_Layer: 0
   m_Name: Sound Effects
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: e76e8f49c981bd34fab2c6a5745234af, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1450,7 +1450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1106587929
 Transform:
   m_ObjectHideFlags: 0
@@ -1652,6 +1652,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1258151630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1258151631}
+  - component: {fileID: 1258151632}
+  m_Layer: 0
+  m_Name: UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1258151631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258151630}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1258151632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258151630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ba6621ecfd4f29be84877af7b9d7a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Eclipse.Presentation::Game.Presentation.UI.UIManager
+  _mainMenu: {fileID: 1106587930}
+  _friendsMenu: {fileID: 1230466893}
+  _notificationsMenu: {fileID: 1574161253}
+  _difficultyMenu: {fileID: 339656106}
 --- !u!1 &1362680816
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,7 +1717,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1362680818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1739,7 +1787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1385764833
 Transform:
   m_ObjectHideFlags: 0
@@ -1972,7 +2020,7 @@ GameObject:
   m_Layer: 0
   m_Name: Animation Orchestrator
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2132,7 +2180,7 @@ GameObject:
   m_Layer: 0
   m_Name: Pin Grid
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2209,7 +2257,7 @@ GameObject:
   m_Layer: 0
   m_Name: Card Draw Animator
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2315,7 +2363,7 @@ GameObject:
   m_Layer: 0
   m_Name: Opponent Hand
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2353,7 +2401,6 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1626219985}
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 1362680820}
@@ -2365,16 +2412,18 @@ SceneRoots:
   - {fileID: 122947184}
   - {fileID: 272884479}
   - {fileID: 16290604}
+  - {fileID: 1626219985}
   - {fileID: 1734935966}
   - {fileID: 802132156}
   - {fileID: 1883750587}
   - {fileID: 2135924201}
-  - {fileID: 733830842}
   - {fileID: 843779188}
   - {fileID: 854427143}
   - {fileID: 1385764833}
+  - {fileID: 733830842}
   - {fileID: 1571571037}
   - {fileID: 1106587929}
-  - {fileID: 1574161254}
   - {fileID: 1230466894}
+  - {fileID: 1574161254}
   - {fileID: 339656107}
+  - {fileID: 1258151631}

@@ -96,7 +96,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.assets.bank
   Name: Master.assets
   StudioPath: bank:/Master.assets
-  lastModified: 639274839505095919
+  lastModified: 639275805273092980
   FileSizes: []
   Exists: 1
 --- !u!114 &-7625720528538125207
@@ -377,7 +377,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639274839505105903
+  lastModified: 639275805274097029
   FileSizes: []
   Exists: 1
 --- !u!114 &-3324857194313043193
@@ -557,7 +557,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639274839505105903
+  lastModified: 639275805274239210
   FileSizes:
   - Name: 
     Value: 1444
@@ -694,7 +694,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -1501010237459166615}
   cacheVersion: 131861
-  cacheTime: 639274839505105903
+  cacheTime: 639275805274239210
   SerializableEventsDict:
   - key: event:/SFX_Spare_Assets/SequenceSFX PopSound1
     index: 0

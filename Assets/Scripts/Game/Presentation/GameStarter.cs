@@ -57,33 +57,33 @@ namespace Game.Presentation
             BindToPresentation(_playCoordinator);
         }
         
-        public static PlayCoordinator CreateLocalPlayCoordinator(GameState gameState, BotDifficulty difficulty)
+        public PlayCoordinator CreateLocalPlayCoordinator(GameState gameState, BotDifficulty difficulty)
         {
             ClientGameState clientGameState = gameState.ToClientGameState(gameState.ToPlay);
 
             LocalGameServer playerGameServer = CreateLocalGameServer(gameState, difficulty);
 
             return new PlayCoordinator(playerGameServer, clientGameState);
+        }
 
-            static LocalGameServer CreateLocalGameServer(GameState gameState, BotDifficulty difficulty)
+        private LocalGameServer CreateLocalGameServer(GameState gameState, BotDifficulty difficulty)
+        {
+            LocalGameState localGameState = new(gameState);
+            LocalGameServer playerGameServer = new(localGameState);
+            LocalGameServer botGameServer = new(localGameState);
+            playerGameServer.OtherPlayerServer = botGameServer;
+            botGameServer.OtherPlayerServer = playerGameServer;
+            IBrain botBrain = difficulty switch
             {
-                LocalGameState localGameState = new(gameState);
-                LocalGameServer playerGameServer = new(localGameState);
-                LocalGameServer botGameServer = new(localGameState);
-                playerGameServer.OtherPlayerServer = botGameServer;
-                botGameServer.OtherPlayerServer = playerGameServer;
-                IBrain botBrain = difficulty switch
-                {
-                    BotDifficulty.Easy => new RandomBrain(),
-                    BotDifficulty.Hard => new CenterBrain(),
-                    BotDifficulty.Extreme => new CenterBrain(),
-                    _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
-                };
-                new Bot(botGameServer, botBrain);
+                BotDifficulty.Easy => new RandomBrain(),
+                BotDifficulty.Hard => new CenterBrain(),
+                BotDifficulty.Extreme => new CenterBrain(),
+                _ => throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null)
+            };
+            Bot bot = new(botGameServer, botBrain);
+            bot.OnStartThinking += () => _animationOrchestrator.QueueDelay(1f);
 
-                
-                return playerGameServer;
-            }
+            return playerGameServer;
         }
 
         public async Task<Match> CreateMatch(string opponentId)

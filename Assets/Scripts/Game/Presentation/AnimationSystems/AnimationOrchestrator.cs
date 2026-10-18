@@ -108,7 +108,6 @@ namespace Game.Presentation.AnimationSystems
             
             async Awaitable Play()
             {
-                await Awaitable.WaitForSecondsAsync(1f); // simulate thinking time. Should this really happen in online play also?
                 _audioPlayer.Play(Sound.PutDown);
 
                 Card card = move.Card;
@@ -122,6 +121,16 @@ namespace Game.Presentation.AnimationSystems
                 {
                     await _boardPresenter.Pin(move.Position, move.Team);
                 }
+            }
+        }
+
+        public void QueueDelay(float delayInSeconds)
+        {
+            _animationQueue.Enqueue(Wait, delayInSeconds);
+            
+            async Awaitable Wait(float delay)
+            {
+                await Awaitable.WaitForSecondsAsync(delay);
             }
         }
     }

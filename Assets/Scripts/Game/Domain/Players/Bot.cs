@@ -1,3 +1,4 @@
+using System;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
 using Game.Domain.Models.State;
@@ -8,6 +9,8 @@ namespace Game.Domain.Players
 {
     public class Bot
     {
+        public event Action OnStartThinking;
+        
         private readonly IBrain _brain;
         private readonly IGameServer _gameServer;
 
@@ -21,6 +24,7 @@ namespace Game.Domain.Players
 
         private void Play(ClientGameState clientGameState)
         {
+            OnStartThinking?.Invoke();
             Move move = _brain.DecideMove(clientGameState);
             _gameServer.Request(move);
         }

@@ -46,6 +46,11 @@ namespace Game.Presentation
             uiManager.GameRequestSent += receiverPlayerId => RunCloudOperation(
                 SendGameRequest(AuthenticationService.Instance.PlayerName, receiverPlayerId));
             uiManager.GameRequestAccepted += user => RunCloudOperation(StartMatch(user.Id));
+            
+            uiManager.FriendRequestSent += friendName => Debug.Log($"Friend request sent to {friendName}");
+            uiManager.FriendRequestAccepted += user => Debug.Log($"Accepted friend request from {user}.");
+            uiManager.GameRequestSent += receiverPlayerId => Debug.Log($"Sent game request to {receiverPlayerId}.");
+            uiManager.GameRequestAccepted += user => Debug.Log($"Accepted game request from {user}.");
         }
 
         private async Task AcceptFriendRequest(User user)

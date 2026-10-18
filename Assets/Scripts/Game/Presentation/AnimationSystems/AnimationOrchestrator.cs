@@ -108,11 +108,11 @@ namespace Game.Presentation.AnimationSystems
             
             async Awaitable Play()
             {
-                await Awaitable.WaitForSecondsAsync(1f); // simulate thinking time.
+                await Awaitable.WaitForSecondsAsync(1f); // simulate thinking time. Should this really happen in online play also?
                 _audioPlayer.Play(Sound.PutDown);
-                
-                Card card = BoardLayout.Get(move.Position);
-                
+
+                Card card = move.Card;
+
                 await _opponentHandAnimator.AnimatePlay(card);
                 if (card.IsRemover())
                 {

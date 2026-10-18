@@ -104,10 +104,10 @@ namespace Game.Presentation.UI
 
             VisualElement CreateFriend(User user)
             {
-                VisualElement friend = _friend.Instantiate();
+                TemplateContainer friend = _friend.Instantiate();
                 
                 if (friend == null) throw new NullReferenceException("Friend is null");
-                if (friend.Q<Label>("Name") == null) throw new NullReferenceException("Friend name is null");
+                if (friend.Q<Label>("FriendName") == null) throw new NullReferenceException("Friend name label is null");
                 
                 friend.Q<Label>("FriendName").text = user.Name;
                 friend.Q<Button>("Play").clicked += () => GameRequestSent?.Invoke(user.Id);

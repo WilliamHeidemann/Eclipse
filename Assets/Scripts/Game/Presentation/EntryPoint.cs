@@ -16,7 +16,7 @@ namespace Game.Presentation
 
         private CloudHandler _cloudHandler;
         
-        private async Task Awake()
+        private async Task Start()
         {
             try
             {

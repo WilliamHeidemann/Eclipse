@@ -38,3 +38,7 @@
     font-size: 19px;
     padding-left: 21px;
 }
+
+.request-section {
+    flex-grow: 0;
+}

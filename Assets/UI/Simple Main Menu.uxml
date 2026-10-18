@@ -11,7 +11,6 @@
         <ui:VisualElement name="Icons" class="menu-icons">
             <ui:Button name="Bot" class="menu-icon-button" style="background-image: url(&quot;project://database/Assets/Sprites/Eclipse%20Card%20Game/Menu%20Elements/Asset%2017@4x.png?fileID=2800000&amp;guid=f6d2571e99531b2419077b38d1e41609&amp;type=3#Asset 17@4x&quot;);"/>
             <ui:Button name="Friends" class="menu-icon-button" style="background-image: url(&quot;project://database/Assets/Sprites/Eclipse%20Card%20Game/Menu%20Elements/Asset%2016@4x.png?fileID=2800000&amp;guid=40e417686d3c23a498b83ef01c4b2c6e&amp;type=3#Asset 16@4x&quot;);"/>
-            <ui:Button name="Notifications" class="menu-icon-button" style="background-image: url(&quot;project://database/Assets/Sprites/Eclipse%20Card%20Game/Menu%20Elements/Asset%2015@4x.png?fileID=2800000&amp;guid=3815d347cd6bb9b4eb5393ca962aa9dd&amp;type=3#Asset 15@4x&quot;);"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -15,7 +15,6 @@ namespace Game.Presentation.UI
         [Header("Menus")] 
         [SerializeField] private PanelRenderer _mainMenu;
         [SerializeField] private PanelRenderer _friendsMenu;
-        [SerializeField] private PanelRenderer _notificationsMenu;
         [SerializeField] private PanelRenderer _difficultyMenu;
 
         [Header("UI Templates")] 
@@ -47,7 +46,6 @@ namespace Game.Presentation.UI
         {
             _mainMenu.gameObject.SetActive(false);
             _friendsMenu.gameObject.SetActive(false);
-            _notificationsMenu.gameObject.SetActive(false);
             _difficultyMenu.gameObject.SetActive(false);
         }
 
@@ -63,12 +61,10 @@ namespace Game.Presentation.UI
         {
             _mainMenu.gameObject.SetActive(true);
             _friendsMenu.gameObject.SetActive(true);
-            _notificationsMenu.gameObject.SetActive(true);
             _difficultyMenu.gameObject.SetActive(true);
 
             _mainMenu.RegisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.RegisterUIReloadCallback(RegisterFriendsMenu);
-            _notificationsMenu.RegisterUIReloadCallback(RegisterNotificationsMenu);
             _difficultyMenu.RegisterUIReloadCallback(RegisterDifficultyMenu);
         }
 
@@ -76,7 +72,6 @@ namespace Game.Presentation.UI
         {
             _mainMenu.UnregisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.UnregisterUIReloadCallback(RegisterFriendsMenu);
-            _notificationsMenu.UnregisterUIReloadCallback(RegisterNotificationsMenu);
             _difficultyMenu.UnregisterUIReloadCallback(RegisterDifficultyMenu);
         }
 
@@ -86,7 +81,6 @@ namespace Game.Presentation.UI
             VerticalShiftMenu menu = new(root, false);
             _stateMachine.Register(UIState.MainMenu, menu);
             root.Q<Button>("Bot").clicked += () => _stateMachine.GoTo(UIState.DifficultyMenu);
-            root.Q<Button>("Notifications").clicked += () => _stateMachine.GoTo(UIState.NotificationsMenu);
             root.Q<Button>("Friends").clicked += () => _stateMachine.GoTo(UIState.FriendsMenu);
         }
 
@@ -101,6 +95,13 @@ namespace Game.Presentation.UI
             friendsScrollView.Clear();
             _friends = new RequestView(friendsScrollView, CreateFriend);
             root.Q<Button>("SendFriendRequestButton").clicked += SendFriendRequest;
+
+            ScrollView friendRequestsScrollView = root.Q<ScrollView>("FriendRequestsScrollView");
+            ScrollView gameRequestsScrollView = root.Q<ScrollView>("GameRequestsScrollView");
+            friendRequestsScrollView.Clear();
+            gameRequestsScrollView.Clear();
+            _friendRequests = new RequestView(friendRequestsScrollView, CreateFriendRequest);
+            _gameRequests = new RequestView(gameRequestsScrollView, CreateGameRequest);
 
             VisualElement CreateFriend(User user)
             {
@@ -122,21 +123,6 @@ namespace Game.Presentation.UI
                 input.value = string.Empty;
                 FriendRequestSent?.Invoke(friendName);
             }
-        }
-
-        private void RegisterNotificationsMenu(PanelRenderer panelRenderer, VisualElement root, int version)
-        {
-            root.style.display = DisplayStyle.None;
-            VerticalShiftMenu menu = new(root, true);
-            _stateMachine.Register(UIState.NotificationsMenu, menu);
-            root.Q<Button>("Back").clicked += () => _stateMachine.GoTo(UIState.MainMenu);
-            
-            ScrollView gameRequestsScrollView = root.Q<ScrollView>("GameRequestsScrollView");
-            ScrollView friendRequestsScrollView = root.Q<ScrollView>("FriendRequestsScrollView");
-            gameRequestsScrollView.Clear();
-            friendRequestsScrollView.Clear();
-            _gameRequests = new RequestView(gameRequestsScrollView, CreateGameRequest);
-            _friendRequests = new RequestView(friendRequestsScrollView, CreateFriendRequest);
 
             VisualElement CreateFriendRequest(User user)
             {

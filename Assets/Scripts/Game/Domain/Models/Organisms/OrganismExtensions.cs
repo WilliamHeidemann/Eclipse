@@ -11,8 +11,8 @@ public static class OrganismExtensions
     {
         return card switch
         {
-            { Rank: Rank.Jack, Symbol: Symbol.Moon } => "Remove",
-            { Rank: Rank.Jack, Symbol: Symbol.Sun } => "Wild",
+            { Rank: Rank.Jack, Symbol: Symbol.Moon } => "R\nE\nM\nO\nV\nE",
+            { Rank: Rank.Jack, Symbol: Symbol.Sun } => "W\nI\nL\nD",
             _ => card.Rank.AsSingleDigit()
         };
     }

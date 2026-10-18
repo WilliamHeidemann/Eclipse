@@ -35,6 +35,19 @@
     aspect-ratio: 0.67;
 }
 
+.card-rank {
+    position: absolute;
+    align-self: flex-start;
+    white-space: nowrap;
+    font-size: 45px;
+}
+
+.card-rank--effect {
+    font-size: 15px;
+    white-space: normal;
+    -unity-text-align: middle-center;
+}
+
 .in-hand {
     margin-left: -122px;
 }
@@ -61,4 +74,3 @@
     justify-content: center;
     flex-direction: row;
 }
-

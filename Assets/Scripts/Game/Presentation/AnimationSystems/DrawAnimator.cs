@@ -47,7 +47,9 @@ namespace Game.Presentation.AnimationSystems
                     Sprite sprite = _cardSprites.GetHandSprite(card);
                     VisualElement root = cardGameObject.rootVisualElement;
                     root.Q<VisualElement>("Card").style.backgroundImage = new StyleBackground(sprite);
-                    root.Q<Label>().text = card.GetText();
+                    Label label = root.Q<Label>();
+                    label.text = card.GetText();
+                    label.EnableInClassList("card-rank--effect", card.IsWild() || card.IsRemover());
                     LMotion.Create(halfWayRotation, _showDisplayTransform.rotation, _durationToDisplay / 2)
                         .WithEase(Ease.OutCubic)
                         .BindToRotation(cardTransform);

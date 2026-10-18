@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/styles.uss?fileID=7433441132597879392&amp;guid=cb1d2706049614e018463c0d001025a6&amp;type=3#styles"/>
     <ui:VisualElement name="Card" class="card" style="background-image: url(&quot;project://database/Assets/Sprites/Eclipse%20Card%20Game/[1]%20Cards%20PNGs/back%20design%20no%20circles.png?fileID=2800000&amp;guid=e8c651aa89855e1419d27c6d0d27d475&amp;type=3#back design no circles&quot;); aspect-ratio: 0.67; align-self: center;">
-        <ui:Label style="-unity-text-align: middle-left; -unity-font-definition: url(&quot;project://database/Assets/Font/nauert/nauert.regular.ttf?fileID=12800000&amp;guid=500304f4e76566043bdf385300d73858&amp;type=3#nauert.regular&quot;); font-size: 45px; top: 3%; color: rgb(255, 255, 255); left: 10%;"/>
+        <ui:Label class="card-rank card-rank--effect" style="-unity-text-align: middle-center; -unity-font-definition: url(&quot;project://database/Assets/Font/nauert/nauert.regular.ttf?fileID=12800000&amp;guid=500304f4e76566043bdf385300d73858&amp;type=3#nauert.regular&quot;); top: 3%; color: rgb(255, 255, 255); left: 10%;"/>
     </ui:VisualElement>
 </ui:UXML>

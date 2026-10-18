@@ -22,7 +22,9 @@ namespace Game.Presentation.AnimationSystems
 
             root.Q<VisualElement>("Card").style.backgroundImage = new StyleBackground(_cardSprites.GetHandSprite(card));
 
-            root.Q<Label>().text = card.GetText();
+            Label label = root.Q<Label>();
+            label.text = card.GetText();
+            label.EnableInClassList("card-rank--effect", card.IsWild() || card.IsRemover());
 
             await _discardPile.Discard(document.transform);
         }

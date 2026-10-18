@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
 using Game.Domain.Models.State;
 using Organism = Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Organisms;
-using Dto = Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.Dto;
 using State = Unity.Services.CloudCode.GeneratedBindings.Game.Domain.Models.State;
 
 namespace Game.Cloud
@@ -105,6 +103,7 @@ namespace Game.Cloud
         {
             return new Organism.Move
             {
+                Card = move.Card.ToDto(),
                 Position = move.Position.ToDto(),
                 Team = move.Team.ToDto()
             };

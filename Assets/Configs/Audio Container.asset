@@ -21,11 +21,11 @@ MonoBehaviour:
     Path: event:/Card_Interactions/SequenceSFX DrawCard
   _onClick:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1025742721
+      Data2: 1328004042
+      Data3: -1369353321
+      Data4: 1285237764
+    Path: event:/Game_MechanicSFX/YesOpp
   _pop:
     Guid:
       Data1: 895195994

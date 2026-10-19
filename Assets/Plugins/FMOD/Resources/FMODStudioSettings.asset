@@ -636,6 +636,8 @@ MonoBehaviour:
   - Master
   Banks:
   - Master.assets
+  - UI
+  - UI.assets
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

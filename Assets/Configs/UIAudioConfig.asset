@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cda63207dbf27d4787b7461f65840be, type: 3}
+  m_Name: UIAudioConfig
+  m_EditorClassIdentifier: Eclipse.Presentation::Game.Presentation.UI.Audio.UIAudioConfig
+  <MenuTransition>k__BackingField:
+    Guid:
+      Data1: -1476583794
+      Data2: 1240004877
+      Data3: -1297819008
+      Data4: 1967359779
+    Path: event:/UI/Transition
+  <MenuTransitionBack>k__BackingField:
+    Guid:
+      Data1: 1017168787
+      Data2: 1309957398
+      Data3: 127906477
+      Data4: 1110513456
+    Path: event:/UI/TransitionBack
+  <ButtonClick>k__BackingField:
+    Guid:
+      Data1: -1298578820
+      Data2: 1272255783
+      Data3: -600795721
+      Data4: -1766488787
+    Path: event:/UI/ClickForwardSFX
+  <BackClick>k__BackingField:
+    Guid:
+      Data1: -1821642327
+      Data2: 1153818053
+      Data3: -1615186252
+      Data4: -202336458
+    Path: event:/UI/ClickBackwardSFX
+  <RequestSent>k__BackingField:
+    Guid:
+      Data1: 1461068825
+      Data2: 1120973487
+      Data3: -2035435587
+      Data4: 1700087187
+    Path: event:/UI/SequenceSFX PopSound1
+  <RequestAccepted>k__BackingField:
+    Guid:
+      Data1: 1461068825
+      Data2: 1120973487
+      Data3: -2035435587
+      Data4: 1700087187
+    Path: event:/UI/SequenceSFX PopSound1

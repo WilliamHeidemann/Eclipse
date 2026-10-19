@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: dbfce1cf83263e84393d9b97198e49ef
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _audioContainer: {fileID: 11400000, guid: ad6817c5b8b908f4fbc2e5c0fc93e1c0, type: 2}
+  - _uiAudioConfig: {fileID: 11400000, guid: 0b38f7a0fd2b29c4997ed8ce39f1be1d, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

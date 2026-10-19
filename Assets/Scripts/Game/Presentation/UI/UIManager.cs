@@ -1,5 +1,7 @@
 using System;
+using FMODUnity;
 using Game.Domain.Models.Dto;
+using Game.Presentation.UI.Audio;
 using Game.Presentation.UI.Menus;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,6 +14,9 @@ namespace Game.Presentation.UI
 {
     public class UIManager : MonoBehaviour
     {
+        [Header("Audio")]
+        [SerializeField] private UIAudioConfig _audioConfig;
+
         [Header("Menus")] 
         [SerializeField] private PanelRenderer _mainMenu;
         [SerializeField] private PanelRenderer _friendsMenu;
@@ -49,6 +54,17 @@ namespace Game.Presentation.UI
             _difficultyMenu.gameObject.SetActive(false);
         }
 
+        private void PlaySound(UISound sound)
+        {
+            if (_audioConfig == null) return;
+
+            EventReference evt = _audioConfig.Get(sound);
+            if (!evt.IsNull)
+            {
+                RuntimeManager.PlayOneShot(evt);
+            }
+        }
+
 #if UNITY_EDITOR
         [Header("Debugging")] [SerializeField] private UIState _menuToGoTo;
         [Button]
@@ -57,6 +73,7 @@ namespace Game.Presentation.UI
             _stateMachine.GoTo(_menuToGoTo);
         }
 #endif
+
         private void Awake()
         {
             _mainMenu.gameObject.SetActive(true);
@@ -80,8 +97,20 @@ namespace Game.Presentation.UI
             root.style.display = DisplayStyle.Flex;
             VerticalShiftMenu menu = new(root, false);
             _stateMachine.Register(UIState.MainMenu, menu);
-            root.Q<Button>("Bot").clicked += () => _stateMachine.GoTo(UIState.DifficultyMenu);
-            root.Q<Button>("Friends").clicked += () => _stateMachine.GoTo(UIState.FriendsMenu);
+
+            root.Q<Button>("Bot").clicked += () =>
+            {   
+                PlaySound(UISound.ButtonClick);
+                PlaySound(UISound.MenuTransition);
+                _stateMachine.GoTo(UIState.DifficultyMenu);
+            };
+
+            root.Q<Button>("Friends").clicked += () =>
+            {   
+                PlaySound(UISound.ButtonClick);
+                PlaySound(UISound.MenuTransition);
+                _stateMachine.GoTo(UIState.FriendsMenu);
+            };
         }
 
         private void RegisterFriendsMenu(PanelRenderer panelRenderer, VisualElement root, int version)
@@ -89,7 +118,13 @@ namespace Game.Presentation.UI
             root.style.display = DisplayStyle.None;
             VerticalShiftMenu menu = new(root, true);
             _stateMachine.Register(UIState.FriendsMenu, menu);
-            root.Q<Button>("Back").clicked += () => _stateMachine.GoTo(UIState.MainMenu);
+
+            root.Q<Button>("Back").clicked += () =>
+            {   
+                PlaySound(UISound.MenuTransitionBack);
+                PlaySound(UISound.BackClick);
+                _stateMachine.GoTo(UIState.MainMenu);
+            };
 
             ScrollView friendsScrollView = root.Q<ScrollView>("FriendsScrollView");
             friendsScrollView.Clear();
@@ -111,7 +146,11 @@ namespace Game.Presentation.UI
                 if (friend.Q<Label>("FriendName") == null) throw new NullReferenceException("Friend name label is null");
                 
                 friend.Q<Label>("FriendName").text = user.Name;
-                friend.Q<Button>("Play").clicked += () => GameRequestSent?.Invoke(user.Id);
+                friend.Q<Button>("Play").clicked += () =>
+                {
+                    PlaySound(UISound.RequestSent);
+                    GameRequestSent?.Invoke(user.Id);
+                };
                 return friend;
             }
 
@@ -120,6 +159,8 @@ namespace Game.Presentation.UI
                 TextField input = root.Q<TextField>("FriendRequestInput");
                 string friendName = input.value.Trim();
                 if (string.IsNullOrEmpty(friendName)) return;
+
+                PlaySound(UISound.RequestSent);
                 input.value = string.Empty;
                 FriendRequestSent?.Invoke(friendName);
             }
@@ -128,9 +169,14 @@ namespace Game.Presentation.UI
             {
                 VisualElement request = _friendRequest.Instantiate();
                 request.Q<Label>("Name").text = user.Name;
-                request.Q<Button>("Accept").clicked += () => FriendRequestAccepted?.Invoke(user);
+                request.Q<Button>("Accept").clicked += () =>
+                {
+                    PlaySound(UISound.RequestAccepted);
+                    FriendRequestAccepted?.Invoke(user);
+                };
                 request.Q<Button>("Decline").clicked += () =>
                 {
+                    PlaySound(UISound.ButtonClick);
                     RemoveFriendRequest(user);
                 };
                 return request;
@@ -142,11 +188,13 @@ namespace Game.Presentation.UI
                 request.Q<Label>("Name").text = user.Name;
                 request.Q<Button>("Accept").clicked += () =>
                 {
+                    PlaySound(UISound.RequestAccepted);
                     RemoveGameRequest(user);
                     GameRequestAccepted?.Invoke(user);
                 };
                 request.Q<Button>("Decline").clicked += () =>
                 {
+                    PlaySound(UISound.ButtonClick);
                     RemoveGameRequest(user);
                 };
                 return request;
@@ -158,7 +206,14 @@ namespace Game.Presentation.UI
             root.style.display = DisplayStyle.None;
             VerticalShiftMenu menu = new(root, true);
             _stateMachine.Register(UIState.DifficultyMenu, menu);
-            root.Q<Button>("Back").clicked += () => _stateMachine.GoTo(UIState.MainMenu);
+
+            root.Q<Button>("Back").clicked += () =>
+            {
+                PlaySound(UISound.BackClick);
+                PlaySound(UISound.MenuTransitionBack);
+                _stateMachine.GoTo(UIState.MainMenu);
+            };
+
             root.Q<Button>("Easy").clicked += () => StartGame(BotDifficulty.Easy);
             root.Q<Button>("Hard").clicked += () => StartGame(BotDifficulty.Hard);
             root.Q<Button>("Extreme").clicked += () => StartGame(BotDifficulty.Extreme);
@@ -166,6 +221,7 @@ namespace Game.Presentation.UI
 
             void StartGame(BotDifficulty difficulty)
             {
+                PlaySound(UISound.ButtonClick);
                 root.style.display = DisplayStyle.None;
                 _gameStarter.StartLocalGame(difficulty);
             }

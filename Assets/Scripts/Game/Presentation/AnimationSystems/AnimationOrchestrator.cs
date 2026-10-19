@@ -16,19 +16,35 @@ namespace Game.Presentation.AnimationSystems
         [SerializeField] private CardAligner _cardAligner;
         [SerializeField] private DiscardPile _discardPile;
         [SerializeField] private OpponentHandAnimator _opponentHandAnimator;
-        [SerializeField] private AudioPlayer _audioPlayer;
+        [SerializeField] private FmodAudioService _audioService;
 
         private readonly AnimationQueue _animationQueue = new();
+        private PlayCoordinator _playCoordinator;
 
         public void BindAnimations(PlayCoordinator playCoordinator)
         {
-            playCoordinator.OnDrawCard += PlayDrawAnimation;
-            playCoordinator.OnOpponentPlayed += AnimateOpponentPlay;
-            playCoordinator.OnValidMoveRequest += PlayDiscardAndPinAnimation;
-            playCoordinator.OnInvalidMoveRequest += PlayInvalidMove;
-            playCoordinator.OnSequenceScored += PlaySequenceCelebration;
-            playCoordinator.OnTurnPassedTo += ShowWhoseTurnItIs;
-            playCoordinator.OnTeamWon += PlayWinAnimation;
+            _playCoordinator = playCoordinator;
+
+            _playCoordinator.OnDrawCard += PlayDrawAnimation;
+            _playCoordinator.OnOpponentPlayed += AnimateOpponentPlay;
+            _playCoordinator.OnValidMoveRequest += PlayDiscardAndPinAnimation;
+            _playCoordinator.OnInvalidMoveRequest += PlayInvalidMove;
+            _playCoordinator.OnSequenceScored += PlaySequenceCelebration;
+            _playCoordinator.OnTurnPassedTo += ShowWhoseTurnItIs;
+            _playCoordinator.OnTeamWon += PlayWinAnimation;
+        }
+
+        private void OnDestroy()
+        {
+            if (_playCoordinator == null) return;
+
+            _playCoordinator.OnDrawCard -= PlayDrawAnimation;
+            _playCoordinator.OnOpponentPlayed -= AnimateOpponentPlay;
+            _playCoordinator.OnValidMoveRequest -= PlayDiscardAndPinAnimation;
+            _playCoordinator.OnInvalidMoveRequest -= PlayInvalidMove;
+            _playCoordinator.OnSequenceScored -= PlaySequenceCelebration;
+            _playCoordinator.OnTurnPassedTo -= ShowWhoseTurnItIs;
+            _playCoordinator.OnTeamWon -= PlayWinAnimation;
         }
 
         private void PlayWinAnimation(Team team)
@@ -44,7 +60,7 @@ namespace Game.Presentation.AnimationSystems
         public void PlayInvalidMove(Position position)
         {
             _boardPresenter.Shake(position);
-                _audioPlayer.Play(Sound.No); // No is for unsuccessful placement
+            _audioService.Play(Sound.No); // No is for unsuccessful placement
         }
 
         public void PlaySequenceCelebration(Sequence sequence)
@@ -64,11 +80,14 @@ namespace Game.Presentation.AnimationSystems
             async Awaitable Draw(Card c)
             {
                 UIDocument cardUIDocument = _drawAnimator.InstantiateCardFaceDown();
-                _audioPlayer.Play(Sound.DrawCard, .15f);
+                
+                // Play delayed sound with cancellation token safety
+                _ = _audioService.PlayAsync(Sound.DrawCard, 0.15f, destroyCancellationToken);
+                
                 await _drawAnimator.AnimateDrawing(c, cardUIDocument);
-                _audioPlayer.Play(Sound.ToHand);
+                _audioService.Play(Sound.ToHand);
                 _cardAligner.AddCard(c, cardUIDocument.transform);
-                float buffer = Random.Range(0.18f, .32f);
+                float buffer = Random.Range(0.18f, 0.32f);
                 await Awaitable.WaitForSecondsAsync(buffer);
             }
         }
@@ -76,7 +95,7 @@ namespace Game.Presentation.AnimationSystems
         public void PlayDiscardAndPinAnimation(Move move)
         {
             _boardPresenter.Pop(move.Position);
-            _audioPlayer.Play(Sound.Pop);
+            _audioService.Play(Sound.Pop);
 
             _animationQueue.Enqueue(Play);
             return;
@@ -85,7 +104,7 @@ namespace Game.Presentation.AnimationSystems
             {
                 if (_cardAligner.RemoveCard(move.Card, out Transform cardTransform))
                 {
-                    _audioPlayer.Play(Sound.PutDown);
+                    _audioService.Play(Sound.PutDown);
                     await _discardPile.Discard(cardTransform);
                 }
 
@@ -96,7 +115,7 @@ namespace Game.Presentation.AnimationSystems
                 else
                 {
                     await _boardPresenter.Pin(move.Position, move.Team);
-                    _audioPlayer.Play(Sound.Yes); // Yes is for successful placement
+                    _audioService.Play(Sound.Yes); // Yes is for successful placement
                 }
             }
         }
@@ -108,7 +127,7 @@ namespace Game.Presentation.AnimationSystems
             
             async Awaitable Play()
             {
-                _audioPlayer.Play(Sound.PutDown);
+                
 
                 Card card = move.Card;
 
@@ -120,6 +139,7 @@ namespace Game.Presentation.AnimationSystems
                 else
                 {
                     await _boardPresenter.Pin(move.Position, move.Team);
+                    _audioService.Play(Sound.Click);
                 }
             }
         }

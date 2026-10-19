@@ -58,17 +58,15 @@ namespace Game.Domain.Models
             }
 
             bool isOpen = board.Fits(move.Position);
-
-            Card requiredCard = isOpen ? BoardLayout.Get(move.Position) : Card.JackOfMoon;
-
-            bool hasCardInHand = hand.FindCard(requiredCard, isOpen).IsSome(out _);
+            
+            bool hasCardInHand = hand.FindCard(move.Card, isOpen).IsSome(out _);
 
             if (!hasCardInHand)
             {
                 return false;
             }
 
-            if (requiredCard == Card.JackOfSun)
+            if (move.Card == Card.JackOfSun)
             {
                 board.TryAdd(move.Position, move.Team);
                 var deltaScore = SequencePatterns.FindSequences(board, move.Team, sequences).ToArray().Length;
@@ -78,7 +76,7 @@ namespace Game.Domain.Models
                     return false;
                 }
             }
-            else if (requiredCard == Card.JackOfMoon)
+            else if (move.Card == Card.JackOfMoon)
             {
                 bool playerOwnsPosition = board.OwnerIs(move.Position, move.Team);
 

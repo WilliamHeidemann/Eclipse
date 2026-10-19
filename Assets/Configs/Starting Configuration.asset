@@ -37,4 +37,25 @@ MonoBehaviour:
     _symbol: 0
   - _rank: 8
     _symbol: 0
-  _playedMoves: []
+  _playedMoves:
+  - _serializedPosition:
+      _row: 5
+      _column: 7
+    _serializedCard:
+      _rank: 1
+      _symbol: 0
+    _team: 0
+  - _serializedPosition:
+      _row: 5
+      _column: 6
+    _serializedCard:
+      _rank: 0
+      _symbol: 0
+    _team: 0
+  - _serializedPosition:
+      _row: 5
+      _column: 5
+    _serializedCard:
+      _rank: 0
+      _symbol: 0
+    _team: 0

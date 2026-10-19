@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Eclipse.Presentation::Game.Presentation.StartingConfiguration
   Mode: 1
   StartIn: 0
-  UseDevelopmentStartingState: 1
+  UseDevelopmentStartingState: 0
   _myCards:
   - _rank: 10
     _symbol: 0

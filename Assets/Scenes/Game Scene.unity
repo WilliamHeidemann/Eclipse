@@ -1699,7 +1699,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Eclipse.Presentation::Game.Presentation.UI.UIManager
   _mainMenu: {fileID: 1106587930}
   _friendsMenu: {fileID: 1230466893}
-  _notificationsMenu: {fileID: 1574161253}
   _difficultyMenu: {fileID: 339656106}
   _gameRequest: {fileID: 9197481963319205126, guid: 81306f91731dcc441ae6fb1a86b5bc77, type: 3}
   _friendRequest: {fileID: 9197481963319205126, guid: 876119e7e71c9b24eb579bc764e0604b, type: 3}

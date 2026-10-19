@@ -33,13 +33,16 @@ namespace Game.Presentation.AnimationSystems
                 _drawPileDocument.transform.position,
                 _drawPileDocument.transform.rotation);
 
+            // Set position
             LMotion.Create(cardTransform.position, _showDisplayTransform.position, _durationToDisplay)
                 .WithEase(Ease.InOutCubic)
                 .BindToPosition(cardTransform);
 
+            // Set rotation
             Quaternion halfWayRotation = Quaternion.Lerp(cardTransform.rotation, _showDisplayTransform.rotation, .5f) *
                                          Quaternion.Euler(0, -180, 0);
 
+            // Set rotation
             LMotion.Create(cardTransform.rotation, halfWayRotation, _durationToDisplay / 2)
                 .WithEase(Ease.InCubic)
                 .WithOnComplete(() =>
@@ -56,6 +59,7 @@ namespace Game.Presentation.AnimationSystems
                 })
                 .BindToRotation(cardTransform);
 
+            // Set scale
             LMotion.Create(cardTransform.localScale, _showDisplayTransform.localScale, _durationToDisplay)
                 .WithEase(Ease.InOutCubic)
                 .BindToLocalScale(cardTransform);

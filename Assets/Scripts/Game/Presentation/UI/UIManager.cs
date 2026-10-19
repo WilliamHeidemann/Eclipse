@@ -1,5 +1,6 @@
 using System;
 using Game.Domain.Models.Dto;
+using Game.Presentation.AnimationSystems;
 using Game.Presentation.UI.Menus;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,6 +17,7 @@ namespace Game.Presentation.UI
         [SerializeField] private PanelRenderer _mainMenu;
         [SerializeField] private PanelRenderer _friendsMenu;
         [SerializeField] private PanelRenderer _difficultyMenu;
+        [SerializeField] private PanelRenderer _gameUI;
 
         [Header("UI Templates")] 
         [SerializeField] private VisualTreeAsset _gameRequest;
@@ -24,6 +26,7 @@ namespace Game.Presentation.UI
 
         [Header("Game Logic")] 
         [SerializeField] private GameStarter _gameStarter;
+        [SerializeField] private AnimationOrchestrator _animationOrchestrator;
 
         private readonly StateMachine _stateMachine = new();
         private RequestView _friends;
@@ -64,10 +67,12 @@ namespace Game.Presentation.UI
             _mainMenu.gameObject.SetActive(true);
             _friendsMenu.gameObject.SetActive(true);
             _difficultyMenu.gameObject.SetActive(true);
+            _gameUI.gameObject.SetActive(true);
 
             _mainMenu.RegisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.RegisterUIReloadCallback(RegisterFriendsMenu);
             _difficultyMenu.RegisterUIReloadCallback(RegisterDifficultyMenu);
+            _gameUI.RegisterUIReloadCallback(RegisterGameUI);
         }
 
         private void OnDestroy()
@@ -75,6 +80,7 @@ namespace Game.Presentation.UI
             _mainMenu.UnregisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.UnregisterUIReloadCallback(RegisterFriendsMenu);
             _difficultyMenu.UnregisterUIReloadCallback(RegisterDifficultyMenu);
+            _gameUI.UnregisterUIReloadCallback(RegisterGameUI);
         }
 
         private void RegisterMainMenu(PanelRenderer panelRenderer, VisualElement root, int version)
@@ -169,8 +175,23 @@ namespace Game.Presentation.UI
 
             void StartGame(BotDifficulty difficulty)
             {
-                root.style.display = DisplayStyle.None;
+                _stateMachine.GoTo(UIState.GameUI);
                 _gameStarter.StartLocalGame(difficulty);
+            }
+        }
+        
+        private void RegisterGameUI(PanelRenderer panelRenderer, VisualElement root, int version)
+        {
+            root.style.display = DisplayStyle.None;
+            SimpleDisplayMenu menu = new(root);
+            _stateMachine.Register(UIState.GameUI, menu);
+
+            root.Q<Button>("Back").clicked += HideGameUI;
+            void HideGameUI()
+            {
+                _stateMachine.GoTo(UIState.MainMenu);
+                _gameStarter.ShowGameElements(false);
+                _animationOrchestrator.DestroyCardsInHand();
             }
         }
     }

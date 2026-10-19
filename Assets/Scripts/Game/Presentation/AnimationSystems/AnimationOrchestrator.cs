@@ -17,6 +17,7 @@ namespace Game.Presentation.AnimationSystems
         [SerializeField] private DiscardPile _discardPile;
         [SerializeField] private OpponentHandAnimator _opponentHandAnimator;
         [SerializeField] private AudioPlayer _audioPlayer;
+        [SerializeField] private Transform _cardsInHand;
 
         private readonly AnimationQueue _animationQueue = new();
 
@@ -29,6 +30,14 @@ namespace Game.Presentation.AnimationSystems
             playCoordinator.OnSequenceScored += PlaySequenceCelebration;
             playCoordinator.OnTurnPassedTo += ShowWhoseTurnItIs;
             playCoordinator.OnTeamWon += PlayWinAnimation;
+        }
+
+        public void DestroyCardsInHand()
+        {
+            foreach (Transform card in _cardsInHand)
+            {
+                Destroy(card.gameObject);
+            }
         }
 
         private void PlayWinAnimation(Team team)
@@ -44,7 +53,7 @@ namespace Game.Presentation.AnimationSystems
         public void PlayInvalidMove(Position position)
         {
             _boardPresenter.Shake(position);
-                _audioPlayer.Play(Sound.No); // No is for unsuccessful placement
+            _audioPlayer.Play(Sound.No); // No is for unsuccessful placement
         }
 
         public void PlaySequenceCelebration(Sequence sequence)
@@ -64,11 +73,13 @@ namespace Game.Presentation.AnimationSystems
             async Awaitable Draw(Card c)
             {
                 UIDocument cardUIDocument = _drawAnimator.InstantiateCardFaceDown();
+                cardUIDocument.transform.parent = _cardsInHand;
                 _audioPlayer.Play(Sound.DrawCard, .15f);
                 await _drawAnimator.AnimateDrawing(c, cardUIDocument);
                 _audioPlayer.Play(Sound.ToHand);
                 _cardAligner.AddCard(c, cardUIDocument.transform);
-                float buffer = Random.Range(0.18f, .32f);
+                // float buffer = Random.Range(0.18f, .32f);
+                float buffer = Random.Range(0.09f, .16f);
                 await Awaitable.WaitForSecondsAsync(buffer);
             }
         }
@@ -105,7 +116,7 @@ namespace Game.Presentation.AnimationSystems
         {
             _animationQueue.Enqueue(Play);
             return;
-            
+
             async Awaitable Play()
             {
                 _audioPlayer.Play(Sound.PutDown);
@@ -127,7 +138,7 @@ namespace Game.Presentation.AnimationSystems
         public void QueueDelay(float delayInSeconds)
         {
             _animationQueue.Enqueue(Wait, delayInSeconds);
-            
+
             async Awaitable Wait(float delay)
             {
                 await Awaitable.WaitForSecondsAsync(delay);

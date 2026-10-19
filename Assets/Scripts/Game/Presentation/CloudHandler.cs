@@ -36,6 +36,8 @@ namespace Game.Presentation
             FriendsService.Instance.IncomingFriendRequests.Select(r => ToUser(r.Member))
                 .ToList()
                 .ForEach(uiManager.ShowFriendRequest);
+            string playerName = await AuthenticationService.Instance.GetPlayerNameAsync();
+            uiManager.SetPlayerName(playerName);
         }
 
         private void BindUI()

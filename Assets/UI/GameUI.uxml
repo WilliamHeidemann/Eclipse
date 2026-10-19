@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/styles.uss?fileID=7433441132597879392&amp;guid=cb1d2706049614e018463c0d001025a6&amp;type=3#styles"/>
+    <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=34018f246eda05847ac2c1594faa96b4&amp;type=3#MenuStyles"/>
+    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; margin-top: 64px; margin-right: 64px; margin-bottom: 64px; margin-left: 64px;">
+        <ui:Button text="" name="Back" class="menu-back-button"/>
+        <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;"/>
+    </ui:VisualElement>
+</ui:UXML>

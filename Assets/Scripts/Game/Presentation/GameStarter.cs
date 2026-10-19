@@ -36,6 +36,12 @@ namespace Game.Presentation
             _boardPresenter.OnPositionClicked += HandlePositionClicked;
         }
 
+        // TODO move to ui manager
+        public void ShowGameElements(bool show)
+        {
+            _gameElements.SetActive(show);
+        }
+
         public void StartLocalGame(BotDifficulty difficulty)
         {
             _gameElements.SetActive(true);
@@ -160,12 +166,23 @@ namespace Game.Presentation
 
         private async Task OnDestroy()
         {
+            await TearDownGame();
+        }
+
+        private async Awaitable TearDownGame()
+        {
             if (_matchId.IsSome(out string matchId))
             {
                 GameLogicServiceBindings gameLogicServiceBindings = new();
                 bool success = await gameLogicServiceBindings.DeleteMatch(matchId);
                 Debug.Log(success);
             }
+        }
+
+        public void EndGame()
+        {
+            _animationOrchestrator.DestroyCardsInHand();
+            TearDownGame().Forget();
         }
     }
 }

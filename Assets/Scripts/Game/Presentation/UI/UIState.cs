@@ -4,5 +4,6 @@ public enum UIState
 {
     MainMenu,
     FriendsMenu,
-    DifficultyMenu
+    DifficultyMenu,
+    GameUI
 }

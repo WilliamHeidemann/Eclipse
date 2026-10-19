@@ -2,6 +2,7 @@ using System;
 using FMODUnity;
 using Game.Domain.Models.Dto;
 using Game.Presentation.UI.Audio;
+using Game.Presentation.AnimationSystems;
 using Game.Presentation.UI.Menus;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -21,6 +22,7 @@ namespace Game.Presentation.UI
         [SerializeField] private PanelRenderer _mainMenu;
         [SerializeField] private PanelRenderer _friendsMenu;
         [SerializeField] private PanelRenderer _difficultyMenu;
+        [SerializeField] private PanelRenderer _gameUI;
 
         [Header("UI Templates")] 
         [SerializeField] private VisualTreeAsset _gameRequest;
@@ -29,17 +31,20 @@ namespace Game.Presentation.UI
 
         [Header("Game Logic")] 
         [SerializeField] private GameStarter _gameStarter;
+        [SerializeField] private AnimationOrchestrator _animationOrchestrator;
 
         private readonly StateMachine _stateMachine = new();
         private RequestView _friends;
         private RequestView _friendRequests;
         private RequestView _gameRequests;
+        private Label _playerName;
 
         public event Action<string> FriendRequestSent;
         public event Action<User> FriendRequestAccepted;
         public event Action<string> GameRequestSent;
         public event Action<User> GameRequestAccepted;
 
+        public void SetPlayerName(string playerName) => _playerName.text = playerName;
         public void ShowFriend(User user) => _friends.Add(user);
         public void RemoveFriend(User user) => _friends.Remove(user.Id);
         public void ShowFriendRequest(User user) => _friendRequests.Add(user);
@@ -79,10 +84,12 @@ namespace Game.Presentation.UI
             _mainMenu.gameObject.SetActive(true);
             _friendsMenu.gameObject.SetActive(true);
             _difficultyMenu.gameObject.SetActive(true);
+            _gameUI.gameObject.SetActive(true);
 
             _mainMenu.RegisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.RegisterUIReloadCallback(RegisterFriendsMenu);
             _difficultyMenu.RegisterUIReloadCallback(RegisterDifficultyMenu);
+            _gameUI.RegisterUIReloadCallback(RegisterGameUI);
         }
 
         private void OnDestroy()
@@ -90,6 +97,7 @@ namespace Game.Presentation.UI
             _mainMenu.UnregisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.UnregisterUIReloadCallback(RegisterFriendsMenu);
             _difficultyMenu.UnregisterUIReloadCallback(RegisterDifficultyMenu);
+            _gameUI.UnregisterUIReloadCallback(RegisterGameUI);
         }
 
         private void RegisterMainMenu(PanelRenderer panelRenderer, VisualElement root, int version)
@@ -137,6 +145,7 @@ namespace Game.Presentation.UI
             gameRequestsScrollView.Clear();
             _friendRequests = new RequestView(friendRequestsScrollView, CreateFriendRequest);
             _gameRequests = new RequestView(gameRequestsScrollView, CreateGameRequest);
+            _playerName = root.Q<Label>("PlayerName");
 
             VisualElement CreateFriend(User user)
             {
@@ -223,7 +232,23 @@ namespace Game.Presentation.UI
             {
                 PlaySound(UISound.ButtonClick);
                 root.style.display = DisplayStyle.None;
+                _stateMachine.GoTo(UIState.GameUI);
                 _gameStarter.StartLocalGame(difficulty);
+            }
+        }
+        
+        private void RegisterGameUI(PanelRenderer panelRenderer, VisualElement root, int version)
+        {
+            root.style.display = DisplayStyle.None;
+            SimpleDisplayMenu menu = new(root);
+            _stateMachine.Register(UIState.GameUI, menu);
+
+            root.Q<Button>("Back").clicked += HideGameUI;
+            void HideGameUI()
+            {
+                _stateMachine.GoTo(UIState.MainMenu);
+                _gameStarter.ShowGameElements(false);
+                _animationOrchestrator.DestroyCardsInHand();
             }
         }
     }

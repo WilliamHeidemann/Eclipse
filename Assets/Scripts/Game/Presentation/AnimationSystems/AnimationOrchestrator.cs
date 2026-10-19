@@ -17,6 +17,7 @@ namespace Game.Presentation.AnimationSystems
         [SerializeField] private DiscardPile _discardPile;
         [SerializeField] private OpponentHandAnimator _opponentHandAnimator;
         [SerializeField] private FmodAudioService _audioService;
+        [SerializeField] private Transform _cardsInHand;
 
         private readonly AnimationQueue _animationQueue = new();
         private PlayCoordinator _playCoordinator;
@@ -45,6 +46,14 @@ namespace Game.Presentation.AnimationSystems
             _playCoordinator.OnSequenceScored -= PlaySequenceCelebration;
             _playCoordinator.OnTurnPassedTo -= ShowWhoseTurnItIs;
             _playCoordinator.OnTeamWon -= PlayWinAnimation;
+        }
+
+        public void DestroyCardsInHand()
+        {
+            foreach (Transform card in _cardsInHand)
+            {
+                Destroy(card.gameObject);
+            }
         }
 
         private void PlayWinAnimation(Team team)
@@ -84,10 +93,12 @@ namespace Game.Presentation.AnimationSystems
                 // Play delayed sound with cancellation token safety
                 _ = _audioService.PlayAsync(Sound.DrawCard, 0.15f, destroyCancellationToken);
                 
+                cardUIDocument.transform.parent = _cardsInHand;
                 await _drawAnimator.AnimateDrawing(c, cardUIDocument);
                 _audioService.Play(Sound.ToHand);
                 _cardAligner.AddCard(c, cardUIDocument.transform);
-                float buffer = Random.Range(0.18f, 0.32f);
+                // float buffer = Random.Range(0.09f, .16f);
+                float buffer = Random.Range(0.09f, .16f);
                 await Awaitable.WaitForSecondsAsync(buffer);
             }
         }
@@ -124,7 +135,7 @@ namespace Game.Presentation.AnimationSystems
         {
             _animationQueue.Enqueue(Play);
             return;
-            
+
             async Awaitable Play()
             {
                 
@@ -147,7 +158,7 @@ namespace Game.Presentation.AnimationSystems
         public void QueueDelay(float delayInSeconds)
         {
             _animationQueue.Enqueue(Wait, delayInSeconds);
-            
+
             async Awaitable Wait(float delay)
             {
                 await Awaitable.WaitForSecondsAsync(delay);

@@ -17,7 +17,7 @@ git pull:root {
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0;
-    height: 48px;
+    height: 64px;
 }
 
 .friend-request-input > .unity-base-field__input {
@@ -30,12 +30,13 @@ git pull:root {
     padding-right: 2px;
     padding-bottom: 2px;
     padding-left: 2px;
+    font-size: 30px;
 }
 
 .friend-request-input .unity-base-text-field__input--placeholder {
     color: rgba(0, 0, 0, 0.42);
     -unity-font-style: italic;
-    font-size: 19px;
+    font-size: 30px;
     padding-left: 21px;
 }
 

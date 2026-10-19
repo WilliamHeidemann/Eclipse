@@ -7,8 +7,8 @@
     <Style src="project://database/Assets/UI/Friends%20Menu.uss?fileID=7433441132597879392&amp;guid=45225a7f09b64ef48a623f1dbbf3d3dd&amp;type=3#Friends Menu"/>
     <ui:VisualElement name="FriendsMenu" class="sub-menu" style="-unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;);">
         <ui:Button name="Back" class="menu-back-button"/>
-        <ui:Label text="Welcome" class="menu-name-label" style="font-size: 22px; color: rgb(214, 214, 214); -unity-font-style: italic;"/>
-        <ui:Label text="Player#1234" style="font-size: 60px; -unity-text-align: upper-center; -unity-font-style: italic; color: rgb(255, 255, 255); margin-bottom: 135px;"/>
+        <ui:Label text="Welcome" name="Welcome" class="menu-name-label" style="font-size: 22px; color: rgb(214, 214, 214); -unity-font-style: italic;"/>
+        <ui:Label text="&#10;" name="PlayerName" style="font-size: 60px; -unity-text-align: upper-center; -unity-font-style: italic; color: rgb(255, 255, 255); margin-bottom: 135px;"/>
         <ui:ScrollView name="FriendsContentScrollView" horizontal-scroller-visibility="Hidden" style="flex-grow: 1;">
             <ui:VisualElement name="SendRequest" class="request-section" style="flex-grow: 0;">
                 <ui:Label text="Send Friend Request" name="SendRequestLabel" class="menu-section-heading"/>

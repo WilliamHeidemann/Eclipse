@@ -29,12 +29,14 @@ namespace Game.Presentation.UI
         private RequestView _friends;
         private RequestView _friendRequests;
         private RequestView _gameRequests;
+        private Label _playerName;
 
         public event Action<string> FriendRequestSent;
         public event Action<User> FriendRequestAccepted;
         public event Action<string> GameRequestSent;
         public event Action<User> GameRequestAccepted;
 
+        public void SetPlayerName(string playerName) => _playerName.text = playerName;
         public void ShowFriend(User user) => _friends.Add(user);
         public void RemoveFriend(User user) => _friends.Remove(user.Id);
         public void ShowFriendRequest(User user) => _friendRequests.Add(user);
@@ -102,6 +104,7 @@ namespace Game.Presentation.UI
             gameRequestsScrollView.Clear();
             _friendRequests = new RequestView(friendRequestsScrollView, CreateFriendRequest);
             _gameRequests = new RequestView(gameRequestsScrollView, CreateGameRequest);
+            _playerName = root.Q<Label>("PlayerName");
 
             VisualElement CreateFriend(User user)
             {

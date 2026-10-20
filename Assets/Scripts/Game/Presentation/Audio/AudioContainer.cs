@@ -4,6 +4,17 @@ using UnityEngine;
 
 namespace Game.Presentation.Audio
 {
+    public enum Sound
+    {
+        DrawCard,
+        Click,
+        Pop,
+        PutDown,
+        ToHand,
+        Yes,
+        No
+    }
+
     [CreateAssetMenu(fileName = "Audio Container", menuName = "Audio/Audio Container")]
     public class AudioContainer : ScriptableObject
     {
@@ -15,19 +26,16 @@ namespace Game.Presentation.Audio
         [SerializeField] private EventReference _yes;
         [SerializeField] private EventReference _no;
 
-        public EventReference Get(Sound sound)
+        public EventReference Get(Sound sound) => sound switch
         {
-            return sound switch
-            {
-                Sound.DrawCard => _drawCard,
-                Sound.Click    => _onClick,
-                Sound.Pop      => _pop,
-                Sound.PutDown  => _putDown,
-                Sound.ToHand   => _toHand,
-                Sound.Yes      => _yes,
-                Sound.No       => _no,
-                _ => throw new ArgumentOutOfRangeException(nameof(sound), sound, null)
-            };
-        }
+            Sound.DrawCard => _drawCard,
+            Sound.Click => _onClick,
+            Sound.Pop => _pop,
+            Sound.PutDown => _putDown,
+            Sound.ToHand => _toHand,
+            Sound.Yes => _yes,
+            Sound.No => _no,
+            _ => throw new ArgumentOutOfRangeException(nameof(sound), sound, null)
+        };
     }
 }

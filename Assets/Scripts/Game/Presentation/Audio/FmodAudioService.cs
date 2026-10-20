@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using FMODUnity;
-using Game.Presentation.UI.Audio;
 using UnityEngine;
 
 namespace Game.Presentation.Audio

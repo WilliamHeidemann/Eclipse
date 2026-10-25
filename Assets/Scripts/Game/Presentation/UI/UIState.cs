@@ -5,5 +5,6 @@ public enum UIState
     MainMenu,
     FriendsMenu,
     DifficultyMenu,
+    CreditsMenu,
     GameUI
 }

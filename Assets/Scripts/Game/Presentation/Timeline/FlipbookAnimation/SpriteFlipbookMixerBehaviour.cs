@@ -9,13 +9,10 @@ public class SpriteFlipbookMixerBehaviour : PlayableBehaviour
 
     public override void ProcessFrame(Playable playable, FrameData info, object playerData)
     {
-        // The bound UIDocument is delivered as playerData, not via the director's GameObject
-        if (playerData is not UnityEngine.UIElements.UIDocument uiDocument || uiDocument.rootVisualElement == null)
+        if (playerData is not UIDocument uiDocument || uiDocument.rootVisualElement == null)
             return;
 
-        VisualElement TargetElement = uiDocument.rootVisualElement.Q<VisualElement>(TargetElementName);
-        if (TargetElement == null)
-            return;
+        VisualElement targetElement = uiDocument.rootVisualElement.Q<VisualElement>(TargetElementName);
 
         int inputCount = playable.GetInputCount();
 
@@ -27,7 +24,7 @@ public class SpriteFlipbookMixerBehaviour : PlayableBehaviour
                 var inputPlayable = (ScriptPlayable<SpriteFlipbookBehaviour>)playable.GetInput(i);
                 var behaviour = inputPlayable.GetBehaviour();
 
-                behaviour.targetElement = TargetElement;
+                behaviour.TargetElement = targetElement;
             }
         }
     }

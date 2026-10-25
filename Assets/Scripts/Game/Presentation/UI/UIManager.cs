@@ -23,6 +23,7 @@ namespace Game.Presentation.UI
         [SerializeField] private PanelRenderer _friendsMenu;
         [SerializeField] private PanelRenderer _difficultyMenu;
         [SerializeField] private PanelRenderer _gameUI;
+        [SerializeField] private PanelRenderer _creditsMenu;
 
         [Header("UI Templates")] 
         [SerializeField] private VisualTreeAsset _gameRequest;
@@ -57,6 +58,7 @@ namespace Game.Presentation.UI
             _mainMenu.gameObject.SetActive(false);
             _friendsMenu.gameObject.SetActive(false);
             _difficultyMenu.gameObject.SetActive(false);
+            _creditsMenu.gameObject.SetActive(false);
         }
 
         private void PlaySound(UISound sound)
@@ -84,11 +86,13 @@ namespace Game.Presentation.UI
             _mainMenu.gameObject.SetActive(true);
             _friendsMenu.gameObject.SetActive(true);
             _difficultyMenu.gameObject.SetActive(true);
+            _creditsMenu.gameObject.SetActive(true);
             _gameUI.gameObject.SetActive(true);
 
             _mainMenu.RegisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.RegisterUIReloadCallback(RegisterFriendsMenu);
             _difficultyMenu.RegisterUIReloadCallback(RegisterDifficultyMenu);
+            _creditsMenu.RegisterUIReloadCallback(RegisterCreditsMenu);
             _gameUI.RegisterUIReloadCallback(RegisterGameUI);
         }
 
@@ -97,6 +101,7 @@ namespace Game.Presentation.UI
             _mainMenu.UnregisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.UnregisterUIReloadCallback(RegisterFriendsMenu);
             _difficultyMenu.UnregisterUIReloadCallback(RegisterDifficultyMenu);
+            _creditsMenu.UnregisterUIReloadCallback(RegisterCreditsMenu);
             _gameUI.UnregisterUIReloadCallback(RegisterGameUI);
         }
 
@@ -118,6 +123,13 @@ namespace Game.Presentation.UI
                 PlaySound(UISound.ButtonClick);
                 PlaySound(UISound.MenuTransition);
                 _stateMachine.GoTo(UIState.FriendsMenu);
+            };
+
+            root.Q<Button>("Credits").clicked += () =>
+            {
+                PlaySound(UISound.ButtonClick);
+                PlaySound(UISound.MenuTransition);
+                _stateMachine.GoTo(UIState.CreditsMenu);
             };
         }
 
@@ -236,7 +248,21 @@ namespace Game.Presentation.UI
                 _gameStarter.StartLocalGame(difficulty);
             }
         }
-        
+
+        private void RegisterCreditsMenu(PanelRenderer panelRenderer, VisualElement root, int version)
+        {
+            root.style.display = DisplayStyle.None;
+            VerticalShiftMenu menu = new(root, true);
+            _stateMachine.Register(UIState.CreditsMenu, menu);
+
+            root.Q<Button>("Back").clicked += () =>
+            {   
+                PlaySound(UISound.MenuTransitionBack);
+                PlaySound(UISound.BackClick);
+                _stateMachine.GoTo(UIState.MainMenu);
+            };
+        }
+
         private void RegisterGameUI(PanelRenderer panelRenderer, VisualElement root, int version)
         {
             root.style.display = DisplayStyle.None;

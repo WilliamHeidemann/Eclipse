@@ -1,11 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/styles.uss"/>
-    <Style src="project://database/Assets/UI/MenuStyles.uss"/>
+    <Style src="project://database/Assets/UI/styles.uss?fileID=7433441132597879392&amp;guid=cb1d2706049614e018463c0d001025a6&amp;type=3#styles"/>
+    <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=34018f246eda05847ac2c1594faa96b4&amp;type=3#MenuStyles"/>
     <Style src="project://database/Assets/UI/Simple%20Main%20Menu.uss?fileID=7433441132597879392&amp;guid=6e2a80a2377448188e685b5b5a3f0421&amp;type=3#Simple Main Menu"/>
     <ui:VisualElement name="MainMenu" class="main-menu">
         <ui:VisualElement name="SoundsToggle" class="sounds-toggle">
             <ui:Button name="Music" class="sound-toggle" style="background-image: url(&quot;project://database/Assets/Sprites/Eclipse%20Card%20Game/Menu%20Elements/Asset%2020@4x.png?fileID=2800000&amp;guid=9d5b9a892727d504b905b735d22f0bda&amp;type=3#Asset 20@4x&quot;);"/>
             <ui:Button name="SFX" class="sound-toggle" style="background-image: url(&quot;project://database/Assets/Sprites/Eclipse%20Card%20Game/Menu%20Elements/Asset%2019@4x.png?fileID=2800000&amp;guid=e76e8f49c981bd34fab2c6a5745234af&amp;type=3#Asset 19@4x&quot;);"/>
+            <ui:Button text="Credits" name="Credits" class="menu-icon-button menu-font menu-name-label" style="-unity-text-align: middle-right;"/>
         </ui:VisualElement>
         <ui:VisualElement name="Logo" class="menu-logo" style="background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Logo/Eclipse%20LOGO.png?fileID=2800000&amp;guid=730e854957f9b174a9bf36c275ab7fec&amp;type=3#Eclipse LOGO&quot;); -unity-background-scale-mode: scale-to-fit;"/>
         <ui:VisualElement name="Icons" class="menu-icons">

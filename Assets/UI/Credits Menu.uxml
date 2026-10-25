@@ -10,7 +10,7 @@
             <ui:Label text="Game Director, Lead Programmer&#10;William Heidemann" name="Row1" class="menu-font menu-name-label contributer"/>
             <ui:Label text="Graphics Design | Matias Bonanata" name="Row2" class="menu-font menu-name-label contributer"/>
             <ui:Label text="Sound Design | Peter Mitchell" name="Row3" class="menu-font menu-name-label contributer"/>
-            <ui:Label text="Programmer | Jakob Ehlerse" name="Row4" class="menu-font menu-name-label contributer"/>
+            <ui:Label text="Programmer | Jakob Ehlers" name="Row4" class="menu-font menu-name-label contributer"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -2,14 +2,15 @@
     <Style src="project://database/Assets/UI/styles.uss?fileID=7433441132597879392&amp;guid=cb1d2706049614e018463c0d001025a6&amp;type=3#styles"/>
     <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=34018f246eda05847ac2c1594faa96b4&amp;type=3#MenuStyles"/>
     <Style src="project://database/Assets/UI/Friends%20Menu.uss?fileID=7433441132597879392&amp;guid=45225a7f09b64ef48a623f1dbbf3d3dd&amp;type=3#Friends Menu"/>
+    <Style src="project://database/Assets/UI/Credits%20Menu.uss?fileID=7433441132597879392&amp;guid=1d34f6c1a9002a84d890dcb7194df9d9&amp;type=3#Credits Menu"/>
     <ui:VisualElement name="CreditsContainer" style="flex-grow: 1;">
         <ui:VisualElement name="SubMenu" class="sub-menu" style="flex-grow: 1;">
-            <ui:Button text="Button" name="Back" class="menu-back-button"/>
-            <ui:Label text="Credits" name="CreditsHeader" class="menu-font menu-section-heading" style="-unity-text-align: upper-center;"/>
-            <ui:Label text="Game Director, Lead Programmer Will" name="Row1" class="menu-font menu-name-label"/>
-            <ui:Label text="Sound Design Pete" name="Row2" class="menu-font menu-name-label"/>
-            <ui:Label text="Graphics Design Matias" name="Row3" class="menu-font menu-name-label"/>
-            <ui:Label text="Programmer Jakob" name="Row4" class="menu-font menu-name-label"/>
+            <ui:Button text="&#10;" name="Back" class="menu-back-button"/>
+            <ui:Label text="Credits" name="CreditsHeader" class="menu-font menu-section-heading" style="-unity-text-align: upper-center; font-size: 118px; margin-bottom: 89px;"/>
+            <ui:Label text="Game Director, Lead Programmer&#10;William Heidemann" name="Row1" class="menu-font menu-name-label contributer"/>
+            <ui:Label text="Graphics Design | Matias Bonanata" name="Row2" class="menu-font menu-name-label contributer"/>
+            <ui:Label text="Sound Design | Peter Mitchell" name="Row3" class="menu-font menu-name-label contributer"/>
+            <ui:Label text="Programmer | Jakob Ehlerse" name="Row4" class="menu-font menu-name-label contributer"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

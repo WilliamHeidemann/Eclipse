@@ -7,7 +7,7 @@
 }
 
 .sounds-toggle {
-    flex-grow: 0.2;
+    flex-grow: 1;
     flex-direction: row;
     padding-top: 5px;
     padding-right: 5px;
@@ -16,10 +16,8 @@
 }
 
 .sound-toggle {
-    flex-grow: 1;
     max-width: 8%;
     background-color: rgba(0, 0, 0, 0);
-    height: 32%;
     min-width: 8%;
     -unity-background-scale-mode: scale-to-fit;
     border-top-width: 0;

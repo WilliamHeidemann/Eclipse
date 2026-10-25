@@ -16,7 +16,7 @@
     border-right-color: rgb(0, 0, 0);
     border-top-color: rgb(0, 0, 0);
     border-bottom-color: rgb(0, 0, 0);
-    -unity-material: url("project://database/Assets/Shaders/Hole%20UI.mat?fileID=2100000&guid=ec38d395c469742b792b40151f599116&type=2#Hole UI") prop("_MainTex" url("project://database/Assets/Configs/Board%20Card%20Sprites_Extracted/Two%20of%20Diamonds.png?fileID=2800000&guid=31165c98d3a3d43a1a4448e9ee8fceb1&type=3#Two of Diamonds"));
+    -unity-material: url("project://database/Assets/Shaders/Hole%20UI.mat?fileID=2100000&guid=ec38d395c469742b792b40151f599116&type=2#Hole UI") prop("_MainTex" url("project://database/Assets/Sprites/Regular%20Playing%20Cards/Two%20of%20Diamonds.png?fileID=2800000&guid=31165c98d3a3d43a1a4448e9ee8fceb1&type=3#Two of Diamonds"));
     margin-top: 8px;
     margin-right: 4px;
     margin-bottom: 8px;
@@ -31,7 +31,7 @@
 
 .card {
     flex-grow: 1;
-    background-image: url("project://database/Assets/Sprites/Standard%20Cards/PNG-cards-1.3/2_of_diamonds.png?fileID=2800000&guid=b761aabb139d743de907fd4d969d588a&type=3#2_of_diamonds");
+    background-image: url("project://database/Assets/Sprites/Regular%20Playing%20Cards/Standard%20Cards/PNG-cards-1.3/2_of_diamonds.png?fileID=2800000&guid=b761aabb139d743de907fd4d969d588a&type=3#2_of_diamonds");
     aspect-ratio: 0.67;
 }
 
@@ -74,3 +74,5 @@
     justify-content: center;
     flex-direction: row;
 }
+
+

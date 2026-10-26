@@ -52,5 +52,11 @@ namespace Game.Presentation.AnimationSystems
                 animationQueue.Enqueue(animation);
             }
         }
+
+        public void Clear()
+        {
+            _queue.Clear();
+            _isPlaying = false;
+        }
     }
 }

@@ -56,6 +56,7 @@ namespace Game.Presentation.AnimationSystems
 
         public void HideGameElements()
         {
+            _animationQueue.Clear();
             _cardAligner.Clear();
             _boardPresenter.Clear();
             _staticGameElements.SetActive(false);

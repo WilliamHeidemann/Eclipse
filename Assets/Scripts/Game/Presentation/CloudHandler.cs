@@ -109,7 +109,7 @@ namespace Game.Presentation
                         Id = matchAccepted.MatchID,
                     };
                     gameStarter.StartGame(match, matchAccepted.OpponentID);
-                    uiManager.HideMenus();
+                    uiManager.GoToMenu(UIState.GameUI);
                     break;
                 case PushMessageType.NewMove:
                     await gameStarter.OnNewMovePushMessageReceived(messageReceivedEvent.Message);

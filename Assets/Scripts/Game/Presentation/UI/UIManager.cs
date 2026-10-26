@@ -87,14 +87,14 @@ namespace Game.Presentation.UI
             }
         }
 
-#if UNITY_EDITOR
-        [Header("Debugging")] [SerializeField] private UIState _menuToGoTo;
-        [Button]
-        public void GoToMenu()
+        public void GoToMenu(UIState menuToGoTo)
         {
-            _stateMachine.GoTo(_menuToGoTo);
+            _stateMachine.GoTo(menuToGoTo);
+            if (menuToGoTo == UIState.GameUI)
+            {
+                _animationOrchestrator.ShowStaticGameElements();
+            }
         }
-#endif
 
         private void Awake()
         {
@@ -226,6 +226,7 @@ namespace Game.Presentation.UI
                 {
                     PlaySound(UISound.RequestAccepted);
                     RemoveGameRequest(user);
+                    _stateMachine.GoTo(UIState.GameUI);
                     _animationOrchestrator.ShowStaticGameElements();
                     GameRequestAccepted?.Invoke(user);
                 };

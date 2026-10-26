@@ -22,10 +22,10 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.08333333333333333
+    m_Start: 0.11666666666666667
     m_ClipIn: 0
     m_Asset: {fileID: -3541563136162975776}
-    m_Duration: 2.833333333333333
+    m_Duration: 2.783333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: -7448913874138339710}
     m_EaseInDuration: 0
@@ -105,6 +105,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde0d25a170598d46a0b9dc16b4527a5, type: 3}
   m_Name: ActivationPlayableAsset
   m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.ActivationPlayableAsset
+--- !u!114 &-1744534697490163114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: SpriteFlipbookAsset
+  m_EditorClassIdentifier: Eclipse.Presentation:Game.Presentation.Timeline:SpriteFlipbookAsset
+  Template:
+    Sprites:
+    - {fileID: -7923547059968610347, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 5844165593316167463, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 6597884930753710100, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -1013930570785927760, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -102252423616917945, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -1298803649253627019, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -6426095058886196203, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 2462660283146666808, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 6933891981723301080, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -6099900116527868406, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 3678592843038070184, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 7437180657085784165, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 1948801893375692358, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 3616484756029408865, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 1595741108261623516, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -273193616832100304, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -7654679840763134573, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -2165180835880659748, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: 8932288961440085559, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -4375031310760117346, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -5313810641070646128, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -495713328682369832, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
+    - {fileID: -359177449014383900, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,8 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.TimelineAsset
   m_Version: 0
   m_Tracks:
-  - {fileID: 4825234276046555901}
   - {fileID: -7448913874138339710}
+  - {fileID: 7810841908295513030}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -164,7 +201,7 @@ MonoBehaviour:
     - {fileID: -5313810641070646128, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
     - {fileID: -495713328682369832, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
     - {fileID: -359177449014383900, guid: 6c6a954bdb1c08147a80cb116b96f0a5, type: 3}
---- !u!114 &4825234276046555901
+--- !u!114 &7810841908295513030
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,10 +225,10 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: 1607694853737300529}
+    m_Asset: {fileID: -1744534697490163114}
     m_Duration: 3
-    m_TimeScale: 1.666666666666669
-    m_ParentTrack: {fileID: 4825234276046555901}
+    m_TimeScale: 1.6666666666666672
+    m_ParentTrack: {fileID: 7810841908295513030}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1

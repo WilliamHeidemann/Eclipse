@@ -109,9 +109,7 @@ namespace Game.Domain.Models
             if (board.Fits(move.Position)) board.TryAdd(move.Position, move.Team);
             else board.Remove(move.Position);
 
-            Card requiredCard = board.Fits(move.Position) ? Card.JackOfMoon : BoardLayout.Get(move.Position);
-
-            hand.TryRemove(requiredCard);
+            hand.TryRemove(move.Card);
 
             Deck deck = new(gameState.Deck);
             Card draw = deck.Draw();
@@ -121,7 +119,7 @@ namespace Game.Domain.Models
             var sequences = SequencePatterns.FindSequences(board, move.Team, gameState.Sequences).ToArray();
             int deltaScore = sequences.Length;
 
-            if (requiredCard == Card.JackOfSun && deltaScore > 0)
+            if (move.Card == Card.JackOfSun && deltaScore > 0)
             {
                 return new MoveResult.Invalid();
             }

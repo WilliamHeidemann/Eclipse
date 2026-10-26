@@ -53,12 +53,14 @@ namespace Game.Domain
             }
         }
 
-        public void RaiseDrawHandEvent()
+        public void RaiseStartGameEvents()
         {
             foreach (Card card in _clientGameState.Hand)
             {
                 OnDrawCard?.Invoke(card);
             }
+            
+            OnTurnPassedTo?.Invoke(_clientGameState.Team);
         }
 
         public async Task CheckIfOpponentPlayed(string matchId)

@@ -60,7 +60,35 @@ namespace Game.Presentation.UI
             _playerTwoRow.style.opacity = toPlay == Team.Yellow ? 1f : InactivePlayerOpacity;
         }
 
-        public void SetPlayerName(string playerName) => _playerName.text = playerName;
+        private string _localPlayerName = DefaultPlayerName;
+        private string _redName = DefaultPlayerName;
+        private string _yellowName = "Opponent";
+        private Label _playerOneLabel;
+        private Label _playerTwoLabel;
+
+        private const string DefaultPlayerName = "Player";
+
+        public void ShowPlayerNames(Team localTeam, string opponentName)
+        {
+            string localName = _localPlayerName;
+            _redName = localTeam == Team.Red ? localName : opponentName;
+            _yellowName = localTeam == Team.Red ? opponentName : localName;
+            ApplyPlayerNames();
+        }
+
+        private void ApplyPlayerNames()
+        {
+            if (_playerOneLabel != null) _playerOneLabel.text = _redName;
+            if (_playerTwoLabel != null) _playerTwoLabel.text = _yellowName;
+        }
+
+        private static string BotName(BotDifficulty difficulty) => $"{difficulty} Bot";
+
+        public void SetPlayerName(string playerName)
+        {
+            _localPlayerName = string.IsNullOrWhiteSpace(playerName) ? DefaultPlayerName : playerName;
+            if (_playerName != null) _playerName.text = playerName;
+        }
         public void ShowFriend(User user) => _friends.Add(user);
         public void RemoveFriend(User user) => _friends.Remove(user.Id);
         public void ShowFriendRequest(User user) => _friendRequests.Add(user);
@@ -263,6 +291,7 @@ namespace Game.Presentation.UI
                 root.style.display = DisplayStyle.None;
                 _stateMachine.GoTo(UIState.GameUI);
                 _gameStarter.StartLocalGame(difficulty);
+                ShowPlayerNames(Team.Red, BotName(difficulty));
                 _animationOrchestrator.ShowStaticGameElements();
             }
         }
@@ -289,6 +318,9 @@ namespace Game.Presentation.UI
 
             _playerOneRow = root.Q<VisualElement>("PlayerOneRow");
             _playerTwoRow = root.Q<VisualElement>("PlayerTwoRow");
+            _playerOneLabel = root.Q<Label>("PlayerOneLabel");
+            _playerTwoLabel = root.Q<Label>("PlayerTwoLabel");
+            ApplyPlayerNames();
             ShowTurn(_currentTurn);
 
             root.Q<Button>("Back").clicked += HideGameUI;

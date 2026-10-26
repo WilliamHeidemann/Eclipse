@@ -31,7 +31,7 @@ namespace Game.Presentation
         private void BindToPresentation(PlayCoordinator playCoordinator)
         {
             _animationOrchestrator.BindAnimations(playCoordinator);
-            playCoordinator.RaiseDrawHandEvent();
+            playCoordinator.RaiseStartGameEvents();
             _boardPresenter.OnPositionClicked += HandlePositionClicked;
         }
 

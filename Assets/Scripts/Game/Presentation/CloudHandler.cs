@@ -47,7 +47,7 @@ namespace Game.Presentation
             uiManager.FriendRequestAccepted += user => RunCloudOperation(AcceptFriendRequest(user));
             uiManager.GameRequestSent += receiverPlayerId => RunCloudOperation(
                 SendGameRequest(AuthenticationService.Instance.PlayerName, receiverPlayerId));
-            uiManager.GameRequestAccepted += user => RunCloudOperation(StartMatch(user.Id));
+            uiManager.GameRequestAccepted += user => RunCloudOperation(StartMatch(user));
             
             uiManager.FriendRequestSent += friendName => Debug.Log($"Friend request sent to {friendName}");
             uiManager.FriendRequestAccepted += user => Debug.Log($"Accepted friend request from {user}.");
@@ -70,10 +70,12 @@ namespace Game.Presentation
             return callbacks;
         }
 
-        private async Task StartMatch(string opponentId)
+        private async Task StartMatch(User opponent)
         {
+            string opponentId = opponent.Id;
             Match match = await gameStarter.CreateMatch(opponentId);
             gameStarter.StartGame(match, opponentId);
+            uiManager.ShowPlayerNames(match.ClientGameState.Team, opponent.Name);
 
             PushMessagesServiceBindings pushMessagesServiceModule = new();
             bool success = await pushMessagesServiceModule.AcceptChallenge(match.Id, opponentId);
@@ -109,6 +111,7 @@ namespace Game.Presentation
                         Id = matchAccepted.MatchID,
                     };
                     gameStarter.StartGame(match, matchAccepted.OpponentID);
+                    uiManager.ShowPlayerNames(match.ClientGameState.Team, FindFriendName(matchAccepted.OpponentID));
                     uiManager.GoToMenu(UIState.GameUI);
                     break;
                 case PushMessageType.NewMove:
@@ -117,6 +120,13 @@ namespace Game.Presentation
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private static string FindFriendName(string playerId)
+        {
+            Relationship friend = FriendsService.Instance.Friends.FirstOrDefault(r => r.Member.Id == playerId);
+            string name = friend?.Member.Profile?.Name;
+            return string.IsNullOrWhiteSpace(name) ? "Opponent" : name;
         }
 
         private static async Task SendGameRequest(string challengerName, string receiverPlayerId)

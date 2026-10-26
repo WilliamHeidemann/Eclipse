@@ -211,6 +211,7 @@ namespace Game.Presentation.UI
                 {
                     PlaySound(UISound.RequestAccepted);
                     RemoveGameRequest(user);
+                    _animationOrchestrator.ShowStaticGameElements();
                     GameRequestAccepted?.Invoke(user);
                 };
                 request.Q<Button>("Decline").clicked += () =>
@@ -246,6 +247,7 @@ namespace Game.Presentation.UI
                 root.style.display = DisplayStyle.None;
                 _stateMachine.GoTo(UIState.GameUI);
                 _gameStarter.StartLocalGame(difficulty);
+                _animationOrchestrator.ShowStaticGameElements();
             }
         }
 
@@ -273,8 +275,7 @@ namespace Game.Presentation.UI
             void HideGameUI()
             {
                 _stateMachine.GoTo(UIState.MainMenu);
-                _gameStarter.ShowGameElements(false);
-                _animationOrchestrator.DestroyCardsInHand();
+                _animationOrchestrator.HideGameElements();
             }
         }
     }

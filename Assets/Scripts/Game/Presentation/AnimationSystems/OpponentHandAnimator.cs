@@ -12,7 +12,7 @@ namespace Game.Presentation.AnimationSystems
         [SerializeField] private DiscardPile _discardPile;
         [SerializeField] private CardSprites _cardSprites;
 
-        public async Awaitable AnimatePlay(Card card)
+        public async Awaitable<Transform> AnimatePlay(Card card)
         {
             Quaternion startingRotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0f, 360f)));
 
@@ -27,6 +27,8 @@ namespace Game.Presentation.AnimationSystems
             label.EnableInClassList("card-rank--effect", card.IsWild() || card.IsRemover());
 
             await _discardPile.Discard(document.transform);
+            
+            return document.transform;
         }
     }
 }

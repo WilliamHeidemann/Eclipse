@@ -17,7 +17,8 @@ namespace Game.Presentation.AnimationSystems
         [SerializeField] private DiscardPile _discardPile;
         [SerializeField] private OpponentHandAnimator _opponentHandAnimator;
         [SerializeField] private FmodAudioService _audioService;
-        [SerializeField] private Transform _cardsInHand;
+        [SerializeField] private Transform _dynamicGameElements;
+        [SerializeField] private GameObject _staticGameElements;
 
         private readonly AnimationQueue _animationQueue = new();
         private PlayCoordinator _playCoordinator;
@@ -48,11 +49,17 @@ namespace Game.Presentation.AnimationSystems
             _playCoordinator.OnTeamWon -= PlayWinAnimation;
         }
 
-        public void DestroyCardsInHand()
+        public void ShowStaticGameElements()
         {
-            foreach (Transform card in _cardsInHand)
+            _staticGameElements.SetActive(true);
+        }
+
+        public void HideGameElements()
+        {
+            _staticGameElements.SetActive(false);
+            foreach (Transform element in _dynamicGameElements)
             {
-                Destroy(card.gameObject);
+                Destroy(element.gameObject);
             }
         }
 
@@ -89,11 +96,11 @@ namespace Game.Presentation.AnimationSystems
             async Awaitable Draw(Card c)
             {
                 UIDocument cardUIDocument = _drawAnimator.InstantiateCardFaceDown();
-                
+
                 // Play delayed sound with cancellation token safety
                 _ = _audioService.PlayAsync(Sound.DrawCard, 0.15f, destroyCancellationToken);
-                
-                cardUIDocument.transform.parent = _cardsInHand;
+
+                cardUIDocument.transform.parent = _dynamicGameElements;
                 await _drawAnimator.AnimateDrawing(c, cardUIDocument);
                 _audioService.Play(Sound.ToHand);
                 _cardAligner.AddCard(c, cardUIDocument.transform);
@@ -125,7 +132,8 @@ namespace Game.Presentation.AnimationSystems
                 }
                 else
                 {
-                    await _boardPresenter.Pin(move.Position, move.Team);
+                    var pin = await _boardPresenter.Pin(move.Position, move.Team);
+                    pin.parent = _dynamicGameElements;
                     _audioService.Play(Sound.Yes); // Yes is for successful placement
                 }
             }
@@ -138,18 +146,19 @@ namespace Game.Presentation.AnimationSystems
 
             async Awaitable Play()
             {
-                
-
                 Card card = move.Card;
 
-                await _opponentHandAnimator.AnimatePlay(card);
+                var cardFromHand = await _opponentHandAnimator.AnimatePlay(card);
+                cardFromHand.parent = _dynamicGameElements;
+                
                 if (card.IsRemover())
                 {
                     await _boardPresenter.RemovePin(move.Position);
                 }
                 else
                 {
-                    await _boardPresenter.Pin(move.Position, move.Team);
+                    var pin = await _boardPresenter.Pin(move.Position, move.Team);
+                    pin.parent = _dynamicGameElements;
                     _audioService.Play(Sound.Click);
                 }
             }

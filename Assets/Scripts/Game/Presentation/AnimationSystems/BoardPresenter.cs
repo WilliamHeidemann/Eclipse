@@ -106,10 +106,11 @@ namespace Game.Presentation.AnimationSystems
                 .Bind(val => slot.style.scale = new Scale(val));
         }
 
-        public async Awaitable Pin(Position position, Team team)
+        public async Awaitable<Transform> Pin(Position position, Team team)
         {
             var prefab = team == Team.Red ? _redPinPrefab : _yellowPinPrefab;
             var pin = Instantiate(prefab, _pinStartTRS.position, _pinStartTRS.rotation);
+
             pin.localScale = _pinStartTRS.localScale;
             _pins.Add(position, pin);
 
@@ -130,6 +131,8 @@ namespace Game.Presentation.AnimationSystems
                 .BindToLocalScale(pin);
 
             await Awaitable.WaitForSecondsAsync(duration);
+            
+            return pin;
         }
 
         public async Awaitable RemovePin(Position position)

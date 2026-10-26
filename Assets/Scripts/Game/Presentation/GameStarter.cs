@@ -23,7 +23,6 @@ namespace Game.Presentation
         [SerializeField] private BoardPresenter _boardPresenter;
         [SerializeField] private AnimationOrchestrator _animationOrchestrator;
         [SerializeField] private StartingConfiguration _startingConfiguration;
-        [SerializeField] private GameObject _gameElements;
         
         private PlayCoordinator _playCoordinator;
         private Option<string> _matchId;
@@ -36,15 +35,9 @@ namespace Game.Presentation
             _boardPresenter.OnPositionClicked += HandlePositionClicked;
         }
 
-        // TODO move to ui manager
-        public void ShowGameElements(bool show)
-        {
-            _gameElements.SetActive(show);
-        }
-
         public void StartLocalGame(BotDifficulty difficulty)
         {
-            _gameElements.SetActive(true);
+            _animationOrchestrator.ShowStaticGameElements();
             
             GameState gameState = _startingConfiguration.UseDevelopmentStartingState
                 ? _startingConfiguration.DevelopmentGameState()
@@ -102,7 +95,7 @@ namespace Game.Presentation
 
         public void StartGame(Match match, string opponentId)
         {
-            _gameElements.SetActive(true);
+            _animationOrchestrator.ShowStaticGameElements();
             _playCoordinator = CreatePlayCoordinator(match);
             _playCoordinator.OnValidMoveRequest += async _ => await NotifyOpponent(opponentId);
             _matchId = Option<string>.Some(match.Id);
@@ -181,7 +174,7 @@ namespace Game.Presentation
 
         public void EndGame()
         {
-            _animationOrchestrator.DestroyCardsInHand();
+            _animationOrchestrator.HideGameElements();
             TearDownGame().Forget();
         }
     }

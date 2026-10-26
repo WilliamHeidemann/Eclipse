@@ -1,3 +1,4 @@
+using System.Threading;
 using LitMotion;
 using LitMotion.Extensions;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace Game.Presentation.AnimationSystems
             _discardPile.rootVisualElement.Q<VisualElement>("Card").style.display = DisplayStyle.None;
         }
 
-        public async Awaitable Discard(Transform card)
+        public async Awaitable Discard(Transform card, CancellationToken token)
         {
             _discards++;
 
@@ -26,15 +27,15 @@ namespace Game.Presentation.AnimationSystems
 
             LMotion.Create(card.position, targetPosition, _discardDuration)
                 .WithEase(Ease.InOutCubic)
-                .BindToPosition(card);
+                .BindToPosition(card)
+                .RegisterTo(token);
 
             var targetRotation = Quaternion.Euler(0, 0, Random.Range(-10f, 10f)) * _discardPile.transform.rotation;
 
-            LMotion.Create(card.rotation, targetRotation, _discardDuration)
+            await LMotion.Create(card.rotation, targetRotation, _discardDuration)
                 .WithEase(Ease.InOutCubic)
-                .BindToRotation(card);
-
-            await Awaitable.WaitForSecondsAsync(_discardDuration);
+                .BindToRotation(card)
+                .ToAwaitable(token);
         }
     }
 }

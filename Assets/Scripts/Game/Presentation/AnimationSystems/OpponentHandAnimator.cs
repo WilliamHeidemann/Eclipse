@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
 using UnityEngine;
@@ -12,7 +14,7 @@ namespace Game.Presentation.AnimationSystems
         [SerializeField] private DiscardPile _discardPile;
         [SerializeField] private CardSprites _cardSprites;
 
-        public async Awaitable<Transform> AnimatePlay(Card card)
+        public async Awaitable<Transform> AnimatePlay(Card card, CancellationToken token)
         {
             Quaternion startingRotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0f, 360f)));
 
@@ -26,7 +28,15 @@ namespace Game.Presentation.AnimationSystems
             label.text = card.GetText();
             label.EnableInClassList("card-rank--effect", card.IsWild() || card.IsRemover());
 
-            await _discardPile.Discard(document.transform);
+            try
+            {
+                await _discardPile.Discard(document.transform, token);
+            }
+            catch (OperationCanceledException)
+            {
+                if (document != null) Destroy(document.gameObject);
+                throw;
+            }
             
             return document.transform;
         }

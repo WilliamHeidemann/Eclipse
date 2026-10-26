@@ -1,3 +1,4 @@
+using System.Threading;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
 using LitMotion;
@@ -25,7 +26,7 @@ namespace Game.Presentation.AnimationSystems
             return Instantiate(_cardPrefab);
         }
         
-        public async Awaitable AnimateDrawing(Card card, UIDocument cardGameObject)
+        public async Awaitable AnimateDrawing(Card card, UIDocument cardGameObject, CancellationToken token)
         {
             var cardTransform = cardGameObject.transform;
 
@@ -36,7 +37,8 @@ namespace Game.Presentation.AnimationSystems
             // Set position
             LMotion.Create(cardTransform.position, _showDisplayTransform.position, _durationToDisplay)
                 .WithEase(Ease.InOutCubic)
-                .BindToPosition(cardTransform);
+                .BindToPosition(cardTransform)
+                .RegisterTo(token);
 
             // Set rotation
             Quaternion halfWayRotation = Quaternion.Lerp(cardTransform.rotation, _showDisplayTransform.rotation, .5f) *
@@ -55,16 +57,19 @@ namespace Game.Presentation.AnimationSystems
                     label.EnableInClassList("card-rank--effect", card.IsWild() || card.IsRemover());
                     LMotion.Create(halfWayRotation, _showDisplayTransform.rotation, _durationToDisplay / 2)
                         .WithEase(Ease.OutCubic)
-                        .BindToRotation(cardTransform);
+                        .BindToRotation(cardTransform)
+                        .RegisterTo(token);
                 })
-                .BindToRotation(cardTransform);
+                .BindToRotation(cardTransform)
+                .RegisterTo(token);
 
             // Set scale
-            LMotion.Create(cardTransform.localScale, _showDisplayTransform.localScale, _durationToDisplay)
+            await LMotion.Create(cardTransform.localScale, _showDisplayTransform.localScale, _durationToDisplay)
                 .WithEase(Ease.InOutCubic)
-                .BindToLocalScale(cardTransform);
+                .BindToLocalScale(cardTransform)
+                .ToAwaitable(token);
 
-            await Awaitable.WaitForSecondsAsync(_durationToDisplay + _displayDuration);
+            await Awaitable.WaitForSecondsAsync(_displayDuration, token);
         }
     }
 }

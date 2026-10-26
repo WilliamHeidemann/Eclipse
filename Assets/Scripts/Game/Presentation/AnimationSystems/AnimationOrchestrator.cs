@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Threading;
 using Game.Domain;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
@@ -38,6 +38,7 @@ namespace Game.Presentation.AnimationSystems
 
         private void OnDestroy()
         {
+            _animationQueue.Dispose();
             if (_playCoordinator == null) return;
 
             _playCoordinator.OnDrawCard -= PlayDrawAnimation;
@@ -93,23 +94,23 @@ namespace Game.Presentation.AnimationSystems
 
         public void PlayDrawAnimation(Card card)
         {
-            _animationQueue.Enqueue(Draw, card);
+            _animationQueue.Enqueue(token => Draw(card, token));
             return;
 
-            async Awaitable Draw(Card c)
+            async Awaitable Draw(Card c, CancellationToken token)
             {
                 UIDocument cardUIDocument = _drawAnimator.InstantiateCardFaceDown();
 
                 // Play delayed sound with cancellation token safety
-                _ = _audioService.PlayAsync(Sound.DrawCard, 0.15f, destroyCancellationToken);
+                _ = _audioService.PlayAsync(Sound.DrawCard, 0.15f, token);
 
                 cardUIDocument.transform.parent = _dynamicGameElements;
-                await _drawAnimator.AnimateDrawing(c, cardUIDocument);
+                await _drawAnimator.AnimateDrawing(c, cardUIDocument, token);
                 _audioService.Play(Sound.ToHand);
                 _cardAligner.AddCard(c, cardUIDocument.transform);
                 // float buffer = Random.Range(0.09f, .16f);
                 float buffer = Random.Range(0.09f, .16f);
-                await Awaitable.WaitForSecondsAsync(buffer);
+                await Awaitable.WaitForSecondsAsync(buffer, token);
             }
         }
 
@@ -121,21 +122,21 @@ namespace Game.Presentation.AnimationSystems
             _animationQueue.Enqueue(Play);
             return;
 
-            async Awaitable Play()
+            async Awaitable Play(CancellationToken token)
             {
                 if (_cardAligner.RemoveCard(move.Card, out Transform cardTransform))
                 {
                     _audioService.Play(Sound.PutDown);
-                    await _discardPile.Discard(cardTransform);
+                    await _discardPile.Discard(cardTransform, token);
                 }
 
                 if (move.Card.IsRemover())
                 {
-                    await _boardPresenter.RemovePin(move.Position);
+                    await _boardPresenter.RemovePin(move.Position, token);
                 }
                 else
                 {
-                    var pin = await _boardPresenter.Pin(move.Position, move.Team);
+                    var pin = await _boardPresenter.Pin(move.Position, move.Team, token);
                     pin.parent = _dynamicGameElements;
                     _audioService.Play(Sound.Yes); // Yes is for successful placement
                 }
@@ -147,20 +148,20 @@ namespace Game.Presentation.AnimationSystems
             _animationQueue.Enqueue(Play);
             return;
 
-            async Awaitable Play()
+            async Awaitable Play(CancellationToken token)
             {
                 Card card = move.Card;
 
-                var cardFromHand = await _opponentHandAnimator.AnimatePlay(card);
+                var cardFromHand = await _opponentHandAnimator.AnimatePlay(card, token);
                 cardFromHand.parent = _dynamicGameElements;
                 
                 if (card.IsRemover())
                 {
-                    await _boardPresenter.RemovePin(move.Position);
+                    await _boardPresenter.RemovePin(move.Position, token);
                 }
                 else
                 {
-                    var pin = await _boardPresenter.Pin(move.Position, move.Team);
+                    var pin = await _boardPresenter.Pin(move.Position, move.Team, token);
                     pin.parent = _dynamicGameElements;
                     _audioService.Play(Sound.Click);
                 }
@@ -169,11 +170,11 @@ namespace Game.Presentation.AnimationSystems
 
         public void QueueDelay(float delayInSeconds)
         {
-            _animationQueue.Enqueue(Wait, delayInSeconds);
+            _animationQueue.Enqueue(token => Wait(delayInSeconds, token));
 
-            async Awaitable Wait(float delay)
+            async Awaitable Wait(float delay, CancellationToken token)
             {
-                await Awaitable.WaitForSecondsAsync(delay);
+                await Awaitable.WaitForSecondsAsync(delay, token);
             }
         }
     }

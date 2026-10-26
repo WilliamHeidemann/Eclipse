@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using LitMotion;
 using UnityEngine;
 
 namespace Game.Presentation.AnimationSystems
@@ -11,10 +13,19 @@ namespace Game.Presentation.AnimationSystems
             {
                 await awaitable;
             }
+            catch (OperationCanceledException)
+            {
+            }
             catch (Exception exception)
             {
                 Debug.LogException(exception);
             }
+        }
+
+        public static MotionHandle RegisterTo(this MotionHandle handle, CancellationToken token)
+        {
+            token.Register(() => handle.TryCancel());
+            return handle;
         }
 
         public static async Awaitable<TResult> Then<TSource, TResult>(
@@ -23,26 +34,6 @@ namespace Game.Presentation.AnimationSystems
         {
             TSource result = await task;
             return await continuation(result);
-        }
-
-        public static Func<Awaitable> Apply<T>(this Func<T, Awaitable> func, T input)
-        {
-            return Method;
-
-            async Awaitable Method()
-            {
-                await func(input);
-            }
-        }
-
-        public static Func<Awaitable> Apply<T1, T2>(this Func<T1, T2, Awaitable> func, T1 input1, T2 input2)
-        {
-            return Method;
-
-            async Awaitable Method()
-            {
-                await func(input1, input2);
-            }
         }
     }
 }

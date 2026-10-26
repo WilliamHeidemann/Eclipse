@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
 using LitMotion;
@@ -106,7 +107,7 @@ namespace Game.Presentation.AnimationSystems
                 .Bind(val => slot.style.scale = new Scale(val));
         }
 
-        public async Awaitable<Transform> Pin(Position position, Team team)
+        public async Awaitable<Transform> Pin(Position position, Team team, CancellationToken token)
         {
             var prefab = team == Team.Red ? _redPinPrefab : _yellowPinPrefab;
             var pin = Instantiate(prefab, _pinStartTRS.position, _pinStartTRS.rotation);
@@ -120,22 +121,32 @@ namespace Game.Presentation.AnimationSystems
 
             LMotion.Create(pin.position, endPosition, duration)
                 .WithEase(Ease.InOutCubic)
-                .BindToPosition(pin);
+                .BindToPosition(pin)
+                .RegisterTo(token);
 
             LMotion.Create(pin.rotation, _pinEndRotationScale.rotation, duration)
                 .WithEase(Ease.InOutCubic)
-                .BindToRotation(pin);
+                .BindToRotation(pin)
+                .RegisterTo(token);
 
-            LMotion.Create(pin.localScale, _pinEndRotationScale.localScale, duration)
-                .WithEase(Ease.InOutCubic)
-                .BindToLocalScale(pin);
+            try
+            {
+                await LMotion.Create(pin.localScale, _pinEndRotationScale.localScale, duration)
+                    .WithEase(Ease.InOutCubic)
+                    .BindToLocalScale(pin)
+                    .ToAwaitable(token);
+            }
+            catch (OperationCanceledException)
+            {
+                _pins.Remove(position);
+                if (pin != null) Destroy(pin.gameObject);
+                throw;
+            }
 
-            await Awaitable.WaitForSecondsAsync(duration);
-            
             return pin;
         }
 
-        public async Awaitable RemovePin(Position position)
+        public async Awaitable RemovePin(Position position, CancellationToken token)
         {
             if (_pins.Remove(position, out Transform pin))
             {
@@ -152,19 +163,25 @@ namespace Game.Presentation.AnimationSystems
 
                 LMotion.Create(startPosition, endPosition, duration)
                     .WithEase(Ease.InOutCubic)
-                    .BindToPosition(pin);
+                    .BindToPosition(pin)
+                    .RegisterTo(token);
 
                 LMotion.Create(startRotation, endRotation, duration)
                     .WithEase(Ease.InOutCubic)
-                    .BindToRotation(pin);
+                    .BindToRotation(pin)
+                    .RegisterTo(token);
 
-                LMotion.Create(startScale, endScale, duration)
-                    .WithEase(Ease.InOutCubic)
-                    .BindToLocalScale(pin);
-
-                await Awaitable.WaitForSecondsAsync(duration);
-
-                Destroy(pin.gameObject);
+                try
+                {
+                    await LMotion.Create(startScale, endScale, duration)
+                        .WithEase(Ease.InOutCubic)
+                        .BindToLocalScale(pin)
+                        .ToAwaitable(token);
+                }
+                finally
+                {
+                    if (pin != null) Destroy(pin.gameObject);
+                }
             }
         }
 

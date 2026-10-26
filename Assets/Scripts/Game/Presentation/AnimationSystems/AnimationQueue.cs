@@ -1,62 +1,66 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 
 namespace Game.Presentation.AnimationSystems
 {
-    public class AnimationQueue
+    public class AnimationQueue : IDisposable
     {
-        private readonly Queue<Func<Awaitable>> _queue = new();
-        private bool _isPlaying = false;
+        private readonly Queue<Func<CancellationToken, Awaitable>> _queue = new();
+        private CancellationTokenSource _cts = new();
+        private bool _isPlaying;
 
-        public async Task Enqueue(Func<Awaitable> animation)
+        public void Enqueue(Func<CancellationToken, Awaitable> animation)
         {
             _queue.Enqueue(animation);
             if (!_isPlaying)
             {
-                await Play();
+                Play().Forget();
             }
         }
 
-        public void Enqueue<T>(Func<T, Awaitable> animation, T input)
-        {
-            Func<Awaitable> applied = animation.Apply(input);
-            Enqueue(applied);
-        }
-        
-        public void Enqueue<T1, T2>(Func<T1, T2, Awaitable> animation, T1 input1, T2 input2)
-        {
-            Func<Awaitable> applied = animation.Apply(input1, input2);
-            Enqueue(applied);
-        }
-        
         private async Awaitable Play()
         {
             _isPlaying = true;
-            while (_queue.Count > 0)
+            CancellationTokenSource cts = _cts;
+            CancellationToken token = cts.Token;
+            try
             {
-                Func<Awaitable> animation = _queue.Dequeue();
-                await animation();
+                while (_queue.Count > 0 && !token.IsCancellationRequested)
+                {
+                    Func<CancellationToken, Awaitable> animation = _queue.Dequeue();
+                    await animation(token);
+                }
             }
-
-            _isPlaying = false;
-        }
-
-        public void PlayQueue(Queue<Func<Awaitable>> queue)
-        {
-            AnimationQueue animationQueue = new();
-            while (_queue.Count > 0)
+            catch (OperationCanceledException)
             {
-                Func<Awaitable> animation = _queue.Dequeue();
-                animationQueue.Enqueue(animation);
+                // Queue was cleared while an animation was playing.
+            }
+            finally
+            {
+                // A newer run may already be active after Clear.
+                if (ReferenceEquals(cts, _cts))
+                {
+                    _isPlaying = false;
+                }
             }
         }
 
         public void Clear()
         {
             _queue.Clear();
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = new CancellationTokenSource();
             _isPlaying = false;
+        }
+
+        public void Dispose()
+        {
+            _queue.Clear();
+            _cts.Cancel();
+            _cts.Dispose();
         }
     }
 }

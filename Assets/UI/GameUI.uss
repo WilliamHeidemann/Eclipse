@@ -1,0 +1,53 @@
+.game-top-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 0.1;
+}
+
+.game-back-button {
+    flex-grow: 0;
+    align-self: stretch;
+}
+
+.game-player-panel {
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.game-player-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.game-player-label {
+    -unity-font-definition: url("project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&type=3#opticenturyschoolbookbold");
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    -unity-text-align: middle-right;
+    margin-top: 0;
+    margin-right: 16px;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.game-player-icon {
+    width: 40px;
+    height: 40px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: rgb(255, 95, 95);
+}
+
+.game-player-icon--second {
+    background-color: rgb(255, 252, 95);
+}

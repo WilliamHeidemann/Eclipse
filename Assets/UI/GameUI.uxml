@@ -1,8 +1,20 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/styles.uss?fileID=7433441132597879392&amp;guid=cb1d2706049614e018463c0d001025a6&amp;type=3#styles"/>
     <Style src="project://database/Assets/UI/MenuStyles.uss?fileID=7433441132597879392&amp;guid=34018f246eda05847ac2c1594faa96b4&amp;type=3#MenuStyles"/>
-    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; margin-top: 64px; margin-right: 64px; margin-bottom: 64px; margin-left: 64px;">
-        <ui:Button text="" name="Back" class="menu-back-button"/>
+        <Style src="GameUI.uss"/>    <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; margin-top: 64px; margin-right: 64px; margin-bottom: 64px; margin-left: 64px;">
+        <ui:VisualElement name="TopBar" picking-mode="Ignore" class="game-top-bar">
+            <ui:Button text="" name="Back" class="menu-back-button game-back-button"/>
+            <ui:VisualElement name="PlayerPanel" picking-mode="Ignore" class="game-player-panel">
+                <ui:VisualElement name="PlayerOneRow" picking-mode="Ignore" class="game-player-row">
+                    <ui:Label text="Player 1" name="PlayerOneLabel" class="game-player-label"/>
+                    <ui:VisualElement name="PlayerOneIcon" picking-mode="Ignore" class="game-player-icon"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="PlayerTwoRow" picking-mode="Ignore" class="game-player-row">
+                    <ui:Label text="Player 2" name="PlayerTwoLabel" class="game-player-label"/>
+                    <ui:VisualElement name="PlayerTwoIcon" picking-mode="Ignore" class="game-player-icon game-player-icon--second"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1;"/>
     </ui:VisualElement>
 </ui:UXML>

@@ -56,6 +56,8 @@ namespace Game.Presentation.AnimationSystems
 
         public void HideGameElements()
         {
+            _cardAligner.Clear();
+            _boardPresenter.Clear();
             _staticGameElements.SetActive(false);
             foreach (Transform element in _dynamicGameElements)
             {

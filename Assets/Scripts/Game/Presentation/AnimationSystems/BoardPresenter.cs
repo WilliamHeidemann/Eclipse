@@ -173,5 +173,10 @@ namespace Game.Presentation.AnimationSystems
             Button slot = _buttons[position];
             
         }
+
+        public void Clear()
+        {
+            _pins.Clear();
+        }
     }
 }

@@ -54,6 +54,12 @@ namespace Game.Presentation.AnimationSystems
             return false;
         }
 
+        public void Clear()
+        {
+            _cards.Clear();
+            _lookup.Clear();
+        }
+
         private void AlignCards(List<Transform> cards)
         {
             // 0 -> []

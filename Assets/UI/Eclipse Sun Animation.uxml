@@ -1,5 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Target" style="flex-grow: 1; -unity-background-scale-mode: scale-to-fit;">
-        <ui:Label text="ECLIPSE" style="flex-grow: 1; -unity-text-align: middle-center; font-size: 72px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); color: rgb(255, 255, 255); letter-spacing: 26px; margin-top: 70%;"/>
+    <ui:VisualElement name="Target" picking-mode="Ignore" style="flex-grow: 1; -unity-background-scale-mode: scale-to-fit;">
+        <ui:Label text="ECLIPSE" picking-mode="Ignore" style="flex-grow: 1; -unity-text-align: middle-center; font-size: 72px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); color: rgb(255, 255, 255); letter-spacing: 26px; margin-top: 70%;"/>
     </ui:VisualElement>
 </ui:UXML>

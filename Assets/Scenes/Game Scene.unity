@@ -2276,6 +2276,7 @@ MonoBehaviour:
   _audioService: {fileID: 1009087377}
   _dynamicGameElements: {fileID: 1681708509}
   _staticGameElements: {fileID: 2122679974}
+  _uiManager: {fileID: 1258151632}
 --- !u!1 &1681708508
 GameObject:
   m_ObjectHideFlags: 0

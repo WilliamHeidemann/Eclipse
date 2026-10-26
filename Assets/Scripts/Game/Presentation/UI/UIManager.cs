@@ -1,6 +1,7 @@
 using System;
 using FMODUnity;
 using Game.Domain.Models.Dto;
+using Game.Domain.Models.Organisms;
 using Game.Presentation.AnimationSystems;
 using Game.Presentation.Audio;
 using Game.Presentation.UI.Menus;
@@ -44,6 +45,20 @@ namespace Game.Presentation.UI
         public event Action<User> FriendRequestAccepted;
         public event Action<string> GameRequestSent;
         public event Action<User> GameRequestAccepted;
+
+        private const float InactivePlayerOpacity = 0.4f;
+        private VisualElement _playerOneRow;
+        private VisualElement _playerTwoRow;
+        private Team _currentTurn = Team.Red;
+
+        public void ShowTurn(Team toPlay)
+        {
+            _currentTurn = toPlay;
+            if (_playerOneRow == null || _playerTwoRow == null) return;
+
+            _playerOneRow.style.opacity = toPlay == Team.Red ? 1f : InactivePlayerOpacity;
+            _playerTwoRow.style.opacity = toPlay == Team.Yellow ? 1f : InactivePlayerOpacity;
+        }
 
         public void SetPlayerName(string playerName) => _playerName.text = playerName;
         public void ShowFriend(User user) => _friends.Add(user);
@@ -270,6 +285,10 @@ namespace Game.Presentation.UI
             root.style.display = DisplayStyle.None;
             SimpleDisplayMenu menu = new(root);
             _stateMachine.Register(UIState.GameUI, menu);
+
+            _playerOneRow = root.Q<VisualElement>("PlayerOneRow");
+            _playerTwoRow = root.Q<VisualElement>("PlayerTwoRow");
+            ShowTurn(_currentTurn);
 
             root.Q<Button>("Back").clicked += HideGameUI;
             void HideGameUI()

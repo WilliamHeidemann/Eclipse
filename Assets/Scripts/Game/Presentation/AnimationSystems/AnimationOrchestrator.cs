@@ -3,6 +3,7 @@ using Game.Domain;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
 using Game.Presentation.Audio;
+using Game.Presentation.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Position = Game.Domain.Models.Organisms.Position;
@@ -19,6 +20,7 @@ namespace Game.Presentation.AnimationSystems
         [SerializeField] private FmodAudioService _audioService;
         [SerializeField] private Transform _dynamicGameElements;
         [SerializeField] private GameObject _staticGameElements;
+        [SerializeField] private UIManager _uiManager;
 
         private readonly AnimationQueue _animationQueue = new();
         private PlayCoordinator _playCoordinator;
@@ -74,7 +76,7 @@ namespace Game.Presentation.AnimationSystems
 
         private void ShowWhoseTurnItIs(Team toPlay)
         {
-            Debug.Log($"To play: {toPlay}");
+            _uiManager.ShowTurn(toPlay);
         }
 
         public void PlayInvalidMove(Position position)

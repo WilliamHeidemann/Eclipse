@@ -238,8 +238,8 @@ MonoBehaviour:
   _uiDocument: {fileID: 105310682}
   _cardSprites: {fileID: 11400000, guid: 025669167c8e14af299b7d136124e73c, type: 2}
   _cardShader: {fileID: 2100000, guid: ec38d395c469742b792b40151f599116, type: 2}
-  _redPinPrefab: {fileID: 3263963994508758000, guid: 4b2899faef4764aec9cf10e6a5b8a3f3, type: 3}
-  _yellowPinPrefab: {fileID: 3263963994508758000, guid: 1b0a62a616fd7451b84a09fcdc516a6b, type: 3}
+  _redPinPrefab: {fileID: 3263963994508758000, guid: c85ba0f352854354fb9c29126b52b6cd, type: 3}
+  _yellowPinPrefab: {fileID: 3263963994508758000, guid: 0bce522fdbb61d94eb2c295103522763, type: 3}
   _pinStartTRS: {fileID: 272884480}
   _pinEndRotationScale: {fileID: 16290605}
   _pinGrid: {fileID: 1734935967}

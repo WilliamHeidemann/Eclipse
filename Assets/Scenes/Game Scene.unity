@@ -243,6 +243,7 @@ MonoBehaviour:
   _pinStartTRS: {fileID: 272884480}
   _pinEndRotationScale: {fileID: 16290605}
   _pinGrid: {fileID: 1734935967}
+  _pinDepth: 0.3
 --- !u!114 &105310682
 MonoBehaviour:
   m_ObjectHideFlags: 0

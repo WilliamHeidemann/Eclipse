@@ -23,6 +23,7 @@ namespace Game.Presentation.AnimationSystems
         [SerializeField] private Transform _pinStartTRS;
         [SerializeField] private Transform _pinEndRotationScale;
         [SerializeField] private PinGrid _pinGrid;
+        [SerializeField] private float _pinDepth;
 
         public event Action<Position> OnPositionClicked;
 
@@ -116,7 +117,7 @@ namespace Game.Presentation.AnimationSystems
             _pins.Add(position, pin);
 
             var endPosition = _pinGrid.Get(position);
-
+            endPosition += new Vector3(0,0,_pinDepth);
             const float duration = 1f;
 
             LMotion.Create(pin.position, endPosition, duration)

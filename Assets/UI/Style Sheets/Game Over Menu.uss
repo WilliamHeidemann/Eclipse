@@ -1,0 +1,14 @@
+:root {
+}
+
+.game-over-button {
+    height: 14%;
+    width: 42%;
+    font-size: 39px;
+    margin-top: 23px;
+    margin-right: 23px;
+    margin-bottom: 23px;
+    margin-left: 23px;
+    -unity-font-definition: url("project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&type=3#opticenturyschoolbookbold");
+    -unity-font-style: italic;
+}

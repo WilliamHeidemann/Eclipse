@@ -96,7 +96,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/UI.assets.bank
   Name: UI.assets
   StudioPath: bank:/UI.assets
-  lastModified: 639280783284716673
+  lastModified: 639282122301019454
   FileSizes: []
   Exists: 1
 --- !u!114 &-8021933230643154255
@@ -114,7 +114,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.assets.bank
   Name: Master.assets
   StudioPath: bank:/Master.assets
-  lastModified: 639280783284696658
+  lastModified: 639282122300997495
   FileSizes: []
   Exists: 1
 --- !u!114 &-7625720528538125207
@@ -395,7 +395,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639280783284706656
+  lastModified: 639282122301009404
   FileSizes: []
   Exists: 1
 --- !u!114 &-3324857194313043193
@@ -521,7 +521,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 639280783284716673
+  lastModified: 639282122301029506
   FileSizes: []
   Exists: 1
 --- !u!114 &-1885471742014481166
@@ -620,7 +620,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639280783284706656
+  lastModified: 639282122301009404
   FileSizes:
   - Name: 
     Value: 1762
@@ -763,7 +763,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -1501010237459166615}
   cacheVersion: 131861
-  cacheTime: 639280783284716673
+  cacheTime: 639282122301029506
   SerializableEventsDict:
   - key: event:/Game_MechanicSFX/NoSFX
     index: 0
@@ -791,6 +791,8 @@ MonoBehaviour:
     index: 11
   - key: event:/UI/TransitionBack
     index: 12
+  - key: event:/Game_MechanicSFX/YesOpp
+    index: 13
 --- !u!114 &140537043084636727
 MonoBehaviour:
   m_ObjectHideFlags: 0

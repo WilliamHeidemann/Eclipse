@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Game.Cloud;
 using Game.Domain.Models.Dto;
@@ -19,8 +21,12 @@ namespace Game.Presentation
 {
     public class CloudHandler(UIManager uiManager, GameStarter gameStarter)
     {
+        private readonly SemaphoreSlim _syncLock = new(1, 1);
+        private SynchronizationContext _mainThread;
+
         public async Task Initialize()
         {
+            _mainThread = SynchronizationContext.Current;
             await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
             await FriendsService.Instance.InitializeAsync();
@@ -30,12 +36,7 @@ namespace Game.Presentation
             FriendsService.Instance.RelationshipAdded += OnRelationshipAdded;
             FriendsService.Instance.RelationshipDeleted += OnRelationshipDeleted;
 
-            FriendsService.Instance.Friends.Select(r => ToUser(r.Member))
-                .ToList()
-                .ForEach(uiManager.ShowFriend);
-            FriendsService.Instance.IncomingFriendRequests.Select(r => ToUser(r.Member))
-                .ToList()
-                .ForEach(uiManager.ShowFriendRequest);
+            await SyncRelationships();
             string playerName = await AuthenticationService.Instance.GetPlayerNameAsync();
             uiManager.SetPlayerName(playerName);
         }
@@ -45,6 +46,8 @@ namespace Game.Presentation
             uiManager.FriendRequestSent += friendName => RunCloudOperation(
                 FriendsService.Instance.AddFriendByNameAsync(friendName));
             uiManager.FriendRequestAccepted += user => RunCloudOperation(AcceptFriendRequest(user));
+            uiManager.FriendRemoved += user => RunCloudOperation(RemoveFriend(user));
+            uiManager.FriendRequestDeclined += user => RunCloudOperation(DeclineFriendRequest(user));
             uiManager.GameRequestSent += receiverPlayerId => RunCloudOperation(
                 SendGameRequest(AuthenticationService.Instance.PlayerName, receiverPlayerId));
             uiManager.GameRequestAccepted += user => RunCloudOperation(StartMatch(user));
@@ -55,10 +58,22 @@ namespace Game.Presentation
             uiManager.GameRequestAccepted += user => Debug.Log($"Accepted game request from {user}.");
         }
 
+        private async Task RemoveFriend(User user)
+        {
+            await FriendsService.Instance.DeleteFriendAsync(user.Id);
+            await SyncRelationships();
+        }
+
+        private async Task DeclineFriendRequest(User user)
+        {
+            await FriendsService.Instance.DeleteIncomingFriendRequestAsync(user.Id);
+            await SyncRelationships();
+        }
+
         private async Task AcceptFriendRequest(User user)
         {
             await FriendsService.Instance.AddFriendByNameAsync(user.Name);
-            uiManager.RemoveFriendRequest(user);
+            await SyncRelationships();
         }
 
         private SubscriptionEventCallbacks CreateSubscriptionEventCallbacks()
@@ -136,41 +151,34 @@ namespace Game.Presentation
             Debug.Log(success ? "Challenge Friend Success" : "Challenge Friend Failed");
         }
 
+        // Notifications may arrive off the main thread, without profiles and in any order,
+        // so every relationship change re-reads the server state and syncs the UI with it.
         private void OnRelationshipDeleted(IRelationshipDeletedEvent relationshipDeletedEvent)
         {
-            User user = ToUser(relationshipDeletedEvent.Relationship.Member);
-            switch (relationshipDeletedEvent.Relationship.Type)
-            {
-                case RelationshipType.Friend:
-                    uiManager.RemoveFriend(user);
-                    break;
-                case RelationshipType.FriendRequest:
-                    uiManager.RemoveFriendRequest(user);
-                    break;
-                case RelationshipType.Block:
-                    Debug.LogWarning("Block relationship deletion is not handled by the UI.");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            _mainThread.Post(_ => RunCloudOperation(SyncRelationships()), null);
         }
 
         private void OnRelationshipAdded(IRelationshipAddedEvent relationshipAddedEvent)
         {
-            User user = ToUser(relationshipAddedEvent.Relationship.Member);
-            switch (relationshipAddedEvent.Relationship.Type)
+            _mainThread.Post(_ => RunCloudOperation(SyncRelationships()), null);
+        }
+
+        private async Task SyncRelationships()
+        {
+            await _syncLock.WaitAsync();
+            try
             {
-                case RelationshipType.Friend:
-                    uiManager.ShowFriend(user);
-                    break;
-                case RelationshipType.FriendRequest:
-                    uiManager.ShowFriendRequest(user);
-                    break;
-                case RelationshipType.Block:
-                    Debug.LogWarning("Block relationships are not displayed in the UI.");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                await FriendsService.Instance.ForceRelationshipsRefreshAsync();
+                List<User> friends = FriendsService.Instance.Friends.Select(r => ToUser(r.Member)).ToList();
+                List<User> requests = FriendsService.Instance.IncomingFriendRequests
+                    .Select(r => ToUser(r.Member)).ToList();
+                Debug.Log($"Relationships synced: {friends.Count} friends, {requests.Count} incoming requests.");
+                uiManager.SetFriends(friends);
+                uiManager.SetFriendRequests(requests);
+            }
+            finally
+            {
+                _syncLock.Release();
             }
         }
 
@@ -179,7 +187,7 @@ namespace Game.Presentation
             return new User
             {
                 Id = member.Id,
-                Name = member.Profile.Name
+                Name = member.Profile?.Name ?? string.Empty
             };
         }
 

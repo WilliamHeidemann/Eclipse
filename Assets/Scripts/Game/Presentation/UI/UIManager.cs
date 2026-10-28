@@ -43,6 +43,8 @@ namespace Game.Presentation.UI
 
         public event Action<string> FriendRequestSent;
         public event Action<User> FriendRequestAccepted;
+        public event Action<User> FriendRemoved;
+        public event Action<User> FriendRequestDeclined;
         public event Action<string> GameRequestSent;
         public event Action<User> GameRequestAccepted;
 
@@ -89,10 +91,9 @@ namespace Game.Presentation.UI
             _localPlayerName = string.IsNullOrWhiteSpace(playerName) ? DefaultPlayerName : playerName;
             if (_playerName != null) _playerName.text = playerName;
         }
-        public void ShowFriend(User user) => _friends.Add(user);
-        public void RemoveFriend(User user) => _friends.Remove(user.Id);
-        public void ShowFriendRequest(User user) => _friendRequests.Add(user);
-        public void RemoveFriendRequest(User user) => _friendRequests.Remove(user.Id);
+
+        public void SetFriends(System.Collections.Generic.IReadOnlyCollection<User> users) => _friends.Set(users);
+        public void SetFriendRequests(System.Collections.Generic.IReadOnlyCollection<User> users) => _friendRequests.Set(users);
         public void ShowGameRequest(User user) => _gameRequests.Add(user);
         public void RemoveGameRequest(User user) => _gameRequests.Remove(user.Id);
 
@@ -215,6 +216,11 @@ namespace Game.Presentation.UI
                     PlaySound(UISound.RequestSent);
                     GameRequestSent?.Invoke(user.Id);
                 };
+                friend.Q<Button>("Remove").clicked += () =>
+                {
+                    PlaySound(UISound.ButtonClick);
+                    FriendRemoved?.Invoke(user);
+                };
                 return friend;
             }
 
@@ -241,7 +247,7 @@ namespace Game.Presentation.UI
                 request.Q<Button>("Decline").clicked += () =>
                 {
                     PlaySound(UISound.ButtonClick);
-                    RemoveFriendRequest(user);
+                    FriendRequestDeclined?.Invoke(user);
                 };
                 return request;
             }

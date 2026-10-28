@@ -25,6 +25,7 @@ namespace Game.Presentation.UI
         [SerializeField] private PanelRenderer _difficultyMenu;
         [SerializeField] private PanelRenderer _gameUI;
         [SerializeField] private PanelRenderer _creditsMenu;
+        [SerializeField] private PanelRenderer _gameOverMenu;
 
         [Header("UI Templates")] 
         [SerializeField] private VisualTreeAsset _gameRequest;
@@ -77,6 +78,16 @@ namespace Game.Presentation.UI
             _yellowName = localTeam == Team.Red ? opponentName : localName;
             ApplyPlayerNames();
         }
+
+        public void ShowGameOver(Team winner)
+        {
+            _winnerName = winner == Team.Red ? _redName : _yellowName;
+            if (_winnerLabel != null) _winnerLabel.text = _winnerName;
+            _stateMachine.GoTo(UIState.GameOverMenu);
+        }
+
+        private string _winnerName = DefaultPlayerName;
+        private Label _winnerLabel;
 
         private void ApplyPlayerNames()
         {
@@ -132,7 +143,9 @@ namespace Game.Presentation.UI
             _difficultyMenu.gameObject.SetActive(true);
             _creditsMenu.gameObject.SetActive(true);
             _gameUI.gameObject.SetActive(true);
+            _gameOverMenu.gameObject.SetActive(true);
 
+            _gameOverMenu.RegisterUIReloadCallback(RegisterGameOverMenu);
             _mainMenu.RegisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.RegisterUIReloadCallback(RegisterFriendsMenu);
             _difficultyMenu.RegisterUIReloadCallback(RegisterDifficultyMenu);
@@ -142,6 +155,7 @@ namespace Game.Presentation.UI
 
         private void OnDestroy()
         {
+            _gameOverMenu.UnregisterUIReloadCallback(RegisterGameOverMenu);
             _mainMenu.UnregisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.UnregisterUIReloadCallback(RegisterFriendsMenu);
             _difficultyMenu.UnregisterUIReloadCallback(RegisterDifficultyMenu);
@@ -314,6 +328,28 @@ namespace Game.Presentation.UI
                 PlaySound(UISound.BackClick);
                 _stateMachine.GoTo(UIState.MainMenu);
             };
+        }
+
+        private void RegisterGameOverMenu(PanelRenderer panelRenderer, VisualElement root, int version)
+        {
+            root.style.display = DisplayStyle.None;
+            VerticalShiftMenu menu = new(root, true);
+            _stateMachine.Register(UIState.GameOverMenu, menu);
+
+            _winnerLabel = root.Q<Label>("Winner");
+            _winnerLabel.text = _winnerName;
+
+            root.Q<Button>("Back").clicked += BackToMainMenu;
+            root.Q<Button>("BackHome").clicked += BackToMainMenu;
+            root.Q<Button>("Rematch").clicked += () => throw new NotImplementedException();
+
+            void BackToMainMenu()
+            {
+                PlaySound(UISound.MenuTransitionBack);
+                PlaySound(UISound.BackClick);
+                _stateMachine.GoTo(UIState.MainMenu);
+                _animationOrchestrator.HideGameElements();
+            }
         }
 
         private void RegisterGameUI(PanelRenderer panelRenderer, VisualElement root, int version)

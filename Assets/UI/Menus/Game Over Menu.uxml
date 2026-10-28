@@ -2,15 +2,17 @@
     <Style src="project://database/Assets/UI/Style%20Sheets/MenuStyles.uss?fileID=7433441132597879392&amp;guid=34018f246eda05847ac2c1594faa96b4&amp;type=3#MenuStyles"/>
     <Style src="project://database/Assets/UI/Style%20Sheets/Friends%20Menu.uss?fileID=7433441132597879392&amp;guid=45225a7f09b64ef48a623f1dbbf3d3dd&amp;type=3#Friends Menu"/>
     <Style src="project://database/Assets/UI/Style%20Sheets/Game%20Over%20Menu.uss?fileID=7433441132597879392&amp;guid=12c4c0a14d8926c4a87457889a5133d7&amp;type=3#Game Over Menu"/>
-    <ui:VisualElement class="sub-menu" style="flex-grow: 1;">
-        <ui:Button text="" name="Back" class="menu-back-button"/>
-        <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center;">
-            <ui:Label text="Selma#1234" name="Winner" style="font-size: 72px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); -unity-font-style: italic; color: rgb(255, 255, 255);"/>
-            <ui:Label text="Wins" style="font-size: 231px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); -unity-font-style: italic; color: rgb(255, 255, 255);"/>
-        </ui:VisualElement>
-        <ui:VisualElement style="flex-grow: 0.5; justify-content: center; align-items: center;">
-            <ui:Button text="Back Home" name="BackHome" class="menu-secondary-button game-over-button"/>
-            <ui:Button text="Rematch" name="Rematch" class="menu-primary-button game-over-button"/>
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.349);">
+        <ui:VisualElement class="sub-menu" style="flex-grow: 1;">
+            <ui:Button text="" name="Back" class="menu-back-button"/>
+            <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center; background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Decorations/win%20circle.png?fileID=5337050260063605800&amp;guid=2f7cbd9f2241dca449131643f0a802b6&amp;type=3#win circle_0&quot;); -unity-background-scale-mode: scale-to-fit;">
+                <ui:Label text="Selma#1234" name="Winner" style="font-size: 72px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); -unity-font-style: italic; color: rgb(255, 255, 255);"/>
+                <ui:Label text="Wins" style="font-size: 231px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); -unity-font-style: italic; color: rgb(255, 255, 255);"/>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 0.5; justify-content: center; align-items: center;">
+                <ui:Button text="Back Home" name="BackHome" class="menu-secondary-button game-over-button"/>
+                <ui:Button text="Rematch" name="Rematch" class="menu-primary-button game-over-button"/>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

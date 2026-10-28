@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Game.Domain;
 using Game.Domain.Models;
@@ -7,6 +8,7 @@ using Game.Presentation.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Position = Game.Domain.Models.Organisms.Position;
+using Random = UnityEngine.Random;
 
 namespace Game.Presentation.AnimationSystems
 {
@@ -71,7 +73,14 @@ namespace Game.Presentation.AnimationSystems
 
         private void PlayWinAnimation(Team team)
         {
-            Debug.Log($"{team} has won!");
+            _animationQueue.Enqueue(ShowWinScreen);
+            return;
+
+            async Awaitable ShowWinScreen(CancellationToken token)
+            {
+                await Awaitable.NextFrameAsync(token);
+                _uiManager.ShowGameOver(team);
+            }
         }
 
         private void ShowWhoseTurnItIs(Team toPlay)

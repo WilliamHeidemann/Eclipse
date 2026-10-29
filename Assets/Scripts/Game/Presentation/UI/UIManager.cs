@@ -41,11 +41,14 @@ namespace Game.Presentation.UI
         private RequestView _friendRequests;
         private RequestView _gameRequests;
         private Label _playerName;
+        private TextField _playerNameInput;
+        private Button _editPlayerNameButton;
 
         public event Action<string> FriendRequestSent;
         public event Action<User> FriendRequestAccepted;
         public event Action<User> FriendRemoved;
         public event Action<User> FriendRequestDeclined;
+        public event Action<string> PlayerNameChanged;
         public event Action<string> GameRequestSent;
         public event Action<User> GameRequestAccepted;
 
@@ -70,6 +73,7 @@ namespace Game.Presentation.UI
         private Label _playerTwoLabel;
 
         private const string DefaultPlayerName = "Player";
+        private const int MaxPlayerNameLength = 10;
 
         public void ShowPlayerNames(Team localTeam, string opponentName)
         {
@@ -101,6 +105,35 @@ namespace Game.Presentation.UI
         {
             _localPlayerName = string.IsNullOrWhiteSpace(playerName) ? DefaultPlayerName : playerName;
             if (_playerName != null) _playerName.text = playerName;
+        }
+
+        private void BeginEditPlayerName()
+        {
+            string current = _playerName.text ?? string.Empty;
+            int suffixStart = current.IndexOf('#');
+            string baseName = suffixStart >= 0 ? current[..suffixStart] : current;
+            _playerNameInput.value = baseName.Trim();
+            _playerName.style.display = DisplayStyle.None;
+            _editPlayerNameButton.style.display = DisplayStyle.None;
+            _playerNameInput.style.display = DisplayStyle.Flex;
+            _playerNameInput.Focus();
+        }
+
+        private void EndEditPlayerName(bool commit)
+        {
+            if (_playerNameInput.style.display == DisplayStyle.None) return;
+
+            string newName = _playerNameInput.value.Trim().Replace(" ", string.Empty);
+            if (newName.Length > MaxPlayerNameLength) newName = newName[..MaxPlayerNameLength];
+            _playerNameInput.style.display = DisplayStyle.None;
+            _playerName.style.display = DisplayStyle.Flex;
+            _editPlayerNameButton.style.display = DisplayStyle.Flex;
+
+            bool changed = commit && newName.Length > 0 && !_playerName.text.StartsWith(newName + "#");
+            if (!changed) return;
+
+            PlaySound(UISound.ButtonClick);
+            PlayerNameChanged?.Invoke(newName);
         }
 
         public void SetFriends(System.Collections.Generic.IReadOnlyCollection<User> users) => _friends.Set(users);
@@ -216,6 +249,16 @@ namespace Game.Presentation.UI
             _friendRequests = new RequestView(friendRequestsScrollView, CreateFriendRequest);
             _gameRequests = new RequestView(gameRequestsScrollView, CreateGameRequest);
             _playerName = root.Q<Label>("PlayerName");
+            _playerNameInput = root.Q<TextField>("PlayerNameInput");
+            _editPlayerNameButton = root.Q<Button>("EditPlayerNameButton");
+            _playerNameInput.maxLength = MaxPlayerNameLength;
+            _editPlayerNameButton.clicked += BeginEditPlayerName;
+            _playerNameInput.RegisterCallback<KeyDownEvent>(evt =>
+            {
+                if (evt.keyCode is KeyCode.Return or KeyCode.KeypadEnter) EndEditPlayerName(true);
+                else if (evt.keyCode == KeyCode.Escape) EndEditPlayerName(false);
+            });
+            _playerNameInput.RegisterCallback<BlurEvent>(_ => EndEditPlayerName(true));
 
             VisualElement CreateFriend(User user)
             {

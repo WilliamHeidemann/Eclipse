@@ -45,6 +45,7 @@ namespace Game.Presentation
         {
             uiManager.FriendRequestSent += friendName => RunCloudOperation(
                 FriendsService.Instance.AddFriendByNameAsync(friendName));
+            uiManager.PlayerNameChanged += name => RunCloudOperation(ChangePlayerName(name));
             uiManager.FriendRequestAccepted += user => RunCloudOperation(AcceptFriendRequest(user));
             uiManager.FriendRemoved += user => RunCloudOperation(RemoveFriend(user));
             uiManager.FriendRequestDeclined += user => RunCloudOperation(DeclineFriendRequest(user));
@@ -56,6 +57,12 @@ namespace Game.Presentation
             uiManager.FriendRequestAccepted += user => Debug.Log($"Accepted friend request from {user}.");
             uiManager.GameRequestSent += receiverPlayerId => Debug.Log($"Sent game request to {receiverPlayerId}.");
             uiManager.GameRequestAccepted += user => Debug.Log($"Accepted game request from {user}.");
+        }
+
+        private async Task ChangePlayerName(string newName)
+        {
+            string updatedName = await AuthenticationService.Instance.UpdatePlayerNameAsync(newName);
+            uiManager.SetPlayerName(updatedName);
         }
 
         private async Task RemoveFriend(User user)

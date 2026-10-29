@@ -8,7 +8,11 @@
     <ui:VisualElement name="FriendsMenu" class="sub-menu" style="-unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;);">
         <ui:Button name="Back" class="menu-back-button"/>
         <ui:Label text="Welcome" name="Welcome" class="menu-name-label" style="font-size: 22px; color: rgb(214, 214, 214); -unity-font-style: italic;"/>
-        <ui:Label text="&#10;" name="PlayerName" style="font-size: 60px; -unity-text-align: upper-center; -unity-font-style: italic; color: rgb(255, 255, 255); margin-bottom: 135px;"/>
+        <ui:VisualElement name="PlayerNameRow" style="flex-direction: row; justify-content: center; align-items: center; margin-bottom: 135px;">
+            <ui:Label text="&#10;" name="PlayerName" style="font-size: 60px; -unity-text-align: upper-center; -unity-font-style: italic; color: rgb(255, 255, 255);"/>
+            <ui:TextField name="PlayerNameInput" max-length="10" style="display: none; min-width: 300px; font-size: 40px;"/>
+            <ui:Button name="EditPlayerNameButton" style="width: 50px; height: 50px; margin-left: 20px; padding: 0; border-width: 0; background-color: rgba(0, 0, 0, 0); background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Menu%20Elements/pen.png?fileID=21300000&amp;guid=bb6ebf24de7214c89ba94aef5e4aef12&amp;type=3#pen&quot;);"/>
+        </ui:VisualElement>
         <ui:ScrollView name="FriendsContentScrollView" horizontal-scroller-visibility="Hidden" style="flex-grow: 1;">
             <ui:VisualElement name="SendRequest" class="request-section" style="flex-grow: 0;">
                 <ui:Label text="Send Friend Request" name="SendRequestLabel" class="menu-section-heading"/>

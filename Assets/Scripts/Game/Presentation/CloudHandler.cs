@@ -37,7 +37,19 @@ namespace Game.Presentation
             FriendsService.Instance.RelationshipDeleted += OnRelationshipDeleted;
 
             await SyncRelationships();
+            await DiscardDefaultUnityName();
+        }
+
+        private async Task DiscardDefaultUnityName()
+        {
             string playerName = await AuthenticationService.Instance.GetPlayerNameAsync();
+            int discriminatorIndex = playerName.IndexOf('#');
+            string baseName = discriminatorIndex >= 0 ? playerName[..discriminatorIndex] : playerName;
+            if (baseName.Length > 10)
+            {
+                playerName = await AuthenticationService.Instance.UpdatePlayerNameAsync("Player");
+            }
+
             uiManager.SetPlayerName(playerName);
         }
 

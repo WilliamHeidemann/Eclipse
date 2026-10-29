@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Game.Domain.Models;
@@ -30,6 +32,9 @@ public class GameLogicService(IGameApiClient gameApiClient)
 
         GameState gameState = GameState.CreateInitial();
         ApiResponse<SetItemResponse> setMatchResponse = await SetGameState(context, matchId, gameState);
+
+        await AddActiveMatch(context, context.PlayerId, matchId);
+        await AddActiveMatch(context, opponentId, matchId);
 
         Team myTeam = GetTeam(context.PlayerId, teams);
         ClientGameState clientGameState = gameState.ToClientGameState(myTeam);
@@ -100,6 +105,12 @@ public class GameLogicService(IGameApiClient gameApiClient)
             return new MoveRequestResult { WasValid = false };
         }
 
+        // The winner has seen the result. The opponent's entry and the match data are cleared once they fetch it.
+        if (HasWon(next, team) && context.PlayerId != null)
+        {
+            await RemoveActiveMatch(context, context.PlayerId, matchId);
+        }
+
         return new MoveRequestResult { WasValid = true, UpdatedGameState = next.ToClientGameState(team) };
     }
 
@@ -109,7 +120,83 @@ public class GameLogicService(IGameApiClient gameApiClient)
     {
         GameState gameState = await GetGameState(context, matchId);
         Team team = await GetMyTeam(context, matchId);
-        return gameState.ToClientGameState(team);
+        ClientGameState clientGameState = gameState.ToClientGameState(team);
+
+        if (HasWon(gameState, team.Opposing()))
+        {
+            await DeleteMatchData(context, matchId);
+        }
+
+        return clientGameState;
+    }
+
+    [CloudCodeFunction]
+    public async Task<List<string>> GetActiveMatchIds(IExecutionContext context)
+    {
+        if (context.PlayerId == null) throw new NullReferenceException("context.PlayerId is null");
+
+        List<string> matchIds = [];
+        string? after = null;
+        do
+        {
+            ApiResponse<GetKeysResponse> response = await gameApiClient.CloudSaveData.GetPrivateCustomKeysAsync(
+                context,
+                context.ServiceToken,
+                context.ProjectId,
+                PlayerMatchesId(context.PlayerId),
+                after);
+
+            matchIds.AddRange(response.Data.Results.Select(key => key.Key));
+            after = response.Data.Links?.Next;
+        } while (!string.IsNullOrEmpty(after));
+
+        return matchIds;
+    }
+
+    private static bool HasWon(GameState gameState, Team team)
+    {
+        return gameState.Sequences.Count(sequence => sequence.Team == team) >= 2;
+    }
+
+    private static string PlayerMatchesId(string playerId) => $"player-matches-{playerId}";
+
+    private async Task AddActiveMatch(IExecutionContext context, string playerId, string matchId)
+    {
+        await gameApiClient.CloudSaveData.SetPrivateCustomItemAsync(
+            context,
+            context.ServiceToken,
+            context.ProjectId,
+            PlayerMatchesId(playerId),
+            new SetItemBody(matchId, true));
+    }
+
+    private async Task RemoveActiveMatch(IExecutionContext context, string playerId, string matchId)
+    {
+        await gameApiClient.CloudSaveData.DeletePrivateCustomItemAsync(
+            context,
+            context.ServiceToken,
+            context.ProjectId,
+            PlayerMatchesId(playerId),
+            matchId);
+    }
+
+    private async Task DeleteMatchData(IExecutionContext context, string matchId)
+    {
+        ApiResponse<GetItemsResponse> response = await gameApiClient.CloudSaveData.GetPrivateCustomItemsAsync(
+            context,
+            context.ServiceToken,
+            context.ProjectId,
+            matchId,
+            ["teams"]);
+
+        string rawJson = JsonConvert.SerializeObject(response.Data.Results[0].Value);
+        Teams teams = JsonConvert.DeserializeObject<Teams>(rawJson)
+                      ?? throw new JsonException("Could not deserialize teams.");
+
+        await RemoveActiveMatch(context, teams.Red, matchId);
+        await RemoveActiveMatch(context, teams.Yellow, matchId);
+        await gameApiClient.CloudSaveData.DeletePrivateCustomItemsAsync(
+            context, context.ServiceToken, context.ProjectId, matchId);
     }
 
     private async Task<Team> GetMyTeam(IExecutionContext context, string matchId)
@@ -161,9 +248,8 @@ public class GameLogicService(IGameApiClient gameApiClient)
     [CloudCodeFunction]
     public async Task<bool> DeleteMatch(IExecutionContext context, string matchId)
     {
-        var result = await gameApiClient.CloudSaveData.DeletePrivateCustomItemsAsync(context,
-            context.ServiceToken, context.ProjectId, matchId);
-
-        return result.StatusCode == HttpStatusCode.OK;
+        await GetMyTeam(context, matchId); // Throws if the caller is not part of the match.
+        await DeleteMatchData(context, matchId);
+        return true;
     }
 }

@@ -157,25 +157,9 @@ namespace Game.Presentation
             }
         }
 
-        private async Task OnDestroy()
-        {
-            await TearDownGame();
-        }
-
-        private async Awaitable TearDownGame()
-        {
-            if (_matchId.IsSome(out string matchId))
-            {
-                GameLogicServiceBindings gameLogicServiceBindings = new();
-                bool success = await gameLogicServiceBindings.DeleteMatch(matchId);
-                Debug.Log(success);
-            }
-        }
-
         public void EndGame()
         {
             _animationOrchestrator.HideGameElements();
-            TearDownGame().Forget();
         }
     }
 }

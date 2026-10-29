@@ -50,6 +50,16 @@ namespace Unity.Services.CloudCode.GeneratedBindings
                 });
         }
 
+        public async Task<List<string>> GetActiveMatchIds()
+        {
+            return await k_Service.CallModuleEndpointAsync<List<string>>(
+                "EclipseModule",
+                "GetActiveMatchIds",
+                new Dictionary<string, object>()
+                {
+                });
+        }
+
         public async Task<bool> DeleteMatch(string matchId)
         {
             return await k_Service.CallModuleEndpointAsync<bool>(

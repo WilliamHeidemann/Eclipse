@@ -638,19 +638,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\William\\.nuget\\packages\\": {}
+    "/Users/dkWiSkHe/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\UnityProjects\\Eclipse\\EclipseModule\\Project\\EclipseModule.csproj",
+      "projectUniqueName": "/Users/dkWiSkHe/Unity/SEQUENCE/EclipseModule/Project/EclipseModule.csproj",
       "projectName": "EclipseModule",
-      "projectPath": "C:\\UnityProjects\\Eclipse\\EclipseModule\\Project\\EclipseModule.csproj",
-      "packagesPath": "C:\\Users\\William\\.nuget\\packages\\",
-      "outputPath": "C:\\UnityProjects\\Eclipse\\EclipseModule\\Project\\obj\\",
+      "projectPath": "/Users/dkWiSkHe/Unity/SEQUENCE/EclipseModule/Project/EclipseModule.csproj",
+      "packagesPath": "/Users/dkWiSkHe/.nuget/packages/",
+      "outputPath": "/Users/dkWiSkHe/Unity/SEQUENCE/EclipseModule/Project/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\William\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/dkWiSkHe/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -674,7 +674,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -704,12 +704,22 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[9.0.13, 9.0.13]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.13, 9.0.13]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.320/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

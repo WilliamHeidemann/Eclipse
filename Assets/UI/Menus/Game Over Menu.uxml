@@ -6,8 +6,8 @@
         <ui:VisualElement class="sub-menu" style="flex-grow: 1;">
             <ui:Button text="" name="Back" class="menu-back-button"/>
             <ui:VisualElement style="flex-grow: 1; justify-content: center; align-items: center; background-image: url(&quot;project://database/Assets/Sprites/UI%20Assets/Decorations/win%20circle.png?fileID=5337050260063605800&amp;guid=2f7cbd9f2241dca449131643f0a802b6&amp;type=3#win circle_0&quot;); -unity-background-scale-mode: scale-to-fit;">
-                <ui:Label text="Selma#1234" name="Winner" style="font-size: 72px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); -unity-font-style: italic; color: rgb(255, 255, 255);"/>
-                <ui:Label text="Wins" style="font-size: 231px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); -unity-font-style: italic; color: rgb(255, 255, 255);"/>
+                <ui:Label text="Selma#1234" name="Winner" style="font-size: 58px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); -unity-font-style: italic; color: rgb(255, 255, 255); -unity-text-align: middle-center;"/>
+                <ui:Label text="Wins" style="font-size: 156px; -unity-font-definition: url(&quot;project://database/Assets/Font/opticenturyschoolbookbold.otf?fileID=12800000&amp;guid=fcc67d2f5a2ac3b4aa8027e1fdb59932&amp;type=3#opticenturyschoolbookbold&quot;); -unity-font-style: italic; color: rgb(255, 255, 255); -unity-text-align: middle-center;"/>
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 0.5; justify-content: center; align-items: center;">
                 <ui:Button text="Back Home" name="BackHome" class="menu-secondary-button game-over-button"/>

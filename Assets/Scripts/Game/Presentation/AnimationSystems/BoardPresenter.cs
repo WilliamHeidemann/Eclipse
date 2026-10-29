@@ -56,6 +56,9 @@ namespace Game.Presentation.AnimationSystems
 
                     Button slot = slotPair.visualSlot.Q<Button>("Slot");
 
+                    slot.Q<VisualElement>("Highlight").style.unityBackgroundImageTintColor =
+                        new StyleColor(new Color(0f, 0f, 0f, 0f));
+                    
                     Card card = BoardLayout.Get(position);
 
                     slot.style.backgroundImage = new StyleBackground(_cardSprites.GetBoardSprite(card.Symbol));
@@ -189,12 +192,16 @@ namespace Game.Presentation.AnimationSystems
         public void Highlight(Position position)
         {
             Button slot = _buttons[position];
-            
+            slot.Q<VisualElement>("Highlight").style.unityBackgroundImageTintColor = new StyleColor(Color.white);
         }
 
         public void Clear()
         {
             _pins.Clear();
+            foreach (Button button in _buttons.Values)
+            {
+                button.Q<VisualElement>("Highlight").style.unityBackgroundImageTintColor = new StyleColor(new Color(0, 0, 0, 0));
+            }
         }
     }
 }

@@ -86,7 +86,7 @@ namespace Game.Presentation.UI
         public void ShowGameOver(Team winner)
         {
             _winnerName = winner == Team.Red ? _redName : _yellowName;
-            if (_winnerLabel != null) _winnerLabel.text = _winnerName;
+            if (_winnerLabel != null) _winnerLabel.text = _winnerName.Split("#")[0];
             _stateMachine.GoTo(UIState.GameOverMenu);
         }
 
@@ -95,8 +95,8 @@ namespace Game.Presentation.UI
 
         private void ApplyPlayerNames()
         {
-            if (_playerOneLabel != null) _playerOneLabel.text = _redName;
-            if (_playerTwoLabel != null) _playerTwoLabel.text = _yellowName;
+            if (_playerOneLabel != null) _playerOneLabel.text = _redName.Split("#")[0];
+            if (_playerTwoLabel != null) _playerTwoLabel.text = _yellowName.Split("#")[0];
         }
 
         private static string BotName(BotDifficulty difficulty) => $"{difficulty} Bot";

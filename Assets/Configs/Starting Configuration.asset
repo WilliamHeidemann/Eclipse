@@ -75,10 +75,3 @@ MonoBehaviour:
       _rank: 0
       _symbol: 0
     _team: 0
-  - _serializedPosition:
-      _row: 3
-      _column: 0
-    _serializedCard:
-      _rank: 0
-      _symbol: 0
-    _team: 0

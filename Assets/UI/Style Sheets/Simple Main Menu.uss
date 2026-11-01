@@ -61,3 +61,13 @@
     margin-bottom: 20px;
     margin-left: 20px;
 }
+
+.icon-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -60px;
+    -unity-text-align: upper-center;
+    font-size: 32px;
+    color: rgb(255, 255, 255);
+}

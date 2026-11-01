@@ -23,7 +23,7 @@ namespace Game.Presentation
         [SerializeField] private BoardPresenter _boardPresenter;
         [SerializeField] private AnimationOrchestrator _animationOrchestrator;
         [SerializeField] private StartingConfiguration _startingConfiguration;
-        
+
         private PlayCoordinator _playCoordinator;
         private Option<string> _matchId;
         private HeartBeat _heartBeat;
@@ -31,31 +31,31 @@ namespace Game.Presentation
         private void BindToPresentation(PlayCoordinator playCoordinator)
         {
             _animationOrchestrator.BindAnimations(playCoordinator);
-            playCoordinator.RaiseStartGameEvents();
             _boardPresenter.OnPositionClicked += HandlePositionClicked;
         }
 
         public void StartLocalGame(BotDifficulty difficulty)
         {
             _animationOrchestrator.ShowStaticGameElements();
-            
+
             GameState gameState = _startingConfiguration.UseDevelopmentStartingState
                 ? _startingConfiguration.DevelopmentGameState()
                 : GameState.CreateInitial();
-            
-            if (_startingConfiguration.UseDevelopmentStartingState)
-            {
-                foreach (Move preMove in gameState.Moves)
-                {
-                    _animationOrchestrator.PlayDiscardAndPinAnimation(preMove);
-                }
-            }
-            
+
             _playCoordinator = CreateLocalPlayCoordinator(gameState, difficulty);
 
             BindToPresentation(_playCoordinator);
+
+            if (_startingConfiguration.UseDevelopmentStartingState)
+            {
+                _animationOrchestrator.SnapToGameState(gameState.ToClientGameState(gameState.ToPlay));
+            }
+            else
+            {
+                _playCoordinator.RaiseStartGameEvents();
+            }
         }
-        
+
         public PlayCoordinator CreateLocalPlayCoordinator(GameState gameState, BotDifficulty difficulty)
         {
             ClientGameState clientGameState = gameState.ToClientGameState(gameState.ToPlay);
@@ -100,6 +100,7 @@ namespace Game.Presentation
             _playCoordinator.OnValidMoveRequest += async _ => await NotifyOpponent(opponentId);
             _matchId = Option<string>.Some(match.Id);
             BindToPresentation(_playCoordinator);
+            _playCoordinator.RaiseStartGameEvents();
             _heartBeat = new HeartBeat(match.Id, _playCoordinator);
             _heartBeat.RunAsync().Forget();
         }

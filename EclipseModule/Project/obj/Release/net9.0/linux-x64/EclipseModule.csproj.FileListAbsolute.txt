@@ -22,3 +22,15 @@ C:/UnityProjects/Eclipse/EclipseModule/Project/obj/Release/net9.0/linux-x64/Ecli
 C:/UnityProjects/Eclipse/EclipseModule/Project/obj/Release/net9.0/linux-x64/refint/EclipseModule.dll
 C:/UnityProjects/Eclipse/EclipseModule/Project/obj/Release/net9.0/linux-x64/EclipseModule.pdb
 C:/UnityProjects/Eclipse/EclipseModule/Project/obj/Release/net9.0/linux-x64/ref/EclipseModule.dll
+C:\UnityProjects\Eclipse\EclipseModule\Project\bin\Release\net9.0\linux-x64\EclipseModule.deps.json
+C:\UnityProjects\Eclipse\EclipseModule\Project\bin\Release\net9.0\linux-x64\EclipseModule.dll
+C:\UnityProjects\Eclipse\EclipseModule\Project\bin\Release\net9.0\linux-x64\EclipseModule.pdb
+C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Release\net9.0\linux-x64\EclipseModule.csproj.AssemblyReference.cache
+C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Release\net9.0\linux-x64\EclipseModule.GeneratedMSBuildEditorConfig.editorconfig
+C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Release\net9.0\linux-x64\EclipseModule.AssemblyInfoInputs.cache
+C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Release\net9.0\linux-x64\EclipseModule.AssemblyInfo.cs
+C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Release\net9.0\linux-x64\EclipseModule.csproj.CoreCompileInputs.cache
+C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Release\net9.0\linux-x64\EclipseModule.dll
+C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Release\net9.0\linux-x64\refint\EclipseModule.dll
+C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Release\net9.0\linux-x64\EclipseModule.pdb
+C:\UnityProjects\Eclipse\EclipseModule\Project\obj\Release\net9.0\linux-x64\ref\EclipseModule.dll

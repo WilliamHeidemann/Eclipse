@@ -37,6 +37,7 @@ namespace Game.Presentation
         public void StartLocalGame(BotDifficulty difficulty)
         {
             _animationOrchestrator.ShowStaticGameElements();
+            LeaveGame();
 
             GameState gameState = _startingConfiguration.UseDevelopmentStartingState
                 ? _startingConfiguration.DevelopmentGameState()
@@ -95,14 +96,50 @@ namespace Game.Presentation
 
         public void StartGame(Match match, string opponentId)
         {
+            PrepareOnlineGame(match, opponentId);
+            _playCoordinator.RaiseStartGameEvents();
+            StartHeartBeat(match);
+        }
+
+        public void ResumeGame(Match match, string opponentId)
+        {
+            PrepareOnlineGame(match, opponentId);
+            _animationOrchestrator.SnapToGameState(match.ClientGameState);
+            _playCoordinator.RaiseWinIfGameOver();
+            StartHeartBeat(match);
+        }
+
+        private void PrepareOnlineGame(Match match, string opponentId)
+        {
             _animationOrchestrator.ShowStaticGameElements();
             _playCoordinator = CreatePlayCoordinator(match);
             _playCoordinator.OnValidMoveRequest += async _ => await NotifyOpponent(opponentId);
             _matchId = Option<string>.Some(match.Id);
             BindToPresentation(_playCoordinator);
-            _playCoordinator.RaiseStartGameEvents();
+        }
+
+        private void StartHeartBeat(Match match)
+        {
+            _heartBeat?.Stop();
             _heartBeat = new HeartBeat(match.Id, _playCoordinator);
             _heartBeat.RunAsync().Forget();
+        }
+
+        public void LeaveGame()
+        {
+            _heartBeat?.Stop();
+            _heartBeat = null;
+            _playCoordinator = null;
+            _matchId = Option<string>.None;
+        }
+
+        // Only the losing player's acknowledgement deletes the match, so they get to see the result first.
+        public async Task AcknowledgeGameOver()
+        {
+            if (!_matchId.IsSome(out string matchId)) return;
+
+            GameLogicServiceBindings gameLogicServiceBindings = new();
+            await gameLogicServiceBindings.AcknowledgeGameOver(matchId);
         }
 
         private async Task NotifyOpponent(string opponentId)
@@ -127,7 +164,7 @@ namespace Game.Presentation
 
         public async Task OnNewMovePushMessageReceived(string matchId)
         {
-            if (_playCoordinator != null)
+            if (_playCoordinator != null && _matchId.IsSome(out string currentMatchId) && currentMatchId == matchId)
             {
                 await _playCoordinator.CheckIfOpponentPlayed(matchId);
             }
@@ -150,6 +187,7 @@ namespace Game.Presentation
         {
             try
             {
+                if (_playCoordinator == null) return;
                 await _playCoordinator.PositionClicked(position);
             }
             catch (Exception e)

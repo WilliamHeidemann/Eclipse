@@ -63,6 +63,17 @@ namespace Game.Domain
             OnTurnPassedTo?.Invoke(_clientGameState.Team);
         }
 
+        public void RaiseWinIfGameOver()
+        {
+            foreach (Team team in Enum.GetValues(typeof(Team)))
+            {
+                if (_clientGameState.Sequences.Count(s => s.Team == team) >= 2)
+                {
+                    OnTeamWon?.Invoke(team);
+                }
+            }
+        }
+
         public async Task CheckIfOpponentPlayed(string matchId)
         {
             ClientGameState clientGameState = await _gameServer.GetClientGameState(matchId);

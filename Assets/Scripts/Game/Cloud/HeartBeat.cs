@@ -10,6 +10,9 @@ namespace Game.Cloud
         private readonly string _matchId;
         private readonly PlayCoordinator _playCoordinator;
         private readonly TimeSpan _interval = TimeSpan.FromSeconds(5);
+        private bool _stopped;
+
+        public void Stop() => _stopped = true;
 
         public HeartBeat(string matchId, PlayCoordinator playCoordinator)
         {
@@ -19,11 +22,12 @@ namespace Game.Cloud
 
         public async Awaitable RunAsync()
         {
-            while (true)
+            while (!_stopped)
             {
                 try
                 {
                     await Awaitable.WaitForSecondsAsync((float)_interval.TotalSeconds);
+                    if (_stopped) break;
                     await _playCoordinator.CheckIfOpponentPlayed(_matchId);
                 }
                 catch (OperationCanceledException)

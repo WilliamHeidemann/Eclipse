@@ -138,6 +138,17 @@ namespace Game.Cloud
                 clientGameState.IsMyTurn);
         }
 
+        public static OngoingMatch ToModel(this Dto.OngoingMatch match)
+        {
+            return new OngoingMatch
+            {
+                Id = match.Id,
+                OpponentId = match.OpponentId,
+                LastMoveUnixMs = match.LastMoveUnixMs,
+                ClientGameState = match.ClientGameState.ToModel()
+            };
+        }
+
         public static Match ToModel(this Dto.Match match)
         {
             return new Match

@@ -32,6 +32,7 @@ public class GameLogicService(IGameApiClient gameApiClient)
 
         GameState gameState = GameState.CreateInitial();
         ApiResponse<SetItemResponse> setMatchResponse = await SetGameState(context, matchId, gameState);
+        await SetLastMove(context, matchId);
 
         await AddActiveMatch(context, context.PlayerId, matchId);
         await AddActiveMatch(context, opponentId, matchId);
@@ -105,6 +106,8 @@ public class GameLogicService(IGameApiClient gameApiClient)
             return new MoveRequestResult { WasValid = false };
         }
 
+        await SetLastMove(context, matchId);
+
         // The winner has seen the result. The opponent's entry and the match data are cleared once they fetch it.
         if (HasWon(next, team) && context.PlayerId != null)
         {
@@ -122,12 +125,19 @@ public class GameLogicService(IGameApiClient gameApiClient)
         Team team = await GetMyTeam(context, matchId);
         ClientGameState clientGameState = gameState.ToClientGameState(team);
 
-        if (HasWon(gameState, team.Opposing()))
-        {
-            await DeleteMatchData(context, matchId);
-        }
-
         return clientGameState;
+    }
+
+    // The loser calls this after seeing the result; the winner already removed their own entry on winning.
+    [CloudCodeFunction]
+    public async Task<bool> AcknowledgeGameOver(IExecutionContext context, string matchId)
+    {
+        GameState gameState = await GetGameState(context, matchId);
+        Team team = await GetMyTeam(context, matchId);
+        if (!HasWon(gameState, team.Opposing())) return false;
+
+        await DeleteMatchData(context, matchId);
+        return true;
     }
 
     [CloudCodeFunction]
@@ -151,6 +161,60 @@ public class GameLogicService(IGameApiClient gameApiClient)
         } while (!string.IsNullOrEmpty(after));
 
         return matchIds;
+    }
+
+    [CloudCodeFunction]
+    public async Task<List<OngoingMatch>> GetOngoingMatches(IExecutionContext context)
+    {
+        if (context.PlayerId == null) throw new NullReferenceException("context.PlayerId is null");
+
+        List<string> matchIds = await GetActiveMatchIds(context);
+        OngoingMatch?[] matches = await Task.WhenAll(matchIds.Select(id => LoadOngoingMatch(context, id)));
+        return matches.OfType<OngoingMatch>().ToList();
+    }
+
+    private async Task<OngoingMatch?> LoadOngoingMatch(IExecutionContext context, string matchId)
+    {
+        ApiResponse<GetItemsResponse> response = await gameApiClient.CloudSaveData.GetPrivateCustomItemsAsync(
+            context,
+            context.ServiceToken,
+            context.ProjectId,
+            matchId,
+            ["teams", "gameState", "lastMoveUnixMs"]);
+
+        Item? teamsItem = response.Data.Results.FirstOrDefault(item => item.Key == "teams");
+        Item? gameStateItem = response.Data.Results.FirstOrDefault(item => item.Key == "gameState");
+        // The match data is removed once the winner has been seen, so the match is no longer ongoing.
+        if (teamsItem == null || gameStateItem == null) return null;
+
+        Teams teams = JsonConvert.DeserializeObject<Teams>(JsonConvert.SerializeObject(teamsItem.Value))
+                      ?? throw new JsonException("Could not deserialize teams.");
+        GameState gameState = JsonConvert.DeserializeObject<GameState>(JsonConvert.SerializeObject(gameStateItem.Value))
+                              ?? throw new JsonException("Could not deserialize game state.");
+        Item? lastMoveItem = response.Data.Results.FirstOrDefault(item => item.Key == "lastMoveUnixMs");
+        long lastMove = lastMoveItem == null
+            ? 0
+            : JsonConvert.DeserializeObject<long>(JsonConvert.SerializeObject(lastMoveItem.Value));
+
+        string playerId = context.PlayerId!;
+        Team team = GetTeam(playerId, teams);
+        return new OngoingMatch
+        {
+            Id = matchId,
+            OpponentId = team == Team.Red ? teams.Yellow : teams.Red,
+            LastMoveUnixMs = lastMove,
+            ClientGameState = gameState.ToClientGameState(team)
+        };
+    }
+
+    private async Task SetLastMove(IExecutionContext context, string matchId)
+    {
+        await gameApiClient.CloudSaveData.SetPrivateCustomItemAsync(
+            context,
+            context.ServiceToken,
+            context.ProjectId,
+            matchId,
+            new SetItemBody("lastMoveUnixMs", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()));
     }
 
     private static bool HasWon(GameState gameState, Team team)

@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="/Assets/UI/Style Sheets/styles.uss"/>
+    <Style src="/Assets/UI/Style Sheets/MenuStyles.uss"/>
+    <Style src="/Assets/UI/Style Sheets/OngoingGame.uss"/>
+    <ui:VisualElement name="OngoingGame" class="menu-font ongoing-game">
+        <ui:VisualElement name="Info" class="ongoing-game-info menu-request-panel">
+            <ui:Label text="Selma" name="Name" class="ongoing-game-name menu-name-label"/>
+            <ui:Label text="5 min ago" name="LastMove" class="ongoing-game-last-move"/>
+        </ui:VisualElement>
+        <ui:Button text="&gt;" name="Open" class="ongoing-game-open menu-primary-button"/>
+    </ui:VisualElement>
+</ui:UXML>

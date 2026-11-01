@@ -9,6 +9,8 @@ public class StateMachine
     private UIState _state = UIState.MainMenu;
     private readonly Dictionary<UIState, IMenu> _menus = new();
 
+    public event Action<UIState> StateEntered;
+
     public void GoTo(UIState state)
     {
         if (state == _state) return;
@@ -21,6 +23,7 @@ public class StateMachine
         next.Show();
 
         _state = state;
+        StateEntered?.Invoke(state);
     }
 
     public void Register(UIState state, IMenu menu)

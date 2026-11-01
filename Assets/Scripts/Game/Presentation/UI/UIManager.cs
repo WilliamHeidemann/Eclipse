@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using FMODUnity;
 using Game.Domain.Models.Dto;
 using Game.Domain.Models.Organisms;
@@ -33,6 +35,7 @@ namespace Game.Presentation.UI
         [SerializeField] private VisualTreeAsset _gameRequest;
         [SerializeField] private VisualTreeAsset _friendRequest;
         [SerializeField] private VisualTreeAsset _friend;
+        [SerializeField] private VisualTreeAsset _ongoingGame;
 
         [Header("Game Logic")] 
         [SerializeField] private GameStarter _gameStarter;
@@ -42,6 +45,10 @@ namespace Game.Presentation.UI
         private RequestView _friends;
         private RequestView _friendRequests;
         private RequestView _gameRequests;
+        private GameListView _yourTurnGames;
+        private GameListView _waitingGames;
+        private VisualElement _ongoingGames;
+        private IReadOnlyCollection<OngoingGame> _currentOngoingGames = Array.Empty<OngoingGame>();
         private Label _playerName;
         private TextField _playerNameInput;
         private Button _editPlayerNameButton;
@@ -53,6 +60,10 @@ namespace Game.Presentation.UI
         public event Action<string> PlayerNameChanged;
         public event Action<string> GameRequestSent;
         public event Action<User> GameRequestAccepted;
+        public event Action MainMenuEntered;
+        public event Action<OngoingGame> OngoingGameOpened;
+        public event Action GameOverShown;
+        public event Action GameClosed;
 
         private const float InactivePlayerOpacity = 0.4f;
         private const float DisabledToggleOpacity = 0.5f;
@@ -92,6 +103,7 @@ namespace Game.Presentation.UI
             _winnerName = winner == Team.Red ? _redName : _yellowName;
             if (_winnerLabel != null) _winnerLabel.text = _winnerName.Split("#")[0];
             _stateMachine.GoTo(UIState.GameOverMenu);
+            GameOverShown?.Invoke();
         }
 
         private string _winnerName = DefaultPlayerName;
@@ -145,6 +157,41 @@ namespace Game.Presentation.UI
         public void ShowGameRequest(User user) => _gameRequests.Add(user);
         public void RemoveGameRequest(User user) => _gameRequests.Remove(user.Id);
 
+        public void SetOngoingGames(IReadOnlyCollection<OngoingGame> games)
+        {
+            _currentOngoingGames = games;
+            if (_ongoingGames == null) return;
+
+            _yourTurnGames.Set(games.Where(game => game.IsMyTurn).ToList());
+            _waitingGames.Set(games.Where(game => !game.IsMyTurn).ToList());
+            _ongoingGames.style.display = games.Count > 0 ? DisplayStyle.Flex : DisplayStyle.None;
+        }
+
+        private VisualElement CreateOngoingGame(OngoingGame game)
+        {
+            VisualElement element = _ongoingGame.Instantiate();
+            element.Q<Label>("Name").text = game.OpponentName.Split("#")[0];
+            element.Q<Label>("LastMove").text = FormatTimeSince(game.LastMoveUnixMs);
+            element.Q<Button>("Open").clicked += () =>
+            {
+                PlaySound(UISound.ButtonClick);
+                _stateMachine.GoTo(UIState.GameUI);
+                OngoingGameOpened?.Invoke(game);
+            };
+            return element;
+        }
+
+        private static string FormatTimeSince(long unixMs)
+        {
+            if (unixMs <= 0) return string.Empty;
+
+            TimeSpan elapsed = DateTimeOffset.UtcNow - DateTimeOffset.FromUnixTimeMilliseconds(unixMs);
+            if (elapsed.TotalMinutes < 1) return "Just now";
+            if (elapsed.TotalHours < 1) return $"{(int)elapsed.TotalMinutes} min ago";
+            if (elapsed.TotalDays < 1) return $"{(int)elapsed.TotalHours} h ago";
+            return $"{(int)elapsed.TotalDays} d ago";
+        }
+
         public void HideMenus()
         {
             _mainMenu.gameObject.SetActive(false);
@@ -176,6 +223,11 @@ namespace Game.Presentation.UI
 
         private void Awake()
         {
+            _stateMachine.StateEntered += state =>
+            {
+                if (state == UIState.MainMenu) MainMenuEntered?.Invoke();
+            };
+
             _mainMenu.gameObject.SetActive(true);
             _friendsMenu.gameObject.SetActive(true);
             _difficultyMenu.gameObject.SetActive(true);
@@ -207,6 +259,14 @@ namespace Game.Presentation.UI
             VerticalShiftMenu menu = new(root, false);
             _stateMachine.Register(UIState.MainMenu, menu);
 
+            _ongoingGames = root.Q<VisualElement>("OngoingGames");
+            ScrollView yourTurnScrollView = root.Q<ScrollView>("YourTurnScrollView");
+            ScrollView waitingScrollView = root.Q<ScrollView>("WaitingScrollView");
+            yourTurnScrollView.Clear();
+            waitingScrollView.Clear();
+            _yourTurnGames = new GameListView(root.Q<VisualElement>("YourTurn"), yourTurnScrollView, CreateOngoingGame);
+            _waitingGames = new GameListView(root.Q<VisualElement>("Waiting"), waitingScrollView, CreateOngoingGame);
+            SetOngoingGames(_currentOngoingGames);
             root.Q<Button>("Bot").clicked += () =>
             {   
                 PlaySound(UISound.ButtonClick);
@@ -422,6 +482,7 @@ namespace Game.Presentation.UI
                 PlaySound(UISound.BackClick);
                 _stateMachine.GoTo(UIState.MainMenu);
                 _animationOrchestrator.HideGameElements();
+                GameClosed?.Invoke();
             }
         }
 
@@ -443,6 +504,7 @@ namespace Game.Presentation.UI
             {
                 _stateMachine.GoTo(UIState.MainMenu);
                 _animationOrchestrator.HideGameElements();
+                GameClosed?.Invoke();
             }
         }
     }

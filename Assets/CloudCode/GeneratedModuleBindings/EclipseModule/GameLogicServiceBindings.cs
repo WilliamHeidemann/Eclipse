@@ -60,6 +60,27 @@ namespace Unity.Services.CloudCode.GeneratedBindings
                 });
         }
 
+        public async Task<List<Game.Domain.Models.Dto.OngoingMatch>> GetOngoingMatches()
+        {
+            return await k_Service.CallModuleEndpointAsync<List<Game.Domain.Models.Dto.OngoingMatch>>(
+                "EclipseModule",
+                "GetOngoingMatches",
+                new Dictionary<string, object>()
+                {
+                });
+        }
+
+        public async Task<bool> AcknowledgeGameOver(string matchId)
+        {
+            return await k_Service.CallModuleEndpointAsync<bool>(
+                "EclipseModule",
+                "AcknowledgeGameOver",
+                new Dictionary<string, object>()
+                {
+                    {"matchId", matchId},
+                });
+        }
+
         public async Task<bool> DeleteMatch(string matchId)
         {
             return await k_Service.CallModuleEndpointAsync<bool>(

@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Game.Cloud;
 using Game.Domain.Models.Dto;
+using Game.Domain.Models.Organisms;
+using Game.Domain.Models.State;
 using Game.Presentation.UI;
 using Newtonsoft.Json;
 using Unity.Services.Authentication;
@@ -38,6 +40,31 @@ namespace Game.Presentation
 
             await SyncRelationships();
             await DiscardDefaultUnityName();
+            await RefreshOngoingGames();
+        }
+
+        private async Task RefreshOngoingGames()
+        {
+            GameLogicServiceBindings gameLogicService = new();
+            var matches = await gameLogicService.GetOngoingMatches();
+            List<OngoingGame> games = matches
+                .Select(dto => dto.ToModel())
+                .Select(ongoing => new OngoingGame(
+                    new Match { Id = ongoing.Id, ClientGameState = ongoing.ClientGameState },
+                    ongoing.OpponentId,
+                    FindFriendName(ongoing.OpponentId),
+                    ongoing.LastMoveUnixMs))
+                .OrderByDescending(game => game.LastMoveUnixMs)
+                .ToList();
+            uiManager.SetOngoingGames(games);
+        }
+
+        private void ResumeMatch(OngoingGame game)
+        {
+            gameStarter.ResumeGame(game.Match, game.OpponentId);
+            ClientGameState state = game.Match.ClientGameState;
+            uiManager.ShowPlayerNames(state.Team, game.OpponentName);
+            uiManager.ShowTurn(state.IsMyTurn ? state.Team : state.Team.Opposing());
         }
 
         private async Task DiscardDefaultUnityName()
@@ -64,6 +91,8 @@ namespace Game.Presentation
             uiManager.GameRequestSent += receiverPlayerId => RunCloudOperation(
                 SendGameRequest(AuthenticationService.Instance.PlayerName, receiverPlayerId));
             uiManager.GameRequestAccepted += user => RunCloudOperation(StartMatch(user));
+            uiManager.MainMenuEntered += () => RunCloudOperation(RefreshOngoingGames());
+            uiManager.OngoingGameOpened += game => ResumeMatch(game);
             
             uiManager.FriendRequestSent += friendName => Debug.Log($"Friend request sent to {friendName}");
             uiManager.FriendRequestAccepted += user => Debug.Log($"Accepted friend request from {user}.");
@@ -150,6 +179,7 @@ namespace Game.Presentation
                     break;
                 case PushMessageType.NewMove:
                     await gameStarter.OnNewMovePushMessageReceived(messageReceivedEvent.Message);
+                    await RefreshOngoingGames();
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

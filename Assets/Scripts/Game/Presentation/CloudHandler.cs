@@ -92,7 +92,9 @@ namespace Game.Presentation
                 SendGameRequest(AuthenticationService.Instance.PlayerName, receiverPlayerId));
             uiManager.GameRequestAccepted += user => RunCloudOperation(StartMatch(user));
             uiManager.MainMenuEntered += () => RunCloudOperation(RefreshOngoingGames());
-            uiManager.OngoingGameOpened += game => ResumeMatch(game);
+            uiManager.OngoingGameOpened += ResumeMatch;
+            uiManager.GameOverShown += () => RunCloudOperation(gameStarter.AcknowledgeGameOver());
+            uiManager.GameClosed += gameStarter.LeaveGame;
             
             uiManager.FriendRequestSent += friendName => Debug.Log($"Friend request sent to {friendName}");
             uiManager.FriendRequestAccepted += user => Debug.Log($"Accepted friend request from {user}.");

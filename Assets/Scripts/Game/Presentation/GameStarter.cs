@@ -138,6 +138,7 @@ namespace Game.Presentation
         {
             if (!_matchId.IsSome(out string matchId)) return;
 
+            _heartBeat?.Stop();
             GameLogicServiceBindings gameLogicServiceBindings = new();
             await gameLogicServiceBindings.AcknowledgeGameOver(matchId);
         }

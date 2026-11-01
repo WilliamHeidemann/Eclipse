@@ -9,6 +9,8 @@ namespace Game.Presentation.Audio
     {
         [SerializeField] private AudioContainer _audioContainer;
         [SerializeField] private UIAudioConfig _uiAudioConfig;
+        
+        public bool IsEnabled { get; private set; } = true;
 
         public void Play(Sound sound)
         {
@@ -24,7 +26,7 @@ namespace Game.Presentation.Audio
 
         public void Play(EventReference eventRef)
         {
-            if (eventRef.IsNull) return;
+            if (!IsEnabled || eventRef.IsNull) return;
             RuntimeManager.PlayOneShot(eventRef);
         }
 
@@ -42,7 +44,7 @@ namespace Game.Presentation.Audio
             try
             {
                 await Awaitable.WaitForSecondsAsync(delaySeconds, cancellationToken: linkedCts.Token);
-                RuntimeManager.PlayOneShot(eventRef);
+                if (IsEnabled) RuntimeManager.PlayOneShot(eventRef);
             }
             catch (OperationCanceledException)
             {
@@ -52,11 +54,17 @@ namespace Game.Presentation.Audio
 
         public void PlayAttached(Sound sound, GameObject target)
         {
-            if (_audioContainer == null || target == null) return;
+            if (!IsEnabled || _audioContainer == null || target == null) return;
             EventReference eventRef = _audioContainer.Get(sound);
             if (eventRef.IsNull) return;
 
             RuntimeManager.PlayOneShotAttached(eventRef, target);
+        }
+        
+        public bool Toggle()
+        {
+            IsEnabled = !IsEnabled;
+            return IsEnabled;
         }
     }
 }

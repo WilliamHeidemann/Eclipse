@@ -18,6 +18,8 @@ namespace Game.Presentation.UI
     {
         [Header("Audio")]
         [SerializeField] private UIAudioConfig _audioConfig;
+        [SerializeField] private StudioEventEmitter _music;
+        [SerializeField] private FmodAudioService _soundEffects;
 
         [Header("Menus")] 
         [SerializeField] private PanelRenderer _mainMenu;
@@ -53,6 +55,8 @@ namespace Game.Presentation.UI
         public event Action<User> GameRequestAccepted;
 
         private const float InactivePlayerOpacity = 0.4f;
+        private const float DisabledToggleOpacity = 0.5f;
+        private bool _musicOn = true;
         private VisualElement _playerOneRow;
         private VisualElement _playerTwoRow;
         private Team _currentTurn = Team.Red;
@@ -151,6 +155,7 @@ namespace Game.Presentation.UI
 
         private void PlaySound(UISound sound)
         {
+            if (_soundEffects != null && !_soundEffects.IsEnabled) return;
             if (_audioConfig == null) return;
 
             EventReference evt = _audioConfig.Get(sound);
@@ -222,6 +227,31 @@ namespace Game.Presentation.UI
                 PlaySound(UISound.MenuTransition);
                 _stateMachine.GoTo(UIState.CreditsMenu);
             };
+            
+            Button music = root.Q<Button>("Music");
+            Button soundEffects = root.Q<Button>("SFX");
+
+            RegisterToggle(music, () => _musicOn, ToggleMusic);
+            RegisterToggle(soundEffects, () => _soundEffects.IsEnabled, _soundEffects.Toggle);
+            return;
+            
+            void RegisterToggle(Button button, Func<bool> isOn, Func<bool> toggle)
+            {
+                button.style.opacity = isOn() ? 1f : DisabledToggleOpacity;
+                button.clicked += () =>
+                {
+                    button.style.opacity = toggle() ? 1f : DisabledToggleOpacity;
+                    PlaySound(UISound.ButtonClick);
+                };
+            }
+
+            bool ToggleMusic()
+            {
+                _musicOn = !_musicOn;
+                if (_musicOn) _music.Play();
+                else _music.Stop();
+                return _musicOn;
+            }
         }
 
         private void RegisterFriendsMenu(PanelRenderer panelRenderer, VisualElement root, int version)

@@ -26,6 +26,17 @@ namespace Game.Presentation.AnimationSystems
             return Instantiate(_cardPrefab);
         }
         
+        public UIDocument InstantiateCardFaceUp(Card card)
+        {
+            UIDocument document = Instantiate(_cardPrefab);
+            VisualElement root = document.rootVisualElement;
+            root.Q<VisualElement>("Card").style.backgroundImage = new StyleBackground(_cardSprites.GetHandSprite(card));
+            Label label = root.Q<Label>();
+            label.text = card.GetText();
+            label.EnableInClassList("card-rank--effect", card.IsWild() || card.IsRemover());
+            return document;
+        }
+
         public async Awaitable AnimateDrawing(Card card, UIDocument cardGameObject, CancellationToken token)
         {
             var cardTransform = cardGameObject.transform;

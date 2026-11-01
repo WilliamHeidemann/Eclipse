@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Threading;
+using Game.Domain.Models.Organisms;
 using LitMotion;
 using LitMotion.Extensions;
 using UnityEngine;
@@ -16,6 +18,24 @@ namespace Game.Presentation.AnimationSystems
         private void OnEnable()
         {
             _discardPile.rootVisualElement.Q<VisualElement>("Card").style.display = DisplayStyle.None;
+        }
+
+        public List<Transform> SnapPlayedCards(Move[] moves, DrawAnimator drawAnimator)
+        {
+            _discards = 0;
+            var cards = new List<Transform>();
+
+            foreach (Move move in moves)
+            {
+                _discards++;
+                Transform card = drawAnimator.InstantiateCardFaceUp(move.Card).transform;
+                card.position = _discardPile.transform.position +
+                                new Vector3(0f, Random.Range(-0.05f, 0.05f), -_discards * 0.01f);
+                card.rotation = Quaternion.Euler(0, 0, Random.Range(-10f, 10f)) * _discardPile.transform.rotation;
+                cards.Add(card);
+            }
+
+            return cards;
         }
 
         public async Awaitable Discard(Transform card, CancellationToken token)

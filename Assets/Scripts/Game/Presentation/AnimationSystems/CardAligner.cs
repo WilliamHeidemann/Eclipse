@@ -35,6 +35,22 @@ namespace Game.Presentation.AnimationSystems
             _lookup[card].Add(cardTransform);
         }
 
+        public List<Transform> SnapHand(Card[] hand, DrawAnimator drawAnimator)
+        {
+            Clear();
+
+            foreach (Card card in hand)
+            {
+                Transform cardTransform = drawAnimator.InstantiateCardFaceUp(card).transform;
+                _cards.Add(cardTransform);
+                _lookup.TryAdd(card, new List<Transform>());
+                _lookup[card].Add(cardTransform);
+            }
+
+            AlignCards(_cards, instant: true);
+            return new List<Transform>(_cards);
+        }
+
         public bool RemoveCard(Card card, out Transform cardTransform)
         {
             if (_lookup.TryGetValue(card, out List<Transform> cardList) && cardList.Count > 0)
@@ -60,7 +76,7 @@ namespace Game.Presentation.AnimationSystems
             _lookup.Clear();
         }
 
-        private void AlignCards(List<Transform> cards)
+        private void AlignCards(List<Transform> cards, bool instant = false)
         {
             // 0 -> []
             // 1 -> [0]
@@ -80,12 +96,19 @@ namespace Game.Presentation.AnimationSystems
                 float y = Mathf.Sin(t * Mathf.PI) * _curve;
                 Vector3 startPosition = cards[i].position;
                 Vector3 targetPosition = _origin.position + new Vector3(x, y, -i * 0.01f);
+                float angle = Mathf.Lerp(-_angle, _angle, t);
+
+                if (instant)
+                {
+                    cards[i].SetPositionAndRotation(targetPosition, Quaternion.Euler(0f, 0f, angle));
+                    cards[i].localScale = Vector3.one;
+                    continue;
+                }
 
                 LMotion.Create(startPosition, targetPosition, .2f)
                     .WithEase(Ease.InOutCubic)
                     .BindToPosition(cards[i]);
 
-                float angle = Mathf.Lerp(-_angle, _angle, t);
                 Quaternion startRotation = cards[i].rotation;
                 Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
 

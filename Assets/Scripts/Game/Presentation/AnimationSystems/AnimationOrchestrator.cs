@@ -1,8 +1,10 @@
 using System;
+using System.Linq;
 using System.Threading;
 using Game.Domain;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
+using Game.Domain.Models.State;
 using Game.Presentation.Audio;
 using Game.Presentation.UI;
 using UnityEngine;
@@ -52,6 +54,21 @@ namespace Game.Presentation.AnimationSystems
             _playCoordinator.OnSequenceScored -= PlaySequenceCelebration;
             _playCoordinator.OnTurnPassedTo -= ShowWhoseTurnItIs;
             _playCoordinator.OnTeamWon -= PlayWinAnimation;
+        }
+
+        public void SnapToGameState(ClientGameState state)
+        {
+            var pins = _boardPresenter.SnapPins(state.Moves);
+            _boardPresenter.SnapHighlights(state.Sequences);
+            var cardsInHand = _cardAligner.SnapHand(state.Hand, _drawAnimator);
+            var discardPile = _discardPile.SnapPlayedCards(state.Moves, _drawAnimator);
+
+            foreach (var element in pins.Concat(cardsInHand).Concat(discardPile))
+            {
+                element.parent = _dynamicGameElements;
+            }
+
+            ShowStaticGameElements();
         }
 
         public void ShowStaticGameElements()

@@ -195,6 +195,40 @@ namespace Game.Presentation.AnimationSystems
             slot.Q<VisualElement>("Highlight").style.unityBackgroundImageTintColor = new StyleColor(Color.white);
         }
 
+        public List<Transform> SnapPins(Move[] moves)
+        {
+            var teams = new Dictionary<Position, Team>();
+            foreach (Move move in moves)
+            {
+                if (move.Card.IsRemover()) teams.Remove(move.Position);
+                else teams[move.Position] = move.Team;
+            }
+
+            var pins = new List<Transform>();
+            foreach ((Position position, Team team) in teams)
+            {
+                var prefab = team == Team.Red ? _redPinPrefab : _yellowPinPrefab;
+                var endPosition = _pinGrid.Get(position) + new Vector3(0, 0, _pinDepth);
+                var pin = Instantiate(prefab, endPosition, _pinEndRotationScale.rotation);
+                pin.localScale = _pinEndRotationScale.localScale;
+                _pins[position] = pin;
+                pins.Add(pin);
+            }
+
+            return pins;
+        }
+
+        public void SnapHighlights(Sequence[] sequences)
+        {
+            foreach (Sequence sequence in sequences)
+            {
+                foreach (Position position in sequence.Positions)
+                {
+                    Highlight(position);
+                }
+            }
+        }
+
         public void Clear()
         {
             _pins.Clear();

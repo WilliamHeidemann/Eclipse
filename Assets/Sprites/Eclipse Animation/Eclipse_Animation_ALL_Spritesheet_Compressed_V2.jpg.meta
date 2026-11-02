@@ -1,0 +1,1931 @@
+fileFormatVersion: 2
+guid: a7bd13e594de6db4a847cbe29e627300
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7821232648022949675
+    second: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_0
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 75
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2f781b97a99a8c60800000000000000
+      internalID: 7821232648022949675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_1
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99f9b00ef3f119d43a302ff32cf9c923
+      internalID: -1030944737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_2
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9295ec3bbc0126846827a2e8262a7206
+      internalID: 122092578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_3
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d68c0f61f39c36458da6aed5648d717
+      internalID: 523745601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_4
+      rect:
+        serializedVersion: 2
+        x: 1748
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 458288e4d49e14449bd76ac499bc6071
+      internalID: 783614277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_5
+      rect:
+        serializedVersion: 2
+        x: 2185
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a40d9838e9d436f42a20c0e36b22a39a
+      internalID: -637424128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_6
+      rect:
+        serializedVersion: 2
+        x: 2622
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53f76df2862b46a4ab1fa09c5c686ea8
+      internalID: 361413366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_7
+      rect:
+        serializedVersion: 2
+        x: 3059
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b196c1416200f884192a1bdd491aee54
+      internalID: 153221296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_8
+      rect:
+        serializedVersion: 2
+        x: 3496
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6430f7059bb1c34e8d23aafeb06762c
+      internalID: 507913522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_9
+      rect:
+        serializedVersion: 2
+        x: 3933
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b3d4b76a05391d49be0a58fb5c894d6
+      internalID: 2015249361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_10
+      rect:
+        serializedVersion: 2
+        x: 4370
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c59e03964461dbe48bf543247948b5ab
+      internalID: 364317735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_11
+      rect:
+        serializedVersion: 2
+        x: 4807
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8731c71d94a02524ca985944bd124aaf
+      internalID: 579312934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_12
+      rect:
+        serializedVersion: 2
+        x: 5244
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1405a08d3ca51b24e885119143aed662
+      internalID: 1803782124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_13
+      rect:
+        serializedVersion: 2
+        x: 5681
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b0efc0b913f4b44a83462ffe487579d
+      internalID: 1975173689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_14
+      rect:
+        serializedVersion: 2
+        x: 6118
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0151229dd94e934e889d1bd9b90b982
+      internalID: 655137536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_15
+      rect:
+        serializedVersion: 2
+        x: 6555
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05fd96b0bc028004c8b047bfc1ab9a4f
+      internalID: -960213909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_16
+      rect:
+        serializedVersion: 2
+        x: 6992
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb89a53c446f9e046aadfbceb10f5e79
+      internalID: -548025043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_17
+      rect:
+        serializedVersion: 2
+        x: 7429
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92478d4bd1d18344a9498ecdf9153293
+      internalID: 912751957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_18
+      rect:
+        serializedVersion: 2
+        x: 7866
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f0c537ed6fca8f44a090601ab3d70d8
+      internalID: -703086553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_19
+      rect:
+        serializedVersion: 2
+        x: 8303
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21e61f4c74003e4438a1915f17b3f501
+      internalID: 661916467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_20
+      rect:
+        serializedVersion: 2
+        x: 8740
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a604a5169bea95c47ad827ab759c2a2a
+      internalID: -622540913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_21
+      rect:
+        serializedVersion: 2
+        x: 9177
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5411ab5d4523cc4eb7071f05bed876d
+      internalID: -116332751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_22
+      rect:
+        serializedVersion: 2
+        x: 9614
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e751a431029708438ea9f782f450da8
+      internalID: -758227560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_23
+      rect:
+        serializedVersion: 2
+        x: 10051
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 025566e581a670647bb06cfcc4c9b8c6
+      internalID: 1060541679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_24
+      rect:
+        serializedVersion: 2
+        x: 10488
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 288e249d5534d9a4fa3a956a43f5442d
+      internalID: -1401623160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_25
+      rect:
+        serializedVersion: 2
+        x: 10925
+        y: 1561
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 414905b6e32044249944b28fcd107f94
+      internalID: -689570253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b8c34d93f5527849b7b37690c85c096
+      internalID: 1364534878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_27
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a3b0b3911dc1a748b7edadd1becf28f
+      internalID: -262110955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_28
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1699c115dff90ad4090781a22cd2cc3d
+      internalID: -2052170494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_29
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a49a91cd9455f6b4f8d220e04794f195
+      internalID: 148764020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_30
+      rect:
+        serializedVersion: 2
+        x: 1748
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c5f505f7c748b14ba25c6106ffb4fac
+      internalID: 1376918683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_31
+      rect:
+        serializedVersion: 2
+        x: 2185
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f183467eee7a264496e27f65670a4d1
+      internalID: -817660354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_32
+      rect:
+        serializedVersion: 2
+        x: 2622
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a2f74f64b68c6d4cb9eeea7415108af
+      internalID: 398383389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_33
+      rect:
+        serializedVersion: 2
+        x: 3059
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71f5956213f1f18459de6be1ee9915af
+      internalID: 951999989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_34
+      rect:
+        serializedVersion: 2
+        x: 3496
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50e6403a3f5e6384abb463e0d5af15f8
+      internalID: -1657120211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_35
+      rect:
+        serializedVersion: 2
+        x: 3933
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d483128db87eb544481dfd24e39b69ba
+      internalID: 363294168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_36
+      rect:
+        serializedVersion: 2
+        x: 4370
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91868468a6db4324491c52c957f25ea8
+      internalID: 1961096574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_37
+      rect:
+        serializedVersion: 2
+        x: 4807
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d88c6d6ad6b77ca44b2d1a6868a3c389
+      internalID: -308769850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_38
+      rect:
+        serializedVersion: 2
+        x: 5244
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1ca027d246a1844a2bccd7ef3db4ee
+      internalID: 1561661994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_39
+      rect:
+        serializedVersion: 2
+        x: 5681
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7703a7a29f77c5c4ebe687c1eb6b840b
+      internalID: 1841695322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_40
+      rect:
+        serializedVersion: 2
+        x: 6118
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d7b5c8ea3786554e88a48703e8c339e
+      internalID: 250960270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_41
+      rect:
+        serializedVersion: 2
+        x: 6555
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 403d8f33f481fe34c8e382e9ef48fb45
+      internalID: 7534825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_42
+      rect:
+        serializedVersion: 2
+        x: 6992
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f2cc0f2df86eae49be00a7d1515148b
+      internalID: -1561638096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_43
+      rect:
+        serializedVersion: 2
+        x: 7429
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf1cedd69a2502f4abe6cdd742caa34a
+      internalID: -756536848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_44
+      rect:
+        serializedVersion: 2
+        x: 7866
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17cfb72194e7c9444b9aa482316fcda7
+      internalID: -943996157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_45
+      rect:
+        serializedVersion: 2
+        x: 8303
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc2a63ef80bbb7b45a93c06974561de6
+      internalID: 1357673313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_46
+      rect:
+        serializedVersion: 2
+        x: 8740
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c860205d6495d124782fa7a23579a7af
+      internalID: 1112821954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_47
+      rect:
+        serializedVersion: 2
+        x: 9177
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e03c8572305a9d242b2226fefa4a2e3e
+      internalID: -655060216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_48
+      rect:
+        serializedVersion: 2
+        x: 9614
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07048906d5726814081a7027c4a880cd
+      internalID: 1714706361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_49
+      rect:
+        serializedVersion: 2
+        x: 10051
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56e52580ab688c94990f12e8077fe720
+      internalID: 1593123582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_50
+      rect:
+        serializedVersion: 2
+        x: 10488
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a08027cacf7f1d445b70a5821c478c08
+      internalID: -2134192138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_51
+      rect:
+        serializedVersion: 2
+        x: 10925
+        y: 781
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d32319f7797e7974da97a96d9a984889
+      internalID: -783163530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_52
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a56a0b737c8cf304283b99d7cd2c755d
+      internalID: -1103538837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_53
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f088fb1604b22ba4db06b7aa870a0dfa
+      internalID: 110891050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_54
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a58c4d63be15b1b42b7d9843b3ab2755
+      internalID: -1112725616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_55
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc97cad43bc49fd46ab62e28c5dd2101
+      internalID: 743364354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_56
+      rect:
+        serializedVersion: 2
+        x: 1748
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53ef5f7e8f60a264290e8a2538e890d2
+      internalID: -1366631432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_57
+      rect:
+        serializedVersion: 2
+        x: 2185
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ebd5c3b6be104345b21937c4723ea40
+      internalID: 962606113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_58
+      rect:
+        serializedVersion: 2
+        x: 2622
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8601186cfa08a4d4fae38a410f50ce80
+      internalID: 211868532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_59
+      rect:
+        serializedVersion: 2
+        x: 3059
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a83d4b207594c994cba9d54dc1c56634
+      internalID: 687599125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_60
+      rect:
+        serializedVersion: 2
+        x: 3496
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92a8232beafbf8b409d382d19b968102
+      internalID: -1499801830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_61
+      rect:
+        serializedVersion: 2
+        x: 3933
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba151f14b51999d45890ad217e1145d1
+      internalID: 1359261834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_62
+      rect:
+        serializedVersion: 2
+        x: 4370
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb8811c7a209c974e9727b01b7c9e80c
+      internalID: 779681249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_63
+      rect:
+        serializedVersion: 2
+        x: 4807
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a42b72418f3b6b4b8b0702883917146
+      internalID: -226995414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_64
+      rect:
+        serializedVersion: 2
+        x: 5244
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90bce1e03a530844b9408f3eec0e4a8d
+      internalID: 273848143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_65
+      rect:
+        serializedVersion: 2
+        x: 5681
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97874cc888b128f42984a1e707b7fded
+      internalID: -715221649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_66
+      rect:
+        serializedVersion: 2
+        x: 6118
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 826a6f1274612d742a5177be38c25022
+      internalID: -2012384082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_67
+      rect:
+        serializedVersion: 2
+        x: 6555
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bded1da5be6599545ac7d6f31cba7ba8
+      internalID: -988214004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_68
+      rect:
+        serializedVersion: 2
+        x: 6992
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b92e684cb867d74a9ca840a2d38e701
+      internalID: 228242497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_69
+      rect:
+        serializedVersion: 2
+        x: 7429
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22021c6656962714591665ff14468310
+      internalID: 144279503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_70
+      rect:
+        serializedVersion: 2
+        x: 7866
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fd038b1800eac34d936802e21695925
+      internalID: 1031449390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_71
+      rect:
+        serializedVersion: 2
+        x: 8303
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc11473cda46a242b2d1b9477a4e03f
+      internalID: -1931498336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_72
+      rect:
+        serializedVersion: 2
+        x: 8740
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1313e7acac329fa4989d77a543d987e1
+      internalID: 234240238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_73
+      rect:
+        serializedVersion: 2
+        x: 9177
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2df2019f3b7754646a46836a382cff1d
+      internalID: 1351372804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_74
+      rect:
+        serializedVersion: 2
+        x: 9614
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 865e60d1508234b499ea70136581d3e9
+      internalID: -323524762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_75
+      rect:
+        serializedVersion: 2
+        x: 10051
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9668485cb74f6044fba2c663b718a977
+      internalID: 870748334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_76
+      rect:
+        serializedVersion: 2
+        x: 10488
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c388c58cc4aa9c48b4721e567b0a1f6
+      internalID: -1343741247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Eclipse_Animation_ALL_Spritesheet_Compressed_V2_77
+      rect:
+        serializedVersion: 2
+        x: 10925
+        y: 1
+        width: 437
+        height: 780
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cca57efec6252f049b3d93ea3706f055
+      internalID: 1119434950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 7dcbc469b5b56f345809d816cfac5eca
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":26.0,"y":3.0},"gridSpriteSize":{"x":437.0,"y":780.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_0: 7821232648022949675
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_1: -1030944737
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_10: 364317735
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_11: 579312934
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_12: 1803782124
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_13: 1975173689
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_14: 655137536
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_15: -960213909
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_16: -548025043
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_17: 912751957
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_18: -703086553
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_19: 661916467
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_2: 122092578
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_20: -622540913
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_21: -116332751
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_22: -758227560
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_23: 1060541679
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_24: -1401623160
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_25: -689570253
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_26: 1364534878
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_27: -262110955
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_28: -2052170494
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_29: 148764020
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_3: 523745601
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_30: 1376918683
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_31: -817660354
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_32: 398383389
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_33: 951999989
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_34: -1657120211
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_35: 363294168
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_36: 1961096574
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_37: -308769850
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_38: 1561661994
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_39: 1841695322
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_4: 783614277
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_40: 250960270
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_41: 7534825
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_42: -1561638096
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_43: -756536848
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_44: -943996157
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_45: 1357673313
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_46: 1112821954
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_47: -655060216
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_48: 1714706361
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_49: 1593123582
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_5: -637424128
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_50: -2134192138
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_51: -783163530
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_52: -1103538837
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_53: 110891050
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_54: -1112725616
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_55: 743364354
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_56: -1366631432
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_57: 962606113
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_58: 211868532
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_59: 687599125
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_6: 361413366
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_60: -1499801830
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_61: 1359261834
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_62: 779681249
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_63: -226995414
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_64: 273848143
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_65: -715221649
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_66: -2012384082
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_67: -988214004
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_68: 228242497
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_69: 144279503
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_7: 153221296
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_70: 1031449390
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_71: -1931498336
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_72: 234240238
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_73: 1351372804
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_74: -323524762
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_75: 870748334
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_76: -1343741247
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_77: 1119434950
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_8: 507913522
+      Eclipse_Animation_ALL_Spritesheet_Compressed_V2_9: 2015249361
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

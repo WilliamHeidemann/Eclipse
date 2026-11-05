@@ -11,8 +11,6 @@ namespace Game.Presentation
     [CreateAssetMenu(fileName = "Starting Configuration", menuName = "Starting Configuration", order = 0)]
     public class StartingConfiguration : ScriptableObject
     {
-        [SerializeField] public Mode Mode;
-        [SerializeField] public StartIn StartIn;
         [SerializeField] public bool UseDevelopmentStartingState;
         
         [Header("Player = Red")]

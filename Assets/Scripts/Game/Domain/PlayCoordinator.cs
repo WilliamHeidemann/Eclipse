@@ -45,6 +45,10 @@ namespace Game.Domain
                     _clientGameState = clientGameState;
                     CheckForSequenceInLastMove(clientGameState, clientGameState.Team);
                     OnDrawCard?.Invoke(clientGameState.Hand[^1]);
+                    if (_gameServer is LocalGameServer localGameServer)
+                    {
+                        localGameServer.PassTurn(move.Team.Opposing());
+                    }
                 }
             }
             else

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
@@ -40,17 +39,12 @@ namespace Game.Domain.Server
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            HandleEvents(result, move);
-
             return Task.FromResult(Option<ClientGameState>.Some(_gameState.Value.ToClientGameState(move.Team)));
         }
 
-        private void HandleEvents(MoveResult result, Move move)
+        public void PassTurn(Team team)
         {
-            if (result is MoveResult.Success success)
-            {
-                OtherPlayerServer.Receive(success.UpdatedState.ToClientGameState(move.Team.Opposing()));
-            }
+            OtherPlayerServer.Receive(_gameState.Value.ToClientGameState(team));
         }
 
         public Task<ClientGameState> GetClientGameState(string matchId)

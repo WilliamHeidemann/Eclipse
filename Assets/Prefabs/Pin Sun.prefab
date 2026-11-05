@@ -149,7 +149,8 @@ PrefabInstance:
       value: Pin Sun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6824746026288583490, guid: 463209f96861c483ca56f7ffdca1a568, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 463209f96861c483ca56f7ffdca1a568, type: 3}
       insertIndex: -1

@@ -11,7 +11,6 @@ namespace Game.Domain.Server
     {
         Task<Option<ClientGameState>> Request(Move move);
         public void Receive(ClientGameState clientGameState);
-        event Action<Card> OnCardReceived;
         event Action<ClientGameState> OnOpponentPlayed;
         public Task<ClientGameState> GetClientGameState(string matchId);
     }

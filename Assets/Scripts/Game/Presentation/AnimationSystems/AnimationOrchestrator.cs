@@ -1,13 +1,12 @@
-using System;
 using System.Linq;
 using System.Threading;
 using Game.Domain;
-using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
 using Game.Domain.Models.State;
 using Game.Presentation.Audio;
 using Game.Presentation.UI;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UIElements;
 using Position = Game.Domain.Models.Organisms.Position;
 using Random = UnityEngine.Random;
@@ -25,6 +24,7 @@ namespace Game.Presentation.AnimationSystems
         [SerializeField] private Transform _dynamicGameElements;
         [SerializeField] private GameObject _staticGameElements;
         [SerializeField] private UIManager _uiManager;
+        [SerializeField] private PlayableDirector _eclipseTimeline;
 
         private readonly AnimationQueue _animationQueue = new();
         private PlayCoordinator _playCoordinator;
@@ -105,22 +105,35 @@ namespace Game.Presentation.AnimationSystems
             _uiManager.ShowTurn(toPlay);
         }
 
-        public void PlayInvalidMove(Position position)
+        private void PlayInvalidMove(Position position)
         {
             _boardPresenter.Shake(position);
             _audioService.Play(Sound.No); // No is for unsuccessful placement
         }
 
-        public void PlaySequenceCelebration(Sequence sequence)
+        private void PlaySequenceCelebration(Sequence sequence)
         {
-            Debug.Log("SEQUENCE!");
-            foreach (var position in sequence.Positions)
+            _animationQueue.Enqueue(PlayEclipseTimeline);
+            return;
+
+            async Awaitable PlayEclipseTimeline(CancellationToken token)
             {
-                _boardPresenter.Highlight(position);
+                _eclipseTimeline.Play();
+                float duration = (float)_eclipseTimeline.duration;
+                float halfDuration = duration / 2f;
+                
+                await Awaitable.WaitForSecondsAsync(halfDuration, token);
+                
+                foreach (var position in sequence.Positions)
+                {
+                    _boardPresenter.Highlight(position);
+                }
+                
+                await Awaitable.WaitForSecondsAsync(halfDuration, token);
             }
         }
 
-        public void PlayDrawAnimation(Card card)
+        private void PlayDrawAnimation(Card card)
         {
             _animationQueue.Enqueue(token => Draw(card, token));
             return;
@@ -136,13 +149,12 @@ namespace Game.Presentation.AnimationSystems
                 await _drawAnimator.AnimateDrawing(c, cardUIDocument, token);
                 _audioService.Play(Sound.ToHand);
                 _cardAligner.AddCard(c, cardUIDocument.transform);
-                // float buffer = Random.Range(0.09f, .16f);
                 float buffer = Random.Range(0.09f, .16f);
                 await Awaitable.WaitForSecondsAsync(buffer, token);
             }
         }
 
-        public void PlayDiscardAndPinAnimation(Move move)
+        private void PlayDiscardAndPinAnimation(Move move)
         {
             _boardPresenter.Pop(move.Position);
             _audioService.Play(Sound.Pop);

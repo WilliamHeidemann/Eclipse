@@ -28,7 +28,6 @@ namespace Game.Domain
             _gameServer = gameServer;
             _clientGameState = startingState;
 
-            gameServer.OnCardReceived += card => OnDrawCard?.Invoke(card);
             gameServer.OnOpponentPlayed += Receive;
         }
 
@@ -45,6 +44,7 @@ namespace Game.Domain
                 {
                     _clientGameState = clientGameState;
                     CheckForSequenceInLastMove(clientGameState, clientGameState.Team);
+                    OnDrawCard?.Invoke(clientGameState.Hand[^1]);
                 }
             }
             else

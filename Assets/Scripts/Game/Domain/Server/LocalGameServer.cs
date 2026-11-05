@@ -22,7 +22,6 @@ namespace Game.Domain.Server
     {
         private readonly LocalGameState _gameState;
         public IGameServer OtherPlayerServer { get; set; }
-        public event Action<Card> OnCardReceived;
         public event Action<ClientGameState> OnOpponentPlayed;
 
         public LocalGameServer(LocalGameState gameState)
@@ -50,8 +49,6 @@ namespace Game.Domain.Server
         {
             if (result is MoveResult.Success success)
             {
-                OnCardReceived?.Invoke(success.UpdatedState.ToClientGameState(move.Team).Hand[^1]);
-
                 OtherPlayerServer.Receive(success.UpdatedState.ToClientGameState(move.Team.Opposing()));
             }
         }

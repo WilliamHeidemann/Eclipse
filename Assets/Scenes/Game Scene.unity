@@ -504,7 +504,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 311903374}
-  - component: {fileID: 311903375}
   - component: {fileID: 311903377}
   - component: {fileID: 311903376}
   m_Layer: 0
@@ -513,7 +512,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &311903374
 Transform:
   m_ObjectHideFlags: 0
@@ -529,29 +528,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &311903375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311903373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
-  m_PanelSettings: {fileID: 11400000, guid: 02c1d4d406b0d2947a4b22bdc0fb05f6, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: baf65a18b4217314c91c7cd33a36b526, type: 3}
-  m_SortingOrder: 1000
-  m_Position: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
-  m_PivotReferenceSize: 0
-  m_Pivot: 0
-  m_WorldSpaceCollider: {fileID: 0}
 --- !u!95 &311903376
 Animator:
   serializedVersion: 7
@@ -2262,6 +2238,7 @@ MonoBehaviour:
   _dynamicGameElements: {fileID: 1681708509}
   _staticGameElements: {fileID: 2122679974}
   _uiManager: {fileID: 1258151632}
+  _eclipseTimeline: {fileID: 2002869949}
 --- !u!1 &1681708508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2579,11 +2556,11 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 0}
-    value: {fileID: 311903375}
-  - key: {fileID: -7448913874138339710, guid: 8452cbd0076220b47ae2ba7123790c4e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -9086757750073769197, guid: 8452cbd0076220b47ae2ba7123790c4e, type: 2}
+    value: {fileID: 311903376}
+  - key: {fileID: -8725653915027886731, guid: 8452cbd0076220b47ae2ba7123790c4e, type: 2}
     value: {fileID: 311903373}
-  - key: {fileID: 7810841908295513030, guid: 8452cbd0076220b47ae2ba7123790c4e, type: 2}
-    value: {fileID: 311903375}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &2030820323

@@ -1,9 +1,11 @@
 using System;
+using System.Threading.Tasks;
 using Game.Domain.Models;
 using Game.Domain.Models.Organisms;
 using Game.Domain.Models.State;
 using Game.Domain.Players.Bot_Strategies;
 using Game.Domain.Server;
+using UtilityToolkit.Monads;
 
 namespace Game.Domain.Players
 {
@@ -12,21 +14,29 @@ namespace Game.Domain.Players
         public event Action OnStartThinking;
         
         private readonly IBrain _brain;
-        private readonly IGameServer _gameServer;
+        private readonly LocalGameServer _gameServer;
 
-        public Bot(IGameServer gameServer, IBrain brain)
+        public Bot(LocalGameServer gameServer, IBrain brain)
         {
             _brain = brain;
             _gameServer = gameServer;
             
-            gameServer.OnOpponentPlayed += Play;
+            gameServer.OnOpponentPlayed += async clientGameState => await Play(clientGameState);
         }
 
-        private void Play(ClientGameState clientGameState)
+        private async Task Play(ClientGameState clientGameState)
         {
             OnStartThinking?.Invoke();
             Move move = _brain.DecideMove(clientGameState);
-            _gameServer.Request(move);
+            Option<ClientGameState> result = await _gameServer.Request(move);
+            if (result.IsSome(out _))
+            {
+                _gameServer.PassTurn(move.Team.Opposing());
+            }
+            else
+            {
+                throw new DomainException("Bot played an invalid move.");
+            }
         }
     }
 }

@@ -61,9 +61,8 @@ namespace Game.Presentation
 
         private void ResumeMatch(OngoingGame game)
         {
-            gameStarter.ResumeGame(game.Match, game.OpponentId);
+            gameStarter.ResumeGame(game.Match, game.OpponentId, game.OpponentName);
             ClientGameState state = game.Match.ClientGameState;
-            uiManager.ShowPlayerNames(state.Team, game.OpponentName);
             uiManager.ShowTurn(state.IsMyTurn ? state.Team : state.Team.Opposing());
         }
 
@@ -139,8 +138,7 @@ namespace Game.Presentation
         {
             string opponentId = opponent.Id;
             Match match = await gameStarter.CreateMatch(opponentId);
-            gameStarter.StartGame(match, opponentId);
-            uiManager.ShowPlayerNames(match.ClientGameState.Team, opponent.Name);
+            gameStarter.StartGame(match, opponentId, opponent.Name);
 
             PushMessagesServiceBindings pushMessagesServiceModule = new();
             bool success = await pushMessagesServiceModule.AcceptChallenge(match.Id, opponentId);
@@ -175,8 +173,7 @@ namespace Game.Presentation
                         ClientGameState = clientGameState.ToModel(),
                         Id = matchAccepted.MatchID,
                     };
-                    gameStarter.StartGame(match, matchAccepted.OpponentID);
-                    uiManager.ShowPlayerNames(match.ClientGameState.Team, FindFriendName(matchAccepted.OpponentID));
+                    gameStarter.StartGame(match, matchAccepted.OpponentID, FindFriendName(matchAccepted.OpponentID));
                     uiManager.GoToMenu(UIState.GameUI);
                     break;
                 case PushMessageType.NewMove:

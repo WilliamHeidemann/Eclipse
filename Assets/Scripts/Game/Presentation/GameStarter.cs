@@ -28,6 +28,8 @@ namespace Game.Presentation
         private Option<string> _matchId;
         private HeartBeat _heartBeat;
 
+        public event Action<Team, string> GameStarted;
+
         private void BindToPresentation(PlayCoordinator playCoordinator)
         {
             _animationOrchestrator.BindAnimations(playCoordinator);
@@ -55,6 +57,8 @@ namespace Game.Presentation
             {
                 _playCoordinator.RaiseStartGameEvents();
             }
+
+            GameStarted?.Invoke(gameState.ToPlay, $"{difficulty} Bot");
         }
 
         public PlayCoordinator CreateLocalPlayCoordinator(GameState gameState, BotDifficulty difficulty)
@@ -94,19 +98,21 @@ namespace Game.Presentation
             return match;
         }
 
-        public void StartGame(Match match, string opponentId)
+        public void StartGame(Match match, string opponentId, string opponentName)
         {
             PrepareOnlineGame(match, opponentId);
             _playCoordinator.RaiseStartGameEvents();
             StartHeartBeat(match);
+            GameStarted?.Invoke(match.ClientGameState.Team, opponentName);
         }
 
-        public void ResumeGame(Match match, string opponentId)
+        public void ResumeGame(Match match, string opponentId, string opponentName)
         {
             PrepareOnlineGame(match, opponentId);
             _animationOrchestrator.SnapToGameState(match.ClientGameState);
             _playCoordinator.RaiseWinIfGameOver();
             StartHeartBeat(match);
+            GameStarted?.Invoke(match.ClientGameState.Team, opponentName);
         }
 
         private void PrepareOnlineGame(Match match, string opponentId)

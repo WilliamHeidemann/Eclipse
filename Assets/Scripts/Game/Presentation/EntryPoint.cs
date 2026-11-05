@@ -23,21 +23,8 @@ namespace Game.Presentation
                 QualitySettings.vSyncCount = 0;
                 Application.targetFrameRate = 60;
                 
-                switch (_startingConfiguration.Mode)
-                {
-                    case Mode.Online:
-                        _cloudHandler = new CloudHandler(_uiManager, _gameStarter);
-                        await _cloudHandler.Initialize();
-                        // var matchId = await _gameStarter.StartOnlineGame("123");
-                        // GameLogicServiceBindings g = new();
-                        // var t = await g.GetClientGameState(matchId);
-                        // Debug.Log($"{t.ToModel()}");
-                        break;
-                    
-                    case Mode.Local when _startingConfiguration.StartIn == StartIn.Game:
-                        _gameStarter.StartLocalGame(BotDifficulty.Hard);
-                        break;
-                }
+                _cloudHandler = new CloudHandler(_uiManager, _gameStarter);
+                await _cloudHandler.Initialize();
             }
             catch (Exception e)
             {

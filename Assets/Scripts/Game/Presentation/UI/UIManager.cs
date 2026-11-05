@@ -90,7 +90,7 @@ namespace Game.Presentation.UI
         private const string DefaultPlayerName = "Player";
         private const int MaxPlayerNameLength = 10;
 
-        public void ShowPlayerNames(Team localTeam, string opponentName)
+        private void ShowPlayerNames(Team localTeam, string opponentName)
         {
             string localName = _localPlayerName;
             _redName = localTeam == Team.Red ? localName : opponentName;
@@ -114,8 +114,6 @@ namespace Game.Presentation.UI
             if (_playerOneLabel != null) _playerOneLabel.text = _redName.Split("#")[0];
             if (_playerTwoLabel != null) _playerTwoLabel.text = _yellowName.Split("#")[0];
         }
-
-        private static string BotName(BotDifficulty difficulty) => $"{difficulty} Bot";
 
         public void SetPlayerName(string playerName)
         {
@@ -223,6 +221,7 @@ namespace Game.Presentation.UI
 
         private void Awake()
         {
+            _gameStarter.GameStarted += ShowPlayerNames;
             _stateMachine.StateEntered += state =>
             {
                 if (state == UIState.MainMenu) MainMenuEntered?.Invoke();
@@ -245,6 +244,7 @@ namespace Game.Presentation.UI
 
         private void OnDestroy()
         {
+            if (_gameStarter != null) _gameStarter.GameStarted -= ShowPlayerNames;
             _gameOverMenu.UnregisterUIReloadCallback(RegisterGameOverMenu);
             _mainMenu.UnregisterUIReloadCallback(RegisterMainMenu);
             _friendsMenu.UnregisterUIReloadCallback(RegisterFriendsMenu);
@@ -444,7 +444,6 @@ namespace Game.Presentation.UI
                 root.style.display = DisplayStyle.None;
                 _stateMachine.GoTo(UIState.GameUI);
                 _gameStarter.StartLocalGame(difficulty);
-                ShowPlayerNames(Team.Red, BotName(difficulty));
                 _animationOrchestrator.ShowStaticGameElements();
             }
         }

@@ -33,7 +33,16 @@ namespace Game.Presentation
         private void BindToPresentation(PlayCoordinator playCoordinator)
         {
             _animationOrchestrator.BindAnimations(playCoordinator);
+        }
+
+        private void OnEnable()
+        {
             _boardPresenter.OnPositionClicked += HandlePositionClicked;
+        }
+
+        private void OnDisable()
+        {
+            _boardPresenter.OnPositionClicked -= HandlePositionClicked;
         }
 
         public void StartLocalGame(BotDifficulty difficulty)

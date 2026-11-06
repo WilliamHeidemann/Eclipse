@@ -13,6 +13,7 @@ namespace Game.Domain
     public class PlayCoordinator
     {
         private readonly IGameServer _gameServer;
+        private readonly SingleFlightGate _moveGate = new();
         private ClientGameState _clientGameState;
 
         public event Action<Position> OnInvalidMoveRequest;
@@ -31,7 +32,9 @@ namespace Game.Domain
             gameServer.OnOpponentPlayed += Receive;
         }
 
-        public async Task PositionClicked(Position position)
+        public Task PositionClicked(Position position) => _moveGate.RunIfIdle(() => PlayMove(position));
+
+        private async Task PlayMove(Position position)
         {
             Option<Move> attempt = MoveValidator.GetValidMove(_clientGameState, position);
 

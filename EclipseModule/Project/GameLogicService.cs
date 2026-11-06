@@ -236,12 +236,19 @@ public class GameLogicService(IGameApiClient gameApiClient)
 
     private async Task RemoveActiveMatch(IExecutionContext context, string playerId, string matchId)
     {
-        await gameApiClient.CloudSaveData.DeletePrivateCustomItemAsync(
-            context,
-            context.ServiceToken,
-            context.ProjectId,
-            PlayerMatchesId(playerId),
-            matchId);
+        try
+        {
+            await gameApiClient.CloudSaveData.DeletePrivateCustomItemAsync(
+                context,
+                context.ServiceToken,
+                context.ProjectId,
+                PlayerMatchesId(playerId),
+                matchId);
+        }
+        catch (ApiException e) when (e.Response.StatusCode == HttpStatusCode.NotFound)
+        {
+            // Already removed, e.g. by the winner when the game ended.
+        }
     }
 
     private async Task DeleteMatchData(IExecutionContext context, string matchId)

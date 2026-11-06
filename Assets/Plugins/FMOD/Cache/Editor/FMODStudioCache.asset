@@ -123,7 +123,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639280851415083829
+  lastModified: 639280783284706656
   FileSizes:
   - Name: 
     Value: 1762
@@ -170,7 +170,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/UI.assets.bank
   Name: UI.assets
   StudioPath: bank:/UI.assets
-  lastModified: 639280851415091314
+  lastModified: 639280783284716673
   FileSizes: []
   Exists: 1
 --- !u!114 &-2346539111690432019
@@ -321,7 +321,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -5698284043269771139}
   cacheVersion: 131861
-  cacheTime: 639280851415098259
+  cacheTime: 639280783284716673
   SerializableEventsDict:
   - key: event:/UI/SequenceSFX PopSound1
     index: 0
@@ -420,7 +420,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.assets.bank
   Name: Master.assets
   StudioPath: bank:/Master.assets
-  lastModified: 639280851415042100
+  lastModified: 639280783284696658
   FileSizes: []
   Exists: 1
 --- !u!114 &3042400072046525142
@@ -438,7 +438,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639280851415054059
+  lastModified: 639280783284706656
   FileSizes: []
   Exists: 1
 --- !u!114 &4959398725443914298
@@ -456,7 +456,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/StreamingAssets/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 639280851415098259
+  lastModified: 639280783284716673
   FileSizes: []
   Exists: 1
 --- !u!114 &7098117361371434999

@@ -50,6 +50,17 @@ namespace Unity.Services.CloudCode.GeneratedBindings
                 });
         }
 
+        public async Task<bool> AcknowledgeGameOver(string matchId)
+        {
+            return await k_Service.CallModuleEndpointAsync<bool>(
+                "EclipseModule",
+                "AcknowledgeGameOver",
+                new Dictionary<string, object>()
+                {
+                    {"matchId", matchId},
+                });
+        }
+
         public async Task<List<string>> GetActiveMatchIds()
         {
             return await k_Service.CallModuleEndpointAsync<List<string>>(
@@ -67,17 +78,6 @@ namespace Unity.Services.CloudCode.GeneratedBindings
                 "GetOngoingMatches",
                 new Dictionary<string, object>()
                 {
-                });
-        }
-
-        public async Task<bool> AcknowledgeGameOver(string matchId)
-        {
-            return await k_Service.CallModuleEndpointAsync<bool>(
-                "EclipseModule",
-                "AcknowledgeGameOver",
-                new Dictionary<string, object>()
-                {
-                    {"matchId", matchId},
                 });
         }
 

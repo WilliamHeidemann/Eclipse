@@ -129,7 +129,16 @@ namespace Game.Presentation
         {
             SubscriptionEventCallbacks callbacks = new();
             callbacks.MessageReceived += async messageReceivedEvent =>
-                await HandlePushMessageReceivedEvent(messageReceivedEvent);
+            {
+                try
+                {
+                    await HandlePushMessageReceivedEvent(messageReceivedEvent);
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogException(exception);
+                }
+            };
             callbacks.Error += Debug.LogError;
             return callbacks;
         }

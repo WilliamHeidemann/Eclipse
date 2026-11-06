@@ -37,8 +37,8 @@ namespace Game.Domain
 
             if (attempt.IsSome(out Move move))
             {
-                OnValidMoveRequest?.Invoke(move);
                 OnTurnPassedTo?.Invoke(move.Team.Opposing());
+                OnValidMoveRequest?.Invoke(move);
                 Option<ClientGameState> result = await _gameServer.Request(move);
                 if (result.IsSome(out ClientGameState clientGameState))
                 {

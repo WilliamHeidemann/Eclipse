@@ -46,7 +46,7 @@ namespace Game.Domain
                 if (result.IsSome(out ClientGameState clientGameState))
                 {
                     _clientGameState = clientGameState;
-                    CheckForSequenceInLastMove(clientGameState, clientGameState.Team);
+                    if (CheckForSequenceInLastMove(clientGameState, clientGameState.Team)) return;
                     OnDrawCard?.Invoke(clientGameState.Hand[^1]);
                     if (_gameServer is LocalGameServer localGameServer)
                     {
@@ -101,7 +101,7 @@ namespace Game.Domain
             OnTurnPassedTo?.Invoke(clientGameState.Team);
         }
 
-        private void CheckForSequenceInLastMove(ClientGameState clientGameState, Team ofTeam)
+        private bool CheckForSequenceInLastMove(ClientGameState clientGameState, Team ofTeam)
         {
             foreach (var sequence in clientGameState.SequencesFromLastMove(ofTeam))
             {
@@ -111,7 +111,9 @@ namespace Game.Domain
             if (clientGameState.Sequences.Count(s => s.Team == ofTeam) >= 2)
             {
                 OnTeamWon?.Invoke(ofTeam);
+                return true;
             }
+            return false;
         }
     }
 }
